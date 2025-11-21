@@ -56,16 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$error) {
                 try {
                     $validationObj = new Validation();
-                    $result = $validationObj->submitNewItem(
-                        $itemName,
-                        $itemNameNepali,
-                        $categoryId,
-                        $basePrice,
-                        $unit,
-                        $marketLocation,
-                        $description,
-                        $imagePath
-                    );
+                    $result = $validationObj->submitNewItem([
+                        'item_name' => $itemName,
+                        'category_id' => $categoryId,
+                        'price' => $basePrice,
+                        'unit' => $unit,
+                        'market_location' => $marketLocation,
+                        'description' => $description . ($itemNameNepali ? " (Nepali Name: $itemNameNepali)" : ""),
+                        'image_path' => $imagePath
+                    ]);
                     
                     if ($result) {
                         setFlashMessage('Item submitted successfully! Waiting for admin approval.', 'success');
