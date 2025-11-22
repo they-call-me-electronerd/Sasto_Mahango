@@ -33,6 +33,41 @@
 }
 
 /* ===================================
+   NEPAL SKYLINE BACKGROUND - PERFECTLY ALIGNED
+   =================================== */
+
+/* Add Nepal skyline as background to hero section */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1400px;
+    height: 350px;
+    background-image: url('../images/nepal-skyline.png');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+    opacity: 0.25;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Ensure hero content stays above skyline */
+.hero-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Dark mode skyline - slightly more visible */
+[data-theme="dark"] .hero-section::after {
+    opacity: 0.15;
+    filter: brightness(0.8);
+}
+
+/* ===================================
    DARK MODE TEXT COLORS - ENHANCED CONTRAST
    =================================== */
 
@@ -128,4 +163,77 @@
 
 [data-theme="dark"] section p {
     color: #e5e7eb !important;
+}
+
+/* ===================================
+   PRESERVE COLORED ELEMENTS IN DARK MODE
+   =================================== */
+
+/* Ensure colored elements remain vibrant and visible */
+
+/* SVG and Canvas elements - preserve colors */
+[data-theme="dark"] svg,
+[data-theme="dark"] canvas {
+    filter: none !important;
+    /* Don't dim colored graphics */
+}
+
+/* Progress circles and charts - keep vibrant colors */
+[data-theme="dark"] circle[stroke*="#"],
+[data-theme="dark"] path[stroke*="#"],
+[data-theme="dark"] rect[fill*="#"] {
+    opacity: 1 !important;
+}
+
+/* Colored backgrounds for stats/badges - preserve */
+[data-theme="dark"] [style*="background: linear-gradient"],
+[data-theme="dark"] [style*="background-color: #f97316"],
+[data-theme="dark"] [style*="background-color: #3b82f6"],
+[data-theme="dark"] [style*="background-color: #10b981"],
+[data-theme="dark"] [style*="background-color: #8b5cf6"],
+[data-theme="dark"] [style*="background-color: #ef4444"] {
+    filter: brightness(1.1) !important;
+    /* Slightly brighten colored elements */
+}
+
+/* Colored text - preserve brand colors */
+[data-theme="dark"] [style*="color: #f97316"],
+[data-theme="dark"] [style*="color: #3b82f6"],
+[data-theme="dark"] [style*="color: #10b981"],
+[data-theme="dark"] [style*="color: #8b5cf6"],
+[data-theme="dark"] [style*="color: #ef4444"] {
+    filter: brightness(1.2) !important;
+    /* Brighten colored text */
+}
+
+/* Stats section with white background - make it slightly dark but visible */
+[data-theme="dark"] [style*="background: white"],
+[data-theme="dark"] [style*="background-color: white"],
+[data-theme="dark"] [style*="background: #ffffff"] {
+    background: rgba(255, 255, 255, 0.05) !important;
+    /* Very subtle dark tint */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Chart containers - ensure visibility */
+[data-theme="dark"] .chart-container,
+[data-theme="dark"] .stats-container,
+[data-theme="dark"] .progress-container {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+/* Colored badges and pills */
+[data-theme="dark"] .badge-primary,
+[data-theme="dark"] .badge-success,
+[data-theme="dark"] .badge-warning,
+[data-theme="dark"] .badge-danger,
+[data-theme="dark"] .badge-info {
+    filter: brightness(1.2) saturate(1.1) !important;
+}
+
+/* Ensure percentage text in circles is visible */
+[data-theme="dark"] text[fill] {
+    fill: #ffffff !important;
 }
