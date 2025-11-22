@@ -1,0 +1,322 @@
+/**
+ * Theme Toggle & Dark Mode Styles
+ * Smooth transitions between light and dark themes
+ */
+
+/* ============================================================================
+   THEME TOGGLE BUTTON
+   ============================================================================ */
+
+.theme-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    background: rgba(249, 115, 22, 0.2);
+    border-color: #f97316;
+    transform: scale(1.1);
+}
+
+/* Theme Icons */
+.theme-icon-light,
+.theme-icon-dark {
+    position: absolute;
+    font-size: 1.2rem;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.theme-icon-light {
+    color: #f59e0b;
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+.theme-icon-dark {
+    color: #60a5fa;
+    transform: rotate(180deg) scale(0);
+    opacity: 0;
+}
+
+/* Dark mode active state */
+[data-theme="dark"] .theme-icon-light {
+    transform: rotate(-180deg) scale(0);
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon-dark {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+/* ============================================================================
+   ROOT VARIABLES FOR THEMING
+   ============================================================================ */
+
+:root {
+    /* Light Theme Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-tertiary: #f3f4f6;
+
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --text-tertiary: #9ca3af;
+
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+    /* Theme transition */
+    --theme-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme Colors */
+[data-theme="dark"] {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-tertiary: #9ca3af;
+
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================================================
+   APPLY THEME TO ELEMENTS
+   ============================================================================ */
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color var(--theme-transition), color var(--theme-transition);
+}
+
+/* Navbar */
+.main-navbar {
+    background: rgba(255, 255, 255, 0.75);
+    border-bottom-color: var(--border-color);
+    transition: all var(--theme-transition);
+}
+
+[data-theme="dark"] .main-navbar {
+    background: rgba(17, 24, 39, 0.85);
+}
+
+[data-theme="dark"] .main-navbar.scrolled {
+    background: rgba(17, 24, 39, 0.95);
+}
+
+/* Navigation Links */
+.navbar-menu a {
+    color: var(--text-secondary);
+}
+
+.navbar-menu a:hover,
+.navbar-menu a.active {
+    color: #f97316;
+}
+
+/* Hero Section */
+.hero-section {
+    background: var(--bg-secondary);
+    transition: background var(--theme-transition);
+}
+
+/* Cards */
+.card {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+    transition: all var(--theme-transition);
+}
+
+[data-theme="dark"] .card {
+    box-shadow: var(--shadow-md);
+}
+
+/* Text Colors */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-primary);
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+/* Footer - Always Dark */
+footer,
+.professional-footer {
+    /* Footer stays dark in both themes for consistency */
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #111827 100%);
+    color: #9ca3af;
+}
+
+/* Inputs and Forms */
+input,
+textarea,
+select {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+    transition: all var(--theme-transition);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #f97316;
+}
+
+/* Buttons adapt to theme - except brand buttons */
+.btn:not([class*="btn-"]):not([style*="gradient"]) {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Scroll-to-Top Button - stays visible in dark mode */
+.scroll-to-top {
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.6);
+}
+
+[data-theme="dark"] .scroll-to-top {
+    box-shadow: 0 4px 30px rgba(249, 115, 22, 0.8);
+}
+
+/* ============================================================================
+   SMOOTH THEME TRANSITION
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: var(--theme-transition);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Exclude animation from theme transition */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================================================
+   DARK MODE SPECIFIC ADJUSTMENTS
+   ============================================================================ */
+
+/* Shadows in dark mode */
+[data-theme="dark"] .shadow-sm {
+    box-shadow: var(--shadow-sm) !important;
+}
+
+[data-theme="dark"] .shadow-md {
+    box-shadow: var(--shadow-md) !important;
+}
+
+[data-theme="dark"] .shadow-lg {
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Links in dark mode */
+[data-theme="dark"] a:not([class*="btn"]):not([class*="nav-"]) {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] a:not([class*="btn"]):not([class*="nav-"]):hover {
+    color: #93c5fd;
+}
+
+/* Images - reduce brightness slightly in dark mode */
+[data-theme="dark"] img:not(.no-filter) {
+    filter: brightness(0.9);
+}
+
+/* Code blocks / pre tags */
+[data-theme="dark"] pre,
+[data-theme="dark"] code {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Tables */
+[data-theme="dark"] table {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] thead {
+    background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] tbody tr:hover {
+    background: var(--bg-tertiary);
+}
+
+/* Modals / Dropdowns */
+[data-theme="dark"] .dropdown-menu {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+/* Focus indicators */
+.theme-toggle:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: more) {
+    .theme-toggle {
+        border-width: 2px;
+    }
+
+    [data-theme="dark"] {
+        --text-primary: #ffffff;
+        --text-secondary: #e5e7eb;
+        --border-color: rgba(255, 255, 255, 0.3);
+    }
+}

@@ -1,0 +1,440 @@
+/**
+ * Professional Footer Styles
+ * Multi-column layout with social icons, contact info, and modern design
+ */
+
+/* ============================================================================
+   PROFESSIONAL FOOTER STRUCTURE
+   ============================================================================ */
+
+.professional-footer {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #111827 100%);
+    background-size: 200% 200%;
+    color: #9ca3af;
+    overflow: hidden;
+    animation: gradient-shift 15s ease infinite;
+}
+
+.footer-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Wave Effect at Top */
+.professional-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23f97316"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%23f97316"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f97316"/></svg>') no-repeat center;
+    background-size: cover;
+    opacity: 0.15;
+    animation: wave-motion 10s ease-in-out infinite;
+    transform: translateY(-50%);
+}
+
+/* Background Pattern */
+.professional-footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+    opacity: 0.6;
+    animation: pattern-float 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================================================
+   FOOTER BRAND & COMPANY INFO
+   ============================================================================ */
+
+.footer-brand {
+    margin-bottom: 1.5rem;
+}
+
+.footer-brand .brand-name {
+    display: flex;
+    align-items: center;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+}
+
+.footer-brand .brand-name i {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.brand-tagline {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.footer-description {
+    line-height: 1.8;
+    color: #9ca3af;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================================================
+   SOCIAL MEDIA ICONS
+   ============================================================================ */
+
+.social-icons {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.social-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    font-size: 1.125rem;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.social-icon i {
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px) scale(1.05);
+    border-color: #f97316;
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+}
+
+.social-icon:hover::before {
+    opacity: 1;
+}
+
+.social-icon:hover i {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* ============================================================================
+   FOOTER HEADINGS
+   ============================================================================ */
+
+.footer-heading {
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #f97316, transparent);
+    border-radius: 2px;
+}
+
+/* ============================================================================
+   FOOTER LINKS
+   ============================================================================ */
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: #9ca3af;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-links a i {
+    font-size: 0.75rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #f97316;
+    padding-left: 0.5rem;
+}
+
+.footer-links a:hover i {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ============================================================================
+   NEWSLETTER FORM
+   ============================================================================ */
+
+.newsletter-form {
+    margin-bottom: 1.5rem;
+}
+
+.newsletter-input {
+    background: rgba(31, 41, 55, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(55, 65, 81, 0.5);
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.newsletter-input:focus {
+    background: rgba(31, 41, 55, 0.95);
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+    outline: none;
+}
+
+.newsletter-input::placeholder {
+    color: rgba(156, 163, 175, 0.7);
+}
+
+.newsletter-btn {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.newsletter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.5);
+}
+
+.newsletter-btn:hover::before {
+    left: 100%;
+}
+
+/* ============================================================================
+   CONTACT INFO
+   ============================================================================ */
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #9ca3af;
+    font-size: 0.9375rem;
+}
+
+.contact-item i {
+    width: 20px;
+    color: #f97316;
+    font-size: 1rem;
+}
+
+/* ============================================================================
+   FOOTER BOTTOM
+   ============================================================================ */
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    margin-top: 3rem;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 0.9375rem;
+}
+
+.footer-legal-link {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-legal-link:hover {
+    color: #f97316;
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes wave-motion {
+
+    0%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-50%) translateX(-5%);
+    }
+}
+
+@keyframes pattern-float {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .footer-main {
+        padding: 3rem 1rem 1.5rem;
+    }
+
+    .footer-heading {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .social-icons {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .footer-bottom {
+        text-align: center;
+    }
+
+    .footer-bottom .row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .footer-legal-link {
+        display: inline-block;
+        margin: 0 0.5rem;
+    }
+}
+
+/* ============================================================================
+   DARK MODE SPECIFIC (Footer remains dark in both themes)
+   ============================================================================ */
+
+[data-theme="dark"] .professional-footer {
+    /* Footer stays consistent in dark mode */
+    background: linear-gradient(135deg, #0a0f1a 0%, #1a1f2e 50%, #0f1419 100%);
+}
+
+[data-theme="dark"] .newsletter-input {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(55, 65, 81, 0.6);
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .professional-footer,
+    .professional-footer::before,
+    .professional-footer::after,
+    .social-icon {
+        animation: none !important;
+    }
+}
+
+.footer-links a:focus,
+.social-icon:focus,
+.newsletter-btn:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}

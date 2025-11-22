@@ -34,57 +34,34 @@ $recentItems = $itemObj->getActiveItems(8);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle . ' - ' . SITE_NAME; ?></title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Heroicons (modern alternative to Bootstrap Icons) -->
-    <script src="https://unpkg.com/@heroicons/v2/outline/heroicons.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Custom Landing Page Styles -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/home-redesign.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Manrope', 'sans-serif'],
-                        nepali: ['Noto Sans Devanagari', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            crimson: '#DC143C',
-                            blue: '#003893',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/core/variables.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/core/reset.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/core/utilities.css">
+    
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/components/navbar.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/components/footer.css">
+    
+    <!-- Page Specific Styles -->
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/pages/landing.css">
+    
+    <!-- Theme -->
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/themes/dark-mode.css">
 
     <style>
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Manrope', sans-serif; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .hero-gradient {
-            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #3b82f6 100%);
-        }
-        .nav-link { position: relative; }
-        .nav-link::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-            background-color: #4f46e5; transition: width 0.3s;
-        }
-        .nav-link:hover::after { width: 100%; }
     </style>
 </head>
 <body>
@@ -111,6 +88,12 @@ $recentItems = $itemObj->getActiveItems(8);
             <div class="navbar-actions">
                 <button class="nav-search-icon" id="searchToggle">
                     <i class="bi bi-search"></i>
+                </button>
+                
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="bi bi-sun-fill theme-icon-light"></i>
+                    <i class="bi bi-moon-stars-fill theme-icon-dark"></i>
                 </button>
                 
                 <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
@@ -140,6 +123,8 @@ $recentItems = $itemObj->getActiveItems(8);
             </div>
         </div>
     </nav>
+
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-container">
             <!-- Left Content -->
@@ -195,54 +180,28 @@ $recentItems = $itemObj->getActiveItems(8);
                     <div class="illustration-circle"></div>
                     <!-- SVG Illustration -->
                     <svg class="illustration-img" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Background Circle -->
                         <circle cx="250" cy="250" r="200" fill="url(#gradient1)" opacity="0.1"/>
-                        
-                        <!-- Main Character Body -->
                         <ellipse cx="250" cy="280" rx="80" ry="100" fill="#f97316"/>
-                        
-                        <!-- Head -->
                         <circle cx="250" cy="180" r="70" fill="#f97316"/>
-                        
-                        <!-- Eyes -->
                         <circle cx="230" cy="170" r="8" fill="#1f2937"/>
                         <circle cx="270" cy="170" r="8" fill="#1f2937"/>
                         <circle cx="232" cy="168" r="3" fill="white"/>
                         <circle cx="272" cy="168" r="3" fill="white"/>
-                        
-                        <!-- Smile -->
                         <path d="M 230 190 Q 250 200 270 190" stroke="#1f2937" stroke-width="4" stroke-linecap="round" fill="none"/>
-                        
-                        <!-- Arms -->
                         <ellipse cx="180" cy="250" rx="20" ry="50" fill="#ea580c" transform="rotate(-20 180 250)"/>
                         <ellipse cx="320" cy="250" rx="20" ry="50" fill="#ea580c" transform="rotate(20 320 250)"/>
-                        
-                        <!-- Price Tag (in left hand) -->
                         <rect x="140" y="230" width="50" height="35" rx="5" fill="white" stroke="#f97316" stroke-width="2"/>
                         <text x="165" y="252" font-size="16" font-weight="bold" fill="#f97316" text-anchor="middle">NPR</text>
-                        
-                        <!-- Shopping Bag (in right hand) -->
                         <rect x="310" y="230" width="45" height="50" rx="5" fill="#3b82f6"/>
                         <path d="M 320 240 Q 332 230 345 240" stroke="#1e40af" stroke-width="3" stroke-linecap="round" fill="none"/>
-                        
-                        <!-- Floating Icons -->
-                        <!-- Tomato -->
                         <circle cx="100" cy="150" r="20" fill="#ef4444"/>
                         <ellipse cx="100" cy="135" rx="8" ry="5" fill="#10b981"/>
-                        
-                        <!-- Carrot -->
                         <path d="M 400 180 L 410 220 L 390 220 Z" fill="#f97316"/>
                         <path d="M 405 175 L 408 165 L 402 165 Z" fill="#10b981"/>
-                        
-                        <!-- Phone -->
                         <rect x="90" cy="320" width="40" height="60" rx="8" fill="#1f2937"/>
                         <rect x="95" y="328" width="30" height="45" fill="#3b82f6"/>
-                        
-                        <!-- Money Icon -->
                         <circle cx="380" cy="300" r="25" fill="#fbbf24"/>
                         <text x="380" y="310" font-size="20" font-weight="bold" fill="#92400e" text-anchor="middle">₹</text>
-                        
-                        <!-- Gradient Definition -->
                         <defs>
                             <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
@@ -255,9 +214,10 @@ $recentItems = $itemObj->getActiveItems(8);
         </div>
     </section>
 
-    <!-- Categories Section --><section style="padding: 5rem 0; background: white;">
+    <!-- Categories Section -->
+    <section style="padding: 5rem 0; background: white;">
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
-            <div style="text-center; margin-bottom: 3rem;">
+            <div style="text-align: center; margin-bottom: 3rem;">
                 <h2 style="font-size: 2.5rem; font-weight: 700; color: #111827; margin-bottom: 1rem;">Browse by Category</h2>
                 <p style="font-size: 1.125rem; color: #6b7280;">Find prices for thousands of products across different categories</p>
             </div>
@@ -316,7 +276,6 @@ $recentItems = $itemObj->getActiveItems(8);
                              onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';"
                              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)';">
                             
-                            <!-- Image -->
                             <div style="height: 200px; background: #f3f4f6; position: relative; overflow: hidden;">
                                 <?php if ($item['image_path']): ?>
                                     <img src="<?php echo UPLOAD_URL . $item['image_path']; ?>" 
@@ -328,14 +287,12 @@ $recentItems = $itemObj->getActiveItems(8);
                                     </div>
                                 <?php endif; ?>
                                 
-                                <!-- Verified Badge -->
-                                <div style="position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(249, 115, 22, 0.95); color: white; padding: 0.375rem 0.75rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; backdrop-filter: blur(10px);">
+                                <div style="position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(249, 115, 22, 0.95); color: white; padding: 0.375rem 0.75rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600;">
                                     <i class="bi bi-patch-check-fill me-1"></i>Verified
                                 </div>
                             </div>
 
                             <div class="card-body p-4">
-                                <!-- Category Badge -->
                                 <span class="badge mb-2" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 600; font-size: 0.75rem; padding: 0.375rem 0.75rem;">
                                     <?php echo htmlspecialchars($item['category_name']); ?>
                                 </span>
@@ -346,7 +303,7 @@ $recentItems = $itemObj->getActiveItems(8);
 
                                 <div class="d-flex align-items-baseline gap-2 mb-3">
                                     <span style="font-size: 0.875rem; color: #6b7280; font-weight: 500;">NPR</span>
-                                    <span style="font-size: 2rem; font-weight: 800; color: #111827; font-variant-numeric: tabular-nums;">
+                                    <span style="font-size: 2rem; font-weight: 800; color: #111827;">
                                         <?php echo formatPrice($item['current_price']); ?>
                                     </span>
                                     <span style="font-size: 0.875rem; color: #9ca3af;">/ <?php echo $item['unit']; ?></span>
@@ -372,44 +329,117 @@ $recentItems = $itemObj->getActiveItems(8);
     </section>
     <?php endif; ?>
 
-    <!-- Footer -->
-    <footer style="background: #111827; color: #9ca3af; padding: 4rem 0 2rem;">
-        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
-            <div class="row g-4 mb-5">
-                <div class="col-lg-4">
-                    <h3 style="color: white; font-weight: 700; margin-bottom: 1rem;">
-                        <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mulyasuchi</span>
-                    </h3>
-                    <p style="line-height: 1.8;">Nepal's most trusted platform for real-time price information. Get verified prices for thousands of products updated daily.</p>
+    <!-- Professional Footer -->
+    <footer class="professional-footer">
+        <div class="footer-main">
+            <div class="row g-5 mb-5">
+                <!-- Company Info -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand mb-4">
+                        <h3 class="brand-name mb-3">
+                            <i class="bi bi-graph-up-arrow me-2"></i>
+                            <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mulyasuchi</span>
+                        </h3>
+                        <p class="brand-tagline">मूल्यसूची - Nepal's Price Tracker</p>
+                    </div>
+                    <p class="footer-description">
+                        Nepal's most trusted platform for real-time price information. Get verified prices for thousands of products updated daily from markets across Nepal.
+                    </p>
+                    
+                    <!-- Social Media Icons -->
+                    <div class="social-icons mt-4">
+                        <a href="#" class="social-icon" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Twitter">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="YouTube">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-6 col-lg-2">
-                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem;">Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="browse.php" style="color: #9ca3af; text-decoration: none;">Browse</a></li>
-                        <li class="mb-2"><a href="about.php" style="color: #9ca3af; text-decoration: none;">About Us</a></li>
-                        <li class="mb-2"><a href="#" style="color: #9ca3af; text-decoration: none;">Contact</a></li>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-3 col-6">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="<?php echo SITE_URL; ?>"><i class="bi bi-chevron-right"></i> Home</a></li>
+                        <li><a href="browse.php"><i class="bi bi-chevron-right"></i> Browse Products</a></li>
+                        <li><a href="about.php"><i class="bi bi-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> How It Works</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i> Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-6 col-lg-2">
-                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem;">Categories</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="browse.php?category=vegetables" style="color: #9ca3af; text-decoration: none;">Vegetables</a></li>
-                        <li class="mb-2"><a href="browse.php?category=fruits" style="color: #9ca3af; text-decoration: none;">Fruits</a></li>
-                        <li class="mb-2"><a href="browse.php?category=tech-gadgets" style="color: #9ca3af; text-decoration: none;">Electronics</a></li>
+
+                <!-- Categories -->
+                <div class="col-lg-2 col-md-3 col-6">
+                    <h5 class="footer-heading">Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="browse.php?category=vegetables"><i class="bi bi-chevron-right"></i> Vegetables</a></li>
+                        <li><a href="browse.php?category=fruits"><i class="bi bi-chevron-right"></i> Fruits</a></li>
+                        <li><a href="browse.php?category=kitchen-appliances"><i class="bi bi-chevron-right"></i> Kitchen</a></li>
+                        <li><a href="browse.php?category=tech-gadgets"><i class="bi bi-chevron-right"></i> Electronics</a></li>
+                        <li><a href="browse.php"><i class="bi bi-chevron-right"></i> View All</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-4">
-                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem;">Stay Updated</h5>
-                    <p>Subscribe to get daily price updates and market insights.</p>
-                    <form class="d-flex gap-2">
-                        <input type="email" class="form-control" placeholder="Your email" style="background: #1f2937; border: 1px solid #374151; color: white;">
-                        <button class="btn" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; border: none; padding: 0.5rem 1.5rem; white-space: nowrap;">Subscribe</button>
+
+                <!-- Contact & Newsletter -->
+                <div class="col-lg-4 col-md-12">
+                    <h5 class="footer-heading">Stay Connected</h5>
+                    <p class="mb-3">Subscribe to get daily price updates and market insights delivered to your inbox.</p>
+                    
+                    <!-- Newsletter Form -->
+                    <form class="newsletter-form mb-4" id="newsletterForm">
+                        <div class="input-group">
+                            <input type="email" class="form-control newsletter-input" placeholder="Enter your email" required aria-label="Email address">
+                            <button class="btn newsletter-btn" type="submit">
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </div>
                     </form>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>info@mulyasuchi.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>+977 1-XXXXXXX</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>Kathmandu, Nepal</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div style="border-top: 1px solid #374151; padding-top: 2rem; text-align: center;">
-                <p style="margin: 0;">&copy; <?php echo date('Y'); ?> Mulyasuchi. All rights reserved. Made with ❤️ in Nepal.</p>
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">
+                            &copy; <?php echo date('Y'); ?> Mulyasuchi. All rights reserved. 
+                            <span class="ms-2">Made with <i class="bi bi-heart-fill text-danger"></i> in Nepal</span>
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="#" class="footer-legal-link">Privacy Policy</a>
+                        <span class="mx-2">•</span>
+                        <a href="#" class="footer-legal-link">Terms of Service</a>
+                        <span class="mx-2">•</span>
+                        <a href="#" class="footer-legal-link">Cookie Policy</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -417,21 +447,16 @@ $recentItems = $itemObj->getActiveItems(8);
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Mobile Menu Script -->
+    <!-- Core Scripts -->
+    <script src="<?php echo SITE_URL; ?>/assets/js/core/utils.js"></script>
+    <script src="<?php echo SITE_URL; ?>/assets/js/core/theme-manager.js"></script>
+    
+    <!-- Component Scripts -->
+    <script src="<?php echo SITE_URL; ?>/assets/js/components/navbar.js"></script>
+    <script src="<?php echo SITE_URL; ?>/assets/js/components/footer.js"></script>
+    
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobileMenuToggle')?.addEventListener('click', function() {
-            document.getElementById('navbarMenu').classList.toggle('active');
-        });
-
-        // Search toggle (expand search on mobile)
-        document.getElementById('searchToggle')?.addEventListener('click', function() {
-            const heroSection = document.querySelector('.hero-section');
-            if (heroSection) {
-                heroSection.scrollIntoView({ behavior: 'smooth' });
-                document.querySelector('.hero-search-input')?.focus();
-            }
-        });
+        console.log('✨ Mulyasuchi - Organized & Enhanced UI Loaded!');
     </script>
 </body>
 </html>
