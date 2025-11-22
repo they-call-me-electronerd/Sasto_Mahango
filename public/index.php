@@ -46,6 +46,9 @@ $recentItems = $itemObj->getActiveItems(8);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Custom Landing Page Styles -->
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/home-redesign.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -57,11 +60,8 @@ $recentItems = $itemObj->getActiveItems(8);
                     },
                     colors: {
                         brand: {
-                            maroon: '#8B1538',
-                            'maroon-dark': '#6B0F2A',
-                            blue: '#1E3A8A',
-                            'blue-dark': '#1E40AF',
-                            gold: '#D4AF37',
+                            crimson: '#DC143C',
+                            blue: '#003893',
                         }
                     }
                 }
@@ -79,210 +79,216 @@ $recentItems = $itemObj->getActiveItems(8);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .hero-gradient {
-            background: linear-gradient(135deg, #8B1538 0%, #5a1232 25%, #1E3A8A 75%, #152d6e 100%);
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #3b82f6 100%);
         }
         .nav-link { position: relative; }
         .nav-link::after {
             content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-            background-color: #8B1538; transition: width 0.3s;
+            background-color: #4f46e5; transition: width 0.3s;
         }
         .nav-link:hover::after { width: 100%; }
-        @keyframes animate-blob {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(20px, -20px) scale(1.1); }
-            50% { transform: translate(-20px, 20px) scale(0.9); }
-            75% { transform: translate(-20px, -20px) scale(1.05); }
-        }
-        .animate-blob { animation: animate-blob 7s infinite; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <!-- 1. Navbar -->
-    <nav class="navbar navbar-expand-lg sticky-top bg-white/90 backdrop-blur-md shadow-sm py-3">
-        <div class="container">
-            <a class="navbar-brand font-heading font-extrabold text-2xl tracking-tight text-gray-900" href="<?php echo SITE_URL; ?>">
-                <span class="text-transparent bg-clip-text" style="background: linear-gradient(135deg, #8B1538 0%, #1E3A8A 100%);">Mulya</span><span class="text-gray-900">Suchi</span>
+    <!-- Professional Navigation Bar -->
+    <nav class="main-navbar">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <a href="<?php echo SITE_URL; ?>" class="navbar-logo">
+                <i class="bi bi-graph-up-arrow"></i>
+                <span class="logo-text">Mulyasuchi</span>
             </a>
-            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto gap-lg-4 font-medium text-gray-600">
-                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="<?php echo SITE_URL; ?>">Home</a></li>
-                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="browse.php">Browse</a></li>
-                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="#search">Search</a></li>
-                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="about.php">About</a></li>
-                    <li class="nav-item"><a class="nav-link transition-colors" style="color: #374151;" onmouseover="this.style.color='#8B1538'" onmouseout="this.style.color='#374151'" href="how-it-works.php">How It Works</a></li>
-                </ul>
+
+            <!-- Main Menu -->
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="<?php echo SITE_URL; ?>">Home</a></li>
+                <li><a href="browse.php">Products</a></li>
+                <li><a href="browse.php">Categories</a></li>
+                <li><a href="about.php">Insights</a></li>
+                <li><a href="about.php">About</a></li>
+            </ul>
+
+            <!-- Right Actions -->
+            <div class="navbar-actions">
+                <button class="nav-search-icon" id="searchToggle">
+                    <i class="bi bi-search"></i>
+                </button>
                 
-                <div class="d-flex gap-3 mt-3 mt-lg-0 align-items-center">
-                    <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary rounded-full px-4 font-semibold dropdown-toggle flex items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle text-lg"></i> 
-                                <span><?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?></span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-xl mt-2 p-2">
-                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                                    <li><a class="dropdown-item rounded-lg py-2" href="<?php echo SITE_URL; ?>/admin/dashboard.php"><i class="bi bi-speedometer2 me-2"></i> Admin Dashboard</a></li>
-                                <?php else: ?>
-                                    <li><a class="dropdown-item rounded-lg py-2" href="<?php echo SITE_URL; ?>/contributor/dashboard.php"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
-                                <?php endif; ?>
-                                <li><hr class="dropdown-divider my-2"></li>
-                                <li><a class="dropdown-item rounded-lg py-2 text-red-600 hover:bg-red-50" href="<?php echo SITE_URL; ?>/admin/logout.php"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
-                            </ul>
-                        </div>
-                    <?php else: ?>
-                        <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="btn btn-outline-primary rounded-full px-4 font-semibold hover:shadow-lg transition-all" style="border-color: #1E3A8A; color: #1E3A8A;" onmouseover="this.style.backgroundColor='#1E3A8A'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#1E3A8A';">
-                            Contributor
-                        </a>
-                        <a href="<?php echo SITE_URL; ?>/admin/login.php" class="btn text-white rounded-full px-4 font-semibold hover:shadow-lg hover:scale-105 transition-all border-0" style="background: linear-gradient(135deg, #8B1538 0%, #1E3A8A 100%);">
-                            Login
-                        </a>
-                    <?php endif; ?>
-                </div>
+                <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+                    <div class="dropdown">
+                        <button class="nav-btn nav-btn-login dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle me-1"></i>
+                            <?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-xl mt-2">
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/dashboard.php"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</a></li>
+                            <?php else: ?>
+                                <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/contributor/dashboard.php"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                            <?php endif; ?>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="<?php echo SITE_URL; ?>/admin/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="nav-btn nav-btn-login">Login</a>
+                    <a href="<?php echo SITE_URL; ?>/admin/login.php" class="nav-btn nav-btn-admin">Admin</a>
+                <?php endif; ?>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
             </div>
         </div>
     </nav>
-
-    <!-- 2. Hero Section -->
-    <section class="hero-gradient relative overflow-hidden min-vh-80 d-flex align-items-center py-5">
-        <!-- Abstract Background Shapes -->
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" style="background-color: rgba(139, 21, 56, 0.5);"></div>
-            <div class="absolute top-[-10%] right-[-10%] w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" style="background-color: rgba(30, 58, 138, 0.5);"></div>
-            <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-4000" style="background-color: rgba(212, 175, 55, 0.3);"></div>
-        </div>
-
-        <div class="container position-relative z-10">
-            <div class="row align-items-center g-5">
-                <!-- Left Content -->
-                <div class="col-lg-7 text-white">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card mb-4 text-sm font-medium text-indigo-100">
-                        <span class="flex h-2 w-2 rounded-full bg-green-400"></span>
-                        Live Market Intelligence
-                    </div>
-                    
-                    <h1 class="display-3 fw-bold mb-3 tracking-tight leading-tight">
-                        Welcome to <span class="text-white">Mulyasuchi</span>
-                    </h1>
-                    <p class="lead mb-2 font-nepali text-2xl opacity-90">
-                        तपाईंको विश्वसनीय बजार मूल्य सूची प्लेटफर्म
-                    </p>
-                    <p class="text-lg text-indigo-100 mb-5 max-w-xl leading-relaxed">
-                        Your trusted market intelligence platform. Access real-time, accurate, and validated prices for vegetables, fruits, and commodities across Nepal.
-                    </p>
-
-                    <!-- Search Bar -->
-                    <div class="bg-white p-2 rounded-xl shadow-2xl max-w-lg transform transition-all hover:scale-[1.01]">
-                        <form action="browse.php" method="GET" class="input-group">
-                            <span class="input-group-text bg-transparent border-0 text-gray-400 ps-3">
-                                <i class="bi bi-search text-xl"></i>
-                            </span>
-                            <input type="text" name="q" class="form-control border-0 shadow-none py-3 text-gray-700 font-medium focus:ring-0" placeholder="Search items... तरकारी, फलफूल, इलेक्ट्रोनिक्स">
-                            <button class="btn text-white rounded-lg px-4 py-2 font-semibold transition-colors" style="background-color: #8B1538;" onmouseover="this.style.backgroundColor='#6B0F2A'" onmouseout="this.style.backgroundColor='#8B1538'" type="submit">
-                                Search
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <div class="mt-4 text-sm text-indigo-200 font-medium">
-                        Trending: <span class="text-white" style="text-decoration: underline; text-decoration-color: #8B1538; text-underline-offset: 4px;">Tomato</span>, <span class="text-white" style="text-decoration: underline; text-decoration-color: #8B1538; text-underline-offset: 4px;">Gold</span>, <span class="text-white" style="text-decoration: underline; text-decoration-color: #8B1538; text-underline-offset: 4px;">Rice</span>
-                    </div>
+    <section class="hero-section">
+        <div class="hero-container">
+            <!-- Left Content -->
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    <span>Real-time Price Updates</span>
                 </div>
 
-                <!-- Right Content (Glass Cards) -->
-                <div class="col-lg-5">
-                    <div class="d-flex flex-column gap-4 perspective-1000">
-                        <!-- Card 1 -->
-                        <div class="glass-card p-4 rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300 ms-lg-auto w-100 max-w-md">
-                            <div class="d-flex align-items-center gap-4">
-                                <div class="bg-white/20 p-3 rounded-xl text-white">
-                                    <i class="bi bi-graph-up-arrow text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h5 class="mb-0 font-bold text-white">Live Price Updates</h5>
-                                    <p class="mb-0 text-indigo-100 text-sm">Real-time data from markets</p>
-                                </div>
-                            </div>
-                        </div>
+                <h1 class="hero-title">
+                    What is the price of <span class="highlight">anything</span> today?
+                </h1>
 
-                        <!-- Card 2 -->
-                        <div class="glass-card p-4 rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300 ms-lg-4 w-100 max-w-md">
-                            <div class="d-flex align-items-center gap-4">
-                                <div class="bg-white/20 p-3 rounded-xl text-white">
-                                    <i class="bi bi-shield-check text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h5 class="mb-0 font-bold text-white">Admin Validated</h5>
-                                    <p class="mb-0 text-indigo-100 text-sm">100% Verified Information</p>
-                                </div>
-                            </div>
-                        </div>
+                <p class="hero-subtitle">
+                    Get instant, verified prices for thousands of products across Nepal. From vegetables to electronics, we track it all.
+                </p>
 
-                        <!-- Card 3 -->
-                        <div class="glass-card p-4 rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300 w-100 max-w-md">
-                            <div class="d-flex align-items-center gap-4">
-                                <div class="bg-white/20 p-3 rounded-xl text-white">
-                                    <i class="bi bi-geo-alt text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h5 class="mb-0 font-bold text-white">Nepal-Focused</h5>
-                                    <p class="mb-0 text-indigo-100 text-sm">Covering 50+ Local Markets</p>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Search Box -->
+                <form action="browse.php" method="GET" class="hero-search-box">
+                    <i class="bi bi-search search-icon-left"></i>
+                    <input 
+                        type="text" 
+                        name="q" 
+                        class="hero-search-input" 
+                        placeholder="Search for rice, tomatoes, mobile phones..."
+                        autocomplete="off"
+                    >
+                    <button type="submit" class="hero-search-btn">
+                        Search
+                    </button>
+                </form>
+
+                <!-- Stats -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">1,245+</span>
+                        <span class="stat-label">Products Tracked</span>
                     </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Markets Covered</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Daily</span>
+                        <span class="stat-label">Price Updates</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Illustration -->
+            <div class="hero-illustration">
+                <div class="illustration-wrapper">
+                    <div class="illustration-circle"></div>
+                    <!-- SVG Illustration -->
+                    <svg class="illustration-img" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Background Circle -->
+                        <circle cx="250" cy="250" r="200" fill="url(#gradient1)" opacity="0.1"/>
+                        
+                        <!-- Main Character Body -->
+                        <ellipse cx="250" cy="280" rx="80" ry="100" fill="#f97316"/>
+                        
+                        <!-- Head -->
+                        <circle cx="250" cy="180" r="70" fill="#f97316"/>
+                        
+                        <!-- Eyes -->
+                        <circle cx="230" cy="170" r="8" fill="#1f2937"/>
+                        <circle cx="270" cy="170" r="8" fill="#1f2937"/>
+                        <circle cx="232" cy="168" r="3" fill="white"/>
+                        <circle cx="272" cy="168" r="3" fill="white"/>
+                        
+                        <!-- Smile -->
+                        <path d="M 230 190 Q 250 200 270 190" stroke="#1f2937" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        
+                        <!-- Arms -->
+                        <ellipse cx="180" cy="250" rx="20" ry="50" fill="#ea580c" transform="rotate(-20 180 250)"/>
+                        <ellipse cx="320" cy="250" rx="20" ry="50" fill="#ea580c" transform="rotate(20 320 250)"/>
+                        
+                        <!-- Price Tag (in left hand) -->
+                        <rect x="140" y="230" width="50" height="35" rx="5" fill="white" stroke="#f97316" stroke-width="2"/>
+                        <text x="165" y="252" font-size="16" font-weight="bold" fill="#f97316" text-anchor="middle">NPR</text>
+                        
+                        <!-- Shopping Bag (in right hand) -->
+                        <rect x="310" y="230" width="45" height="50" rx="5" fill="#3b82f6"/>
+                        <path d="M 320 240 Q 332 230 345 240" stroke="#1e40af" stroke-width="3" stroke-linecap="round" fill="none"/>
+                        
+                        <!-- Floating Icons -->
+                        <!-- Tomato -->
+                        <circle cx="100" cy="150" r="20" fill="#ef4444"/>
+                        <ellipse cx="100" cy="135" rx="8" ry="5" fill="#10b981"/>
+                        
+                        <!-- Carrot -->
+                        <path d="M 400 180 L 410 220 L 390 220 Z" fill="#f97316"/>
+                        <path d="M 405 175 L 408 165 L 402 165 Z" fill="#10b981"/>
+                        
+                        <!-- Phone -->
+                        <rect x="90" cy="320" width="40" height="60" rx="8" fill="#1f2937"/>
+                        <rect x="95" y="328" width="30" height="45" fill="#3b82f6"/>
+                        
+                        <!-- Money Icon -->
+                        <circle cx="380" cy="300" r="25" fill="#fbbf24"/>
+                        <text x="380" y="310" font-size="20" font-weight="bold" fill="#92400e" text-anchor="middle">₹</text>
+                        
+                        <!-- Gradient Definition -->
+                        <defs>
+                            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. Live Price Strip -->
-    <div class="container relative z-20 -mt-8">
-        <div class="bg-white rounded-xl shadow-lg p-3 d-flex align-items-center gap-3 border border-gray-100">
-            <div class="d-flex align-items-center gap-2 px-3 py-1 bg-red-50 text-red-600 rounded-full font-bold text-sm whitespace-nowrap">
-                <span class="relative flex h-3 w-3">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                </span>
-                LIVE UPDATES
-            </div>
-            <div class="overflow-hidden w-100">
-                <div class="d-flex gap-5 animate-marquee whitespace-nowrap text-sm font-medium text-gray-600" id="priceTicker">
-                    <span>Loading latest market prices...</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Categories Section -->
-    <section class="py-20 bg-white">
-        <div class="container">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">Browse by Category</h2>
-                <p class="text-gray-500">Explore items organized by categories</p>
+    <!-- Categories Section --><section style="padding: 5rem 0; background: white;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <div style="text-center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; font-weight: 700; color: #111827; margin-bottom: 1rem;">Browse by Category</h2>
+                <p style="font-size: 1.125rem; color: #6b7280;">Find prices for thousands of products across different categories</p>
             </div>
 
             <div class="row g-4">
                 <?php foreach ($categories as $category): ?>
                 <div class="col-6 col-md-4 col-lg-3">
-                    <a href="browse.php?category=<?php echo $category['slug']; ?>" class="group block bg-gray-50 rounded-2xl p-6 text-center transition-all duration-300 border border-gray-100" style="text-decoration: none;" onmouseover="this.style.backgroundColor='white'; this.style.boxShadow='0 20px 25px -5px rgba(0,0,0,0.1)'; this.style.transform='translateY(-4px)'; this.style.borderColor='#8B1538';" onmouseout="this.style.backgroundColor='rgb(249,250,251)'; this.style.boxShadow=''; this.style.transform=''; this.style.borderColor='rgb(243,244,246)';">
-                        <div class="w-16 h-16 mx-auto bg-white rounded-full shadow-sm flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
-                            <?php 
-                            $icons = ['vegetables'=>'🥦','fruits'=>'🍎','kitchen-appliances'=>'🍳','study-material'=>'📚','clothing'=>'👕','tools'=>'🔧','electrical-appliances'=>'💡','tech-gadgets'=>'📱','miscellaneous'=>'📦'];
-                            echo $icons[$category['slug']] ?? '📦';
-                            ?>
+                    <a href="browse.php?category=<?php echo $category['slug']; ?>" 
+                       class="card border-0 shadow-sm h-100 text-decoration-none"
+                       style="transition: all 0.3s ease;"
+                       onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';"
+                       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)';">
+                        <div class="card-body text-center p-4">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">
+                                <?php 
+                                $icons = ['vegetables'=>'🥦','fruits'=>'🍎','kitchen-appliances'=>'🍳','study-material'=>'📚','clothing'=>'👕','tools'=>'🔧','electrical-appliances'=>'💡','tech-gadgets'=>'📱','miscellaneous'=>'📦'];
+                                echo $icons[$category['slug']] ?? '📦';
+                                ?>
+                            </div>
+                            <h5 class="card-title mb-2" style="color: #111827; font-weight: 600;">
+                                <?php echo htmlspecialchars($category['category_name']); ?>
+                            </h5>
+                            <p class="card-text mb-3" style="color: #6b7280; font-size: 0.875rem;">
+                                <?php echo htmlspecialchars($category['category_name_nepali']); ?>
+                            </p>
+                            <span class="badge" style="background: rgba(249, 115, 22, 0.1); color: #f97316; padding: 0.5rem 1rem; font-weight: 600; border-radius: 2rem;">
+                                <?php echo $category['item_count']; ?> items
+                            </span>
                         </div>
-                        <h3 class="font-bold text-gray-900 mb-1"><?php echo htmlspecialchars($category['category_name']); ?></h3>
-                        <p class="text-sm text-gray-500 font-nepali mb-2"><?php echo htmlspecialchars($category['category_name_nepali']); ?></p>
-                        <span class="inline-block px-3 py-1 text-white text-xs font-bold rounded-full" style="background-color: #8B1538;">
-                            <?php echo $category['item_count']; ?> Items
-                        </span>
                     </a>
                 </div>
                 <?php endforeach; ?>
@@ -290,59 +296,77 @@ $recentItems = $itemObj->getActiveItems(8);
         </div>
     </section>
 
-    <!-- Featured Items Section -->
+    <!-- Recent Updates Section -->
     <?php if (!empty($recentItems)): ?>
-    <section class="py-20 bg-gray-50">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-end mb-12">
+    <section style="padding: 5rem 0; background: #f9fafb;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <div class="d-flex justify-content-between align-items-center mb-5">
                 <div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Market Movers</h2>
-                    <p class="text-gray-500">Latest price updates from the market</p>
+                    <h2 style="font-size: 2.5rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Latest Price Updates</h2>
+                    <p style="font-size: 1.125rem; color: #6b7280;">Fresh prices updated daily from trusted sources</p>
                 </div>
-                <a href="browse.php" class="text-indigo-600 font-semibold hover:text-indigo-800 flex items-center gap-1">
-                    View All Items <i class="bi bi-arrow-right"></i>
+                <a href="browse.php" class="btn btn-lg" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; border: none; padding: 0.75rem 2rem; border-radius: 0.75rem; font-weight: 600;">
+                    View All <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>
 
             <div class="row g-4">
                 <?php foreach ($recentItems as $item): ?>
                 <div class="col-md-6 col-lg-3">
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-100">
-                        <div class="relative h-48 bg-gray-100 overflow-hidden group">
-                            <?php if ($item['image_path']): ?>
-                                <img src="<?php echo UPLOAD_URL . $item['image_path']; ?>" alt="<?php echo htmlspecialchars($item['item_name']); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <?php else: ?>
-                                <div class="w-full h-full flex items-center justify-center text-gray-300 text-4xl font-bold bg-gray-100">
-                                    <?php echo mb_substr($item['item_name'], 0, 1); ?>
+                    <a href="item.php?id=<?php echo $item['item_id']; ?>" class="text-decoration-none">
+                        <div class="card border-0 shadow-sm h-100" style="transition: all 0.3s ease; overflow: hidden;"
+                             onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)';">
+                            
+                            <!-- Image -->
+                            <div style="height: 200px; background: #f3f4f6; position: relative; overflow: hidden;">
+                                <?php if ($item['image_path']): ?>
+                                    <img src="<?php echo UPLOAD_URL . $item['image_path']; ?>" 
+                                         alt="<?php echo htmlspecialchars($item['item_name']); ?>" 
+                                         style="width: 100%; height: 100%; object-fit: cover;">
+                                <?php else: ?>
+                                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: #d1d5db; font-weight: 700;">
+                                        <?php echo mb_substr($item['item_name'], 0, 1); ?>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <!-- Verified Badge -->
+                                <div style="position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(249, 115, 22, 0.95); color: white; padding: 0.375rem 0.75rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; backdrop-filter: blur(10px);">
+                                    <i class="bi bi-patch-check-fill me-1"></i>Verified
                                 </div>
-                            <?php endif; ?>
-                            <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">
-                                <?php echo timeAgo($item['updated_at']); ?>
                             </div>
-                        </div>
-                        <div class="p-5">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="text-xs font-bold px-2 py-1 rounded uppercase tracking-wider" style="color: #1E3A8A; background-color: rgba(30,58,138,0.1);">
+
+                            <div class="card-body p-4">
+                                <!-- Category Badge -->
+                                <span class="badge mb-2" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 600; font-size: 0.75rem; padding: 0.375rem 0.75rem;">
                                     <?php echo htmlspecialchars($item['category_name']); ?>
                                 </span>
-                                <?php if ($item['market_location']): ?>
-                                    <span class="text-xs text-gray-500 flex items-center gap-1">
-                                        <i class="bi bi-geo-alt-fill"></i> <?php echo htmlspecialchars($item['market_location']); ?>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-                            <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-1">
-                                <a href="item.php?id=<?php echo $item['item_id']; ?>" class="hover:text-indigo-600 transition-colors">
+
+                                <h5 class="card-title mb-3" style="color: #111827; font-weight: 600; line-height: 1.4;">
                                     <?php echo htmlspecialchars($item['item_name']); ?>
-                                </a>
-                            </h3>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-sm text-gray-500 font-medium">NPR</span>
-                                <span class="text-2xl font-extrabold" style="color: #8B1538;"><?php echo formatPrice($item['current_price']); ?></span>
-                                <span class="text-sm text-gray-400">/ <?php echo $item['unit']; ?></span>
+                                </h5>
+
+                                <div class="d-flex align-items-baseline gap-2 mb-3">
+                                    <span style="font-size: 0.875rem; color: #6b7280; font-weight: 500;">NPR</span>
+                                    <span style="font-size: 2rem; font-weight: 800; color: #111827; font-variant-numeric: tabular-nums;">
+                                        <?php echo formatPrice($item['current_price']); ?>
+                                    </span>
+                                    <span style="font-size: 0.875rem; color: #9ca3af;">/ <?php echo $item['unit']; ?></span>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <small style="color: #6b7280; font-size: 0.8125rem;">
+                                        <i class="bi bi-clock me-1"></i> <?php echo timeAgo($item['updated_at']); ?>
+                                    </small>
+                                    <?php if ($item['market_location']): ?>
+                                        <small style="color: #6b7280; font-size: 0.8125rem;">
+                                            <i class="bi bi-geo-alt me-1"></i><?php echo htmlspecialchars($item['market_location']); ?>
+                                        </small>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -351,44 +375,43 @@ $recentItems = $itemObj->getActiveItems(8);
     <?php endif; ?>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
-        <div class="container">
-            <div class="row g-5">
+    <footer style="background: #111827; color: #9ca3af; padding: 4rem 0 2rem;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <div class="row g-4 mb-5">
                 <div class="col-lg-4">
-                    <h4 class="font-bold text-2xl mb-4">Mulyasuchi</h4>
-                    <p class="text-gray-400 mb-4">Empowering Nepal with transparent, real-time market intelligence. Making informed decisions easier for everyone.</p>
-                    <div class="flex gap-3">
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center transition-colors" style="text-decoration:none;" onmouseover="this.style.backgroundColor='#8B1538'" onmouseout="this.style.backgroundColor='rgb(31,41,55)'"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center transition-colors" style="text-decoration:none;" onmouseover="this.style.backgroundColor='#8B1538'" onmouseout="this.style.backgroundColor='rgb(31,41,55)'"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center transition-colors" style="text-decoration:none;" onmouseover="this.style.backgroundColor='#8B1538'" onmouseout="this.style.backgroundColor='rgb(31,41,55)'"><i class="bi bi-instagram"></i></a>
-                    </div>
+                    <h3 style="color: white; font-weight: 700; margin-bottom: 1rem;">
+                        <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mulyasuchi</span>
+                    </h3>
+                    <p style="line-height: 1.8;">Nepal's most trusted platform for real-time price information. Get verified prices for thousands of products updated daily.</p>
                 </div>
-                <div class="col-lg-2 col-6">
-                    <h5 class="font-bold mb-4">Platform</h5>
-                    <ul class="list-unstyled text-gray-400 space-y-2">
-                        <li><a href="#" class="hover:text-white transition-colors">Browse Items</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Live Ticker</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Market Locations</a></li>
+                <div class="col-6 col-lg-2">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem;">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="browse.php" style="color: #9ca3af; text-decoration: none;">Browse</a></li>
+                        <li class="mb-2"><a href="about.php" style="color: #9ca3af; text-decoration: none;">About Us</a></li>
+                        <li class="mb-2"><a href="#" style="color: #9ca3af; text-decoration: none;">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2 col-6">
-                    <h5 class="font-bold mb-4">Company</h5>
-                    <ul class="list-unstyled text-gray-400 space-y-2">
-                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                <div class="col-6 col-lg-2">
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem;">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="browse.php?category=vegetables" style="color: #9ca3af; text-decoration: none;">Vegetables</a></li>
+                        <li class="mb-2"><a href="browse.php?category=fruits" style="color: #9ca3af; text-decoration: none;">Fruits</a></li>
+                        <li class="mb-2"><a href="browse.php?category=tech-gadgets" style="color: #9ca3af; text-decoration: none;">Electronics</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4">
-                    <h5 class="font-bold mb-4">Stay Updated</h5>
-                    <form class="input-group">
-                        <input type="email" class="form-control bg-gray-800 border-0 text-white focus:ring-0" placeholder="Enter your email">
-                        <button class="btn text-white border-0" style="background-color: #8B1538;" onmouseover="this.style.backgroundColor='#6B0F2A'" onmouseout="this.style.backgroundColor='#8B1538'" type="button">Subscribe</button>
+                    <h5 style="color: white; font-weight: 600; margin-bottom: 1rem;">Stay Updated</h5>
+                    <p>Subscribe to get daily price updates and market insights.</p>
+                    <form class="d-flex gap-2">
+                        <input type="email" class="form-control" placeholder="Your email" style="background: #1f2937; border: 1px solid #374151; color: white;">
+                        <button class="btn" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; border: none; padding: 0.5rem 1.5rem; white-space: nowrap;">Subscribe</button>
                     </form>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
-                &copy; <?php echo date('Y'); ?> Mulyasuchi. All rights reserved. Made with ❤️ in Nepal.
+
+            <div style="border-top: 1px solid #374151; padding-top: 2rem; text-align: center;">
+                <p style="margin: 0;">&copy; <?php echo date('Y'); ?> Mulyasuchi. All rights reserved. Made with ❤️ in Nepal.</p>
             </div>
         </div>
     </footer>
@@ -396,21 +419,21 @@ $recentItems = $itemObj->getActiveItems(8);
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Ticker Script -->
+    <!-- Mobile Menu Script -->
     <script>
-        // Simple ticker animation
-        const ticker = document.getElementById('priceTicker');
-        // In a real app, fetch data here
-        setTimeout(() => {
-            ticker.innerHTML = `
-                <span class="mx-4">🍅 Tomato Big: NPR 120 <span class="text-red-500">▼ 5%</span></span>
-                <span class="mx-4">🧅 Onion Dry: NPR 85 <span class="text-green-500">▲ 2%</span></span>
-                <span class="mx-4">🥔 Potato Red: NPR 65 <span class="text-gray-400">- 0%</span></span>
-                <span class="mx-4">🍎 Apple Fuji: NPR 320 <span class="text-green-500">▲ 1.5%</span></span>
-                <span class="mx-4">🍌 Banana: NPR 140 <span class="text-red-500">▼ 2%</span></span>
-                <span class="mx-4">🥕 Carrot: NPR 90 <span class="text-green-500">▲ 4%</span></span>
-            `;
-        }, 1000);
+        // Mobile menu toggle
+        document.getElementById('mobileMenuToggle')?.addEventListener('click', function() {
+            document.getElementById('navbarMenu').classList.toggle('active');
+        });
+
+        // Search toggle (expand search on mobile)
+        document.getElementById('searchToggle')?.addEventListener('click', function() {
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector('.hero-search-input')?.focus();
+            }
+        });
     </script>
 </body>
 </html>
