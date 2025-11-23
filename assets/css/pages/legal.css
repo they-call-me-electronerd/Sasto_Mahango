@@ -19,14 +19,27 @@
     right: 0;
     bottom: 0;
     background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h60v60H0z" fill="none"/><path d="M30 0v60M0 30h60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
-    opacity: 0.5;
+    opacity: 0.3;
+}
+
+.legal-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
 }
 
 .legal-hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     position: relative;
     z-index: 1;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .legal-hero .lead {
@@ -34,6 +47,9 @@
     opacity: 0.95;
     position: relative;
     z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .legal-content {
@@ -43,8 +59,8 @@
 
 .legal-section {
     background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 1.25rem;
     padding: 2.5rem;
     margin-bottom: 2rem;
     box-shadow: var(--shadow-md);
@@ -53,7 +69,8 @@
 
 .legal-section:hover {
     box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    border-color: var(--primary-orange-light);
 }
 
 .legal-section h2 {

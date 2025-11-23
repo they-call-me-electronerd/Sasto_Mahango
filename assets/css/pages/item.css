@@ -1,18 +1,21 @@
 /* Item Detail Page Styles */
 
 .breadcrumb-nav {
-    color: #6b7280;
+    color: var(--text-secondary);
     font-size: 0.875rem;
+    margin-bottom: 2rem;
 }
 
 .breadcrumb-nav a {
-    color: #f97316;
+    color: var(--primary-orange);
     text-decoration: none;
     transition: color 0.3s;
+    font-weight: 500;
 }
 
 .breadcrumb-nav a:hover {
-    color: #ea580c;
+    color: var(--primary-orange-dark);
+    text-decoration: underline;
 }
 
 .item-detail-layout {
@@ -53,42 +56,66 @@
 
 .category-badge {
     display: inline-block;
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(234, 88, 12, 0.1));
-    color: #f97316;
-    padding: 0.5rem 1.25rem;
+    background: var(--primary-gradient-soft);
+    color: var(--primary-orange-dark);
+    padding: 0.625rem 1.5rem;
     border-radius: 2rem;
     font-size: 0.875rem;
     font-weight: 700;
     margin-bottom: 2rem;
+    border: 1.5px solid var(--primary-orange-lighter);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .price-box {
-    background: linear-gradient(135deg, #fff5eb, #fed7aa);
-    padding: 2rem;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(234, 88, 12, 0.08));
+    padding: 2.5rem;
     border-radius: 1.5rem;
     margin-bottom: 2rem;
-    border: 2px solid #f97316;
+    border: 2px solid var(--primary-orange);
+    box-shadow: var(--shadow-orange);
+    position: relative;
+    overflow: hidden;
+}
+
+.price-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
 }
 
 .current-price .label {
     display: block;
     font-size: 0.875rem;
-    color: #6b7280;
+    color: var(--text-secondary);
     font-weight: 600;
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .current-price .price {
     display: block;
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 800;
-    color: #f97316;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 0.25rem;
+    line-height: 1;
 }
 
 .current-price .unit {
-    font-size: 1rem;
-    color: #6b7280;
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
 .location-info {
