@@ -12,16 +12,16 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    gap: 0.6rem;
+    background: rgba(249, 115, 22, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 0.5rem 1.25rem;
+    padding: 0.6rem 1.4rem;
     border-radius: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: 0.875rem;
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    font-size: 0.95rem;
     font-weight: 600;
-    color: white;
+    color: #ea580c;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
@@ -289,6 +289,7 @@
 [data-theme="dark"] .hero-badge {
     background: rgba(249, 115, 22, 0.15);
     border-color: rgba(249, 115, 22, 0.3);
+    color: #fb923c;
 }
 
 [data-theme="dark"] .hero-badge:hover {
