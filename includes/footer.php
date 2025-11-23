@@ -1,4 +1,4 @@
-    <footer class="main-footer">
+    <footer class="main-footer" style="padding: 2rem 0 1rem;">
         <div class="footer-container">
             <div class="footer-section">
                 <h3><?php echo SITE_NAME; ?></h3>
@@ -32,7 +32,7 @@
             </div>
         </div>
         
-        <div class="footer-bottom">
+        <div class="footer-bottom" style="margin-top: 1rem; padding-top: 1rem;">
             <p>&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. All rights reserved.</p>
             <p>Built with ❤️ for Nepal</p>
         </div>

@@ -413,7 +413,7 @@ include __DIR__ . '/../includes/header_professional.php';
     <!-- Professional Footer -->
     <footer class="professional-footer">
         <div class="footer-main">
-            <div class="row g-5 mb-5">
+            <div class="row g-4 mb-4">
                 <!-- Company Info -->
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-brand mb-4">

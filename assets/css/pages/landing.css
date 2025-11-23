@@ -119,6 +119,15 @@ body {
     letter-spacing: -0.02em;
 }
 
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+    color: var(--gray-900);
+}
+
 .hero-title .highlight {
     background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
     -webkit-background-clip: text;
@@ -127,20 +136,21 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: var(--gray-600);
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     line-height: 1.6;
+    max-width: 90%;
 }
 
 .hero-search-box {
     background: var(--white);
-    border-radius: 1rem;
-    padding: 0.75rem;
+    border-radius: 1.25rem;
+    padding: 1rem;
     box-shadow: var(--shadow-xl);
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
     transition: all 0.3s ease;
     border: 2px solid transparent;
 }
@@ -152,16 +162,16 @@ body {
 }
 
 .search-icon-left {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: var(--gray-400);
-    padding-left: 0.5rem;
+    padding-left: 0.75rem;
 }
 
 .hero-search-input {
     flex: 1;
     border: none;
     outline: none;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     color: var(--gray-900);
     padding: 0.5rem;
 }
@@ -174,10 +184,10 @@ body {
     background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
     color: var(--white);
     border: none;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 1rem;
+    padding: 1.125rem 2.5rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 1.125rem;
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-md);
@@ -201,13 +211,14 @@ body {
 }
 
 .stat-number {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 800;
     color: var(--gray-900);
+    line-height: 1.2;
 }
 
 .stat-label {
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--gray-600);
     font-weight: 500;
 }

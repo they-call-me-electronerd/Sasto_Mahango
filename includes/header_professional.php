@@ -107,7 +107,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     <!-- Professional Navigation Bar -->
     <nav class="main-navbar" style="box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;">
-        <div class="navbar-container" style="max-width: 1400px; margin: 0 auto; padding: 0.75rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem;">
+        <div class="navbar-container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem;">
             <!-- Logo -->
             <a href="<?php echo SITE_URL; ?>/public/index.php" class="navbar-logo" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; font-size: 1.5rem; font-weight: 800; color: #f97316;">
                 <i class="bi bi-graph-up-arrow"></i>
@@ -147,8 +147,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         </ul>
                     </div>
                 <?php else: ?>
-                    <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="btn btn-outline-primary" style="border-radius: 2rem; padding: 0.5rem 1.5rem; border-color: #f97316; color: #f97316; text-decoration: none;">Login</a>
-                    <a href="<?php echo SITE_URL; ?>/admin/login.php" class="btn btn-primary" style="border-radius: 2rem; padding: 0.5rem 1.5rem; background: linear-gradient(135deg, #f97316, #ea580c); border: none; text-decoration: none; color: white;">Admin</a>
+                    <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="nav-btn nav-btn-outline">Login</a>
+                    <a href="<?php echo SITE_URL; ?>/contributor/register.php" class="nav-btn nav-btn-primary">Get Started</a>
                 <?php endif; ?>
 
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none; background: none; border: none; font-size: 1.5rem; color: #374151; cursor: pointer;">

@@ -1,5 +1,5 @@
     <!-- Professional Footer -->
-    <footer class="professional-footer" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f9fafb; padding: 4rem 0 2rem; margin-top: 4rem; border-top: 4px solid #f97316;">
+    <footer class="professional-footer" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f9fafb; padding: 2rem 0 1rem; margin-top: 2rem; border-top: 4px solid #f97316;">
         <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
             <div class="row g-4">
                 <!-- Brand Section -->
@@ -19,7 +19,7 @@
 
                 <!-- Quick Links -->
                 <div class="col-lg-2 col-md-3 col-6">
-                    <h5 style="color: white; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.125rem;">Quick Links</h5>
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1rem; font-size: 1.125rem;">Quick Links</h5>
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         <li style="margin-bottom: 0.75rem;"><a href="<?php echo SITE_URL; ?>/public/index.php" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#f97316';" onmouseout="this.style.color='#cbd5e1';"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Home</a></li>
                         <li style="margin-bottom: 0.75rem;"><a href="<?php echo SITE_URL; ?>/public/products.php" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#f97316';" onmouseout="this.style.color='#cbd5e1';"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Browse Products</a></li>
@@ -30,7 +30,7 @@
 
                 <!-- Categories -->
                 <div class="col-lg-2 col-md-3 col-6">
-                    <h5 style="color: white; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.125rem;">Categories</h5>
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1rem; font-size: 1.125rem;">Categories</h5>
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         <li style="margin-bottom: 0.75rem;"><a href="<?php echo SITE_URL; ?>/public/products.php?category=vegetables" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#f97316';" onmouseout="this.style.color='#cbd5e1';"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Vegetables</a></li>
                         <li style="margin-bottom: 0.75rem;"><a href="<?php echo SITE_URL; ?>/public/products.php?category=fruits" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#f97316';" onmouseout="this.style.color='#cbd5e1';"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Fruits</a></li>
@@ -42,7 +42,7 @@
 
                 <!-- For Contributors -->
                 <div class="col-lg-2 col-md-6 col-6">
-                    <h5 style="color: white; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.125rem;">Contributors</h5>
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1rem; font-size: 1.125rem;">Contributors</h5>
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         <li style="margin-bottom: 0.75rem;"><a href="<?php echo SITE_URL; ?>/contributor/login.php" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#f97316';" onmouseout="this.style.color='#cbd5e1';"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Login</a></li>
                         <li style="margin-bottom: 0.75rem;"><a href="<?php echo SITE_URL; ?>/contributor/register.php" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#f97316';" onmouseout="this.style.color='#cbd5e1';"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Register</a></li>
@@ -53,7 +53,7 @@
 
                 <!-- Contact -->
                 <div class="col-lg-2 col-md-6 col-6">
-                    <h5 style="color: white; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.125rem;">Legal</h5>
+                    <h5 style="color: white; font-weight: 700; margin-bottom: 1rem; font-size: 1.125rem;">Legal</h5>
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         <li style="margin-bottom: 0.75rem;"><a href="<?php echo SITE_URL; ?>/public/privacy-policy.php" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#f97316';" onmouseout="this.style.color='#cbd5e1';"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Privacy Policy</a></li>
                         <li style="margin-bottom: 0.75rem;"><a href="<?php echo SITE_URL; ?>/public/terms-of-service.php" style="color: #cbd5e1; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;" onmouseover="this.style.color='#f97316';" onmouseout="this.style.color='#cbd5e1';"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Terms of Service</a></li>
@@ -63,7 +63,7 @@
             </div>
             
             <!-- Footer Bottom -->
-            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
                 <p style="color: #94a3b8; margin: 0;">&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. All rights reserved.</p>
                 <p style="color: #64748b; margin-top: 0.5rem; font-size: 0.875rem;">Built with ❤️ for Nepal</p>
             </div>

@@ -19,7 +19,7 @@
 .footer-main {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 4rem 2rem 2rem;
+    padding: 2rem 2rem 1rem;
     position: relative;
     z-index: 2;
 }
@@ -61,7 +61,7 @@
    ============================================================================ */
 
 .footer-brand {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .footer-brand .brand-name {
@@ -89,9 +89,9 @@
 }
 
 .footer-description {
-    line-height: 1.8;
+    line-height: 1.6;
     color: #9ca3af;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 /* ============================================================================

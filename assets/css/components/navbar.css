@@ -6,8 +6,8 @@
 
 :root {
     --header-transition-speed: 0.4s;
-    --header-shrink-height: 60px;
-    --header-full-height: 80px;
+    --header-shrink-height: 56px;
+    --header-full-height: 64px;
 }
 
 /* ============================================================================
@@ -195,58 +195,31 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    color: #374151;
+    padding: 0.6rem 1rem;
+    color: #4b5563;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.95rem;
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-}
-
-/* Animated Underline Effect with Gradient */
-.navbar-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    width: 0;
-    height: 2.5px;
-    background: linear-gradient(90deg,
-            transparent,
-            #f97316 20%,
-            #3b82f6 50%,
-            #10b981 80%,
-            transparent);
-    transform: translateX(-50%);
-    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border-radius: 2px;
-}
-
-.navbar-menu a:hover::after {
-    width: 85%;
-    animation: link-underline-expand 0.4s ease;
-}
-
-/* Background Highlight on Hover */
-.navbar-menu a::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg,
-            rgba(249, 115, 22, 0.12),
-            rgba(59, 130, 246, 0.1),
-            rgba(16, 185, 129, 0.08));
-    opacity: 0;
-    border-radius: 12px;
-    transition: opacity 0.3s ease;
-    z-index: -1;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 .navbar-menu a:hover {
     color: #f97316;
-    transform: translateY(-2px);
+    background: rgba(249, 115, 22, 0.08);
+    transform: translateY(-1px);
+}
+
+.navbar-menu a.active {
+    color: #f97316;
+    background: rgba(249, 115, 22, 0.1);
+    font-weight: 600;
+}
+
+/* Remove old complex animations for cleaner look */
+.navbar-menu a::after,
+.navbar-menu a::before {
+    display: none;
 }
 
 .navbar-menu a:hover::before {
@@ -333,40 +306,31 @@
     height: 300px;
 }
 
-/* Login Button */
-.nav-btn-login {
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%);
+/* Primary Button (Get Started) */
+.nav-btn-primary {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
     color: white;
-    box-shadow:
-        0 4px 18px rgba(249, 115, 22, 0.35),
-        0 2px 8px rgba(234, 88, 12, 0.25);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    border: none;
 }
 
-.nav-btn-login:hover {
-    transform: translateY(-3px);
-    box-shadow:
-        0 8px 28px rgba(249, 115, 22, 0.5),
-        0 4px 14px rgba(234, 88, 12, 0.35);
-    background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
+.nav-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
 }
 
-/* Admin Button */
-.nav-btn-admin {
-    background: linear-gradient(135deg,
-            rgba(59, 130, 246, 0.12),
-            rgba(99, 102, 241, 0.1));
-    color: #3b82f6;
-    border: 1.5px solid rgba(59, 130, 246, 0.3);
+/* Outline Button (Login) */
+.nav-btn-outline {
+    background: transparent;
+    color: #f97316;
+    border: 1.5px solid rgba(249, 115, 22, 0.3);
 }
 
-.nav-btn-admin:hover {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
-    color: white;
-    border-color: #3b82f6;
-    transform: translateY(-3px);
-    box-shadow:
-        0 8px 28px rgba(59, 130, 246, 0.45),
-        0 4px 14px rgba(37, 99, 235, 0.35);
+.nav-btn-outline:hover {
+    background: rgba(249, 115, 22, 0.1);
+    border-color: #f97316;
+    transform: translateY(-2px);
 }
 
 /* ============================================================================
