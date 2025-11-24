@@ -38,11 +38,23 @@ include __DIR__ . '/../includes/header_professional.php';
 <section class="categories-section">
     <div class="container">
         <div class="section-header">
-            <h2>All Categories</h2>
-            <p>Select a category to view products and track prices</p>
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div class="text-start">
+                    <h2>All Categories</h2>
+                    <p class="mb-0">Select a category to view products and track prices</p>
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid" title="Grid View">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                    </button>
+                    <button class="view-btn" data-view="list" title="List View">
+                        <i class="bi bi-list-ul"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="categories-grid">
+        <div class="categories-grid" id="categoriesGrid">
             <?php if (!empty($categories)): ?>
                 <?php 
                 $categoryIcons = [
@@ -58,32 +70,41 @@ include __DIR__ . '/../includes/header_professional.php';
                     'grains' => 'bi-flower1'
                 ];
                 
+                $isAdmin = Auth::isLoggedIn() && Auth::hasRole(ROLE_ADMIN);
+
                 foreach ($categories as $category): 
                     $icon = $categoryIcons[$category['slug']] ?? 'bi-box-seam';
                     $itemCount = $category['item_count'] ?? 0;
                 ?>
-                    <a href="<?php echo SITE_URL; ?>/public/products.php?category=<?php echo htmlspecialchars($category['slug']); ?>" 
-                       class="category-card">
-                        <div class="category-icon">
-                            <i class="bi <?php echo $icon; ?>"></i>
-                        </div>
-                        <div class="category-info">
-                            <h3 class="category-name"><?php echo htmlspecialchars($category['category_name']); ?></h3>
-                            <p class="category-count">
-                                <i class="bi bi-box me-1"></i>
-                                <?php echo $itemCount; ?> <?php echo $itemCount == 1 ? 'item' : 'items'; ?>
-                            </p>
-                            <?php if (!empty($category['description'])): ?>
-                                <p class="category-description">
-                                    <?php echo htmlspecialchars(substr($category['description'], 0, 80)); ?>
-                                    <?php if (strlen($category['description']) > 80) echo '...'; ?>
+                    <div class="category-card-wrapper">
+                        <a href="<?php echo SITE_URL; ?>/public/products.php?category=<?php echo htmlspecialchars($category['slug']); ?>" 
+                           class="category-card">
+                            <div class="category-icon">
+                                <i class="bi <?php echo $icon; ?>"></i>
+                            </div>
+                            <div class="category-info">
+                                <h3 class="category-name"><?php echo htmlspecialchars($category['category_name']); ?></h3>
+                                <p class="category-count">
+                                    <i class="bi bi-box me-1"></i>
+                                    <?php echo $itemCount; ?> <?php echo $itemCount == 1 ? 'item' : 'items'; ?>
                                 </p>
-                            <?php endif; ?>
-                        </div>
-                        <div class="category-arrow">
-                            <i class="bi bi-arrow-right"></i>
-                        </div>
-                    </a>
+                                <?php if (!empty($category['description'])): ?>
+                                    <p class="category-description">
+                                        <?php echo htmlspecialchars(substr($category['description'], 0, 80)); ?>
+                                        <?php if (strlen($category['description']) > 80) echo '...'; ?>
+                                    </p>
+                                <?php endif; ?>
+                            </div>
+                            <div class="category-actions">
+                                <span class="btn-view">View <i class="bi bi-arrow-right"></i></span>
+                                <?php if ($isAdmin): ?>
+                                    <button class="btn-edit" onclick="event.preventDefault(); window.location.href='<?php echo SITE_URL; ?>/admin/categories.php?action=edit&id=<?php echo $category['category_id']; ?>'">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                        </a>
+                    </div>
                 <?php endforeach; ?>
             <?php else: ?>
                 <div class="empty-state">
@@ -136,3 +157,26 @@ include __DIR__ . '/../includes/header_professional.php';
 </section>
 
 <?php include __DIR__ . '/../includes/footer_professional.php'; ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const viewButtons = document.querySelectorAll('.view-btn');
+    const categoriesGrid = document.getElementById('categoriesGrid');
+
+    viewButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            viewButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const view = btn.dataset.view;
+            if (view === 'list') {
+                categoriesGrid.classList.add('list-view');
+            } else {
+                categoriesGrid.classList.remove('list-view');
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

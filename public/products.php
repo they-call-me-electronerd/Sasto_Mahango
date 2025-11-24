@@ -232,11 +232,16 @@ include __DIR__ . '/../includes/header_professional.php';
                 <?php else: ?>
                     <div class="products-grid" id="productsGrid">
                         <?php 
+                        $isAdmin = Auth::isLoggedIn() && Auth::hasRole(ROLE_ADMIN);
                         $delay = 0;
                         foreach ($items as $item): 
+                            $status = $item['status'] ?? 'active';
+                            $statusClass = $status === 'active' ? 'status-active' : 'status-inactive';
+                            $statusLabel = $status === 'active' ? 'Available' : 'Out of Stock';
                         ?>
                             <div class="product-card" style="animation-delay: <?php echo $delay; ?>s;">
                                 <div class="product-image">
+                                    <span class="product-badge <?php echo $statusClass; ?>"><?php echo $statusLabel; ?></span>
                                     <?php if ($item['image_path'] && file_exists(__DIR__ . '/../assets/uploads/items/' . $item['image_path'])): ?>
                                         <img src="<?php echo SITE_URL; ?>/assets/uploads/items/<?php echo htmlspecialchars($item['image_path']); ?>" 
                                              alt="<?php echo htmlspecialchars($item['item_name']); ?>"
@@ -269,7 +274,8 @@ include __DIR__ . '/../includes/header_professional.php';
                                         <?php if (!empty($item['market_location'])): ?>
                                             <span class="meta-item">
                                                 <i class="bi bi-geo-alt"></i>
-                        </span>
+                                                <?php echo htmlspecialchars($item['market_location']); ?>
+                                            </span>
                                         <?php endif; ?>
                                     </div>
 
@@ -282,6 +288,11 @@ include __DIR__ . '/../includes/header_professional.php';
                                             View Details
                                             <i class="bi bi-arrow-right ms-1"></i>
                                         </a>
+                                        <?php if ($isAdmin): ?>
+                                            <a href="<?php echo SITE_URL; ?>/admin/edit_item.php?id=<?php echo $item['item_id']; ?>" class="btn-edit-icon" title="Edit Item">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>

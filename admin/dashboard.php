@@ -31,7 +31,7 @@ $totalItems = $itemObj->countItems();
 $totalUsers = $userObj->countUsers();
 ?>
 
-<main class="dashboard-layout">
+<main class="dashboard-layout" style="padding-top: 100px;">
     <div class="dashboard-container">
         <div class="dashboard-header">
             <div>
@@ -115,7 +115,7 @@ $totalUsers = $userObj->countUsers();
                     <p class="action-card-desc">Create, edit, or remove users</p>
                 </a>
                 
-                <a href="<?php echo SITE_URL; ?>/public/browse.php" class="action-card">
+                <a href="<?php echo SITE_URL; ?>/public/products.php" class="action-card">
                     <div class="action-card-icon" style="color: var(--brand-accent);">
                         <i class="bi bi-collection-fill"></i>
                     </div>
@@ -131,24 +131,24 @@ $totalUsers = $userObj->countUsers();
                     <p class="action-card-desc">View the live website</p>
                 </a>
                 
-                <a href="#" class="action-card">
+                <a href="system_logs.php" class="action-card">
                     <div class="action-card-icon" style="color: var(--text-tertiary);">
                         <i class="bi bi-journal-text"></i>
                     </div>
                     <h3 class="action-card-title">System Logs</h3>
-                    <p class="action-card-desc">Audit trail (Coming Soon)</p>
+                    <p class="action-card-desc">Audit trail of activities</p>
                 </a>
                 
-                <a href="#" class="action-card">
+                <a href="settings.php" class="action-card">
                     <div class="action-card-icon" style="color: var(--text-tertiary);">
                         <i class="bi bi-gear-fill"></i>
                     </div>
                     <h3 class="action-card-title">Settings</h3>
-                    <p class="action-card-desc">Configuration (Coming Soon)</p>
+                    <p class="action-card-desc">Profile & System Config</p>
                 </a>
             </div>
         </div>
     </div>
 </main>
 
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer_professional.php'; ?>

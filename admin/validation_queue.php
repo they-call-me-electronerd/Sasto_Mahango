@@ -1,7 +1,7 @@
 <?php
 /**
  * Admin Validation Queue
- * Review and approve/reject contributor submissions
+ * Modern, Professional Review System for Contributor Submissions
  */
 
 define('MULYASUCHI_APP', true);
@@ -17,7 +17,7 @@ require_once __DIR__ . '/../includes/functions.php';
 // Require admin login
 Auth::requireRole(ROLE_ADMIN, SITE_URL . '/admin/login.php');
 
-$pageTitle = 'Validation Queue';
+$pageTitle = 'Validation Queue - Mulyasuchi Admin';
 $validationObj = new Validation();
 
 // Handle approval/rejection
@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $validationObj->approveValidation($queueId);
             if ($result) {
                 setFlashMessage('Submission approved successfully!', 'success');
+                Logger::log('validation_approved', 'Validation queue #' . $queueId . ' approved');
             } else {
                 setFlashMessage('Failed to approve submission', 'error');
             }
@@ -43,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = $validationObj->rejectValidation($queueId, $reason);
                 if ($result) {
                     setFlashMessage('Submission rejected', 'success');
+                    Logger::log('validation_rejected', 'Validation queue #' . $queueId . ' rejected');
                 } else {
                     setFlashMessage('Failed to reject submission', 'error');
                 }
@@ -52,293 +54,349 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Get pending submissions
-$pendingSubmissions = $validationObj->getPendingValidations();
+// Filter and search parameters
+$searchTerm = sanitizeInput($_GET['search'] ?? '');
 
-include __DIR__ . '/../includes/header.php';
+// Get pending submissions
+$allSubmissions = $validationObj->getPendingValidations();
+$pendingSubmissions = $allSubmissions;
+
+// Calculate stats (before filtering for accurate counts)
+$totalPending = count($allSubmissions);
+$newItems = count(array_filter($allSubmissions, fn($s) => $s['action_type'] === ACTION_NEW_ITEM));
+$priceUpdates = count(array_filter($allSubmissions, fn($s) => $s['action_type'] === ACTION_PRICE_UPDATE));
+
+// Apply search filter
+if (!empty($searchTerm)) {
+    $pendingSubmissions = array_filter($pendingSubmissions, function($sub) use ($searchTerm) {
+        return stripos($sub['item_name'] ?? $sub['existing_item_name'] ?? '', $searchTerm) !== false ||
+               stripos($sub['full_name'] ?? '', $searchTerm) !== false;
+    });
+}
+
+$additionalCSS = ['pages/auth-admin.css'];
+include __DIR__ . '/../includes/header_professional.php';
 ?>
 
-<style>
-.admin-nav {
-    background: var(--gradient-secondary);
-    color: white;
-    padding: var(--spacing-md);
-}
-
-.admin-nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.admin-nav a {
-    color: white;
-    margin-left: var(--spacing-md);
-}
-
-.queue-container {
-    max-width: 1280px;
-    margin: var(--spacing-2xl) auto;
-    padding: 0 var(--spacing-md);
-}
-
-.queue-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
-}
-
-.stat-card {
-    background: white;
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-md);
-}
-
-.stat-card h3 {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.stat-card .value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.submission-card {
-    background: white;
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-md);
-    margin-bottom: var(--spacing-lg);
-}
-
-.submission-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin-bottom: var(--spacing-md);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 2px solid var(--border-color);
-}
-
-.submission-type {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: var(--radius-md);
-    font-size: 0.875rem;
-    font-weight: 600;
-    background: var(--gradient-primary);
-    color: white;
-}
-
-.submission-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-}
-
-.detail-item {
-    padding: var(--spacing-sm);
-    background: var(--bg-lighter);
-    border-radius: var(--radius-md);
-}
-
-.detail-item strong {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    margin-bottom: 4px;
-}
-
-.action-buttons {
-    display: flex;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-md);
-}
-
-.btn-approve {
-    flex: 1;
-    padding: var(--spacing-md);
-    background: var(--success);
-    color: white;
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.btn-reject {
-    flex: 1;
-    padding: var(--spacing-md);
-    background: var(--danger);
-    color: white;
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.reject-form {
-    display: none;
-    margin-top: var(--spacing-md);
-    padding: var(--spacing-md);
-    background: #fee;
-    border-radius: var(--radius-md);
-}
-
-.reject-form textarea {
-    width: 100%;
-    padding: var(--spacing-sm);
-    border: 2px solid var(--danger);
-    border-radius: var(--radius-md);
-    min-height: 80px;
-    margin-bottom: var(--spacing-sm);
-    font-family: inherit;
-}
-
-.no-submissions {
-    text-align: center;
-    padding: var(--spacing-2xl);
-    color: var(--text-secondary);
-}
-</style>
-
-<nav class="admin-nav">
-    <div class="container">
-        <h2>⚡ Validation Queue</h2>
-        <div>
-            <a href="dashboard.php">← Dashboard</a>
-            <a href="logout.php">Logout</a>
+<!-- Main Content -->
+<main class="dashboard-layout" style="padding-top: 100px;">
+    <div class="dashboard-container">
+        
+        <!-- Header Section -->
+        <div class="dashboard-header">
+            <div>
+                <h1 class="dashboard-title">Validation Queue</h1>
+                <p class="dashboard-subtitle">Review and approve contributor submissions</p>
+            </div>
         </div>
-    </div>
-</nav>
 
-<main class="queue-container">
-    <h1>Review Submissions</h1>
-    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);">
-        Approve or reject contributor submissions to maintain data quality
-    </p>
-    
-    <div class="queue-stats">
-        <div class="stat-card">
-            <h3>PENDING REVIEW</h3>
-            <div class="value"><?php echo count($pendingSubmissions); ?></div>
-        </div>
-    </div>
-    
-    <?php if (empty($pendingSubmissions)): ?>
-        <div class="no-submissions">
-            <h2>🎉 All caught up!</h2>
-            <p>No pending submissions at the moment.</p>
-        </div>
-    <?php else: ?>
-        <?php foreach ($pendingSubmissions as $submission): ?>
-            <div class="submission-card">
-                <div class="submission-header">
-                    <div>
-                        <span class="submission-type">
-                            <?php echo $submission['action_type'] === ACTION_NEW_ITEM ? '📝 New Item' : '💰 Price Update'; ?>
-                        </span>
-                        <h3 style="margin-top: var(--spacing-sm);">
-                            <?php echo htmlspecialchars($submission['item_name'] ?? $submission['existing_item_name'] ?? 'Item'); ?>
-                        </h3>
-                        <p style="font-size: 0.875rem; color: var(--text-secondary);">
-                            Submitted by: <strong><?php echo htmlspecialchars($submission['full_name']); ?></strong> | 
-                            <?php echo date('M j, Y g:i A', strtotime($submission['submitted_at'])); ?>
-                        </p>
-                    </div>
+        <!-- Flash Messages -->
+        <?php if (hasFlashMessage()): ?>
+            <?php $flash = getFlashMessage(); ?>
+            <div class="alert alert-<?php echo $flash['type'] === 'error' ? 'error' : 'success'; ?>">
+                <i class="bi bi-<?php echo $flash['type'] === 'success' ? 'check-circle-fill' : 'exclamation-triangle-fill'; ?>"></i>
+                <span><?php echo htmlspecialchars($flash['message']); ?></span>
+            </div>
+        <?php endif; ?>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
+                    <i class="bi bi-hourglass-split"></i>
                 </div>
-                
-                <div class="submission-details">
-                    <?php if ($submission['action_type'] === ACTION_NEW_ITEM): ?>
-                        <div class="detail-item">
-                            <strong>CATEGORY</strong>
-                            <?php echo htmlspecialchars($submission['category_name'] ?? 'N/A'); ?>
-                        </div>
-                        <div class="detail-item">
-                            <strong>INITIAL PRICE</strong>
-                            NPR <?php echo number_format($submission['new_price'], 2); ?> / <?php echo htmlspecialchars($submission['unit']); ?>
-                        </div>
-                        <div class="detail-item">
-                            <strong>MARKET LOCATION</strong>
-                            <?php echo htmlspecialchars($submission['market_location']); ?>
-                        </div>
-                        <?php if (!empty($submission['description'])): ?>
-                            <div class="detail-item" style="grid-column: 1 / -1;">
-                                <strong>DESCRIPTION</strong>
-                                <?php echo htmlspecialchars($submission['description']); ?>
-                            </div>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <div class="detail-item">
-                            <strong>CURRENT PRICE</strong>
-                            NPR <?php echo number_format($submission['old_price'], 2); ?>
-                        </div>
-                        <div class="detail-item">
-                            <strong>NEW PRICE</strong>
-                            NPR <?php echo number_format($submission['new_price'], 2); ?>
-                        </div>
-                        <div class="detail-item">
-                            <strong>CHANGE</strong>
-                            <?php
-                            $change = (($submission['new_price'] - $submission['old_price']) / $submission['old_price']) * 100;
-                            $color = $change > 0 ? 'var(--danger)' : 'var(--success)';
-                            echo "<span style='color: $color; font-weight: 700;'>";
-                            echo ($change > 0 ? '+' : '') . number_format($change, 1) . '%';
-                            echo "</span>";
-                            ?>
-                        </div>
-                        <div class="detail-item">
-                            <strong>MARKET LOCATION</strong>
-                            <?php echo htmlspecialchars($submission['market_location']); ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                
-                <div class="action-buttons">
-                    <form method="POST" style="flex: 1;">
-                        <input type="hidden" name="csrf_token" value="<?php echo Auth::generateCSRFToken(); ?>">
-                        <input type="hidden" name="queue_id" value="<?php echo $submission['queue_id']; ?>">
-                        <input type="hidden" name="action" value="approve">
-                        <button type="submit" class="btn-approve" onclick="return confirm('Approve this submission?')">
-                            ✓ Approve
-                        </button>
-                    </form>
-                    
-                    <button type="button" class="btn-reject" onclick="toggleRejectForm(<?php echo $submission['queue_id']; ?>)">
-                        ✗ Reject
-                    </button>
-                </div>
-                
-                <div id="reject-form-<?php echo $submission['queue_id']; ?>" class="reject-form">
-                    <form method="POST">
-                        <input type="hidden" name="csrf_token" value="<?php echo Auth::generateCSRFToken(); ?>">
-                        <input type="hidden" name="queue_id" value="<?php echo $submission['queue_id']; ?>">
-                        <input type="hidden" name="action" value="reject">
-                        <label><strong>Rejection Reason:</strong></label>
-                        <textarea name="rejection_reason" required placeholder="Explain why this submission is being rejected..."></textarea>
-                        <div style="display: flex; gap: var(--spacing-sm);">
-                            <button type="submit" class="btn-reject">Confirm Rejection</button>
-                            <button type="button" onclick="toggleRejectForm(<?php echo $submission['queue_id']; ?>)" 
-                                    style="background: var(--bg-lighter); color: var(--text-primary);">Cancel</button>
-                        </div>
-                    </form>
+                <div class="stat-content">
+                    <div class="stat-label">Pending Review</div>
+                    <div class="stat-value"><?php echo $totalPending; ?></div>
+                    <div class="stat-trend">Requires attention</div>
                 </div>
             </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                    <i class="bi bi-file-earmark-plus"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">New Items</div>
+                    <div class="stat-value"><?php echo $newItems; ?></div>
+                    <div class="stat-trend">Product additions</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <i class="bi bi-tag"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">Price Updates</div>
+                    <div class="stat-value"><?php echo $priceUpdates; ?></div>
+                    <div class="stat-trend">Market changes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="admin-controls">
+            <form method="GET" class="search-form" id="searchForm">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input 
+                        type="text" 
+                        name="search" 
+                        placeholder="Search by item name or contributor..." 
+                        value="<?php echo htmlspecialchars($searchTerm); ?>"
+                        class="search-input">
+                </div>
+                <button type="submit" class="btn-search">
+                    <i class="bi bi-search"></i> Search
+                </button>
+                <?php if ($searchTerm): ?>
+                    <a href="validation_queue.php" class="btn-clear">
+                        <i class="bi bi-x-circle"></i> Clear
+                    </a>
+                <?php endif; ?>
+            </form>
+        </div>
+
+        <!-- Submissions List -->
+        <?php if (empty($pendingSubmissions)): ?>
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <h2>All Caught Up!</h2>
+                <p>No pending submissions at the moment. Great job!</p>
+                <a href="<?php echo SITE_URL; ?>/admin/dashboard.php" class="btn-primary">
+                    <i class="bi bi-speedometer2"></i> Back to Dashboard
+                </a>
+            </div>
+        <?php else: ?>
+            <div class="submissions-list">
+                <?php foreach ($pendingSubmissions as $submission): ?>
+                    <div class="submission-card" data-submission-id="<?php echo $submission['queue_id']; ?>">
+                        
+                        <!-- Card Header -->
+                        <div class="submission-header">
+                            <div class="submission-meta">
+                                <span class="submission-badge badge-<?php echo $submission['action_type'] === ACTION_NEW_ITEM ? 'new' : 'update'; ?>">
+                                    <i class="bi bi-<?php echo $submission['action_type'] === ACTION_NEW_ITEM ? 'file-earmark-plus' : 'tag'; ?>"></i>
+                                    <?php echo $submission['action_type'] === ACTION_NEW_ITEM ? 'New Item' : 'Price Update'; ?>
+                                </span>
+                                <span class="submission-time">
+                                    <i class="bi bi-clock"></i>
+                                    <?php echo date('M j, Y • g:i A', strtotime($submission['submitted_at'])); ?>
+                                </span>
+                            </div>
+                            <div class="submission-contributor">
+                                <i class="bi bi-person-circle"></i>
+                                <span><?php echo htmlspecialchars($submission['full_name']); ?></span>
+                            </div>
+                        </div>
+
+                        <!-- Item Title -->
+                        <h3 class="submission-title">
+                            <?php echo htmlspecialchars($submission['item_name'] ?? $submission['existing_item_name'] ?? 'Item'); ?>
+                        </h3>
+
+                        <!-- Submission Details -->
+                        <div class="submission-details">
+                            <?php if ($submission['action_type'] === ACTION_NEW_ITEM): ?>
+                                <!-- New Item Details -->
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <div class="detail-label">
+                                            <i class="bi bi-bookmark-fill"></i> Category
+                                        </div>
+                                        <div class="detail-value">
+                                            <?php echo htmlspecialchars($submission['category_name'] ?? 'N/A'); ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <div class="detail-label">
+                                            <i class="bi bi-currency-rupee"></i> Initial Price
+                                        </div>
+                                        <div class="detail-value price-highlight">
+                                            NPR <?php echo number_format($submission['new_price'], 2); ?>
+                                            <span class="unit">/ <?php echo htmlspecialchars($submission['unit']); ?></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <div class="detail-label">
+                                            <i class="bi bi-geo-alt-fill"></i> Market Location
+                                        </div>
+                                        <div class="detail-value">
+                                            <?php echo htmlspecialchars($submission['market_location']); ?>
+                                        </div>
+                                    </div>
+
+                                    <?php if (!empty($submission['description'])): ?>
+                                        <div class="detail-item detail-full">
+                                            <div class="detail-label">
+                                                <i class="bi bi-card-text"></i> Description
+                                            </div>
+                                            <div class="detail-value">
+                                                <?php echo nl2br(htmlspecialchars($submission['description'])); ?>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php else: ?>
+                                <!-- Price Update Details -->
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <div class="detail-label">
+                                            <i class="bi bi-arrow-down-circle"></i> Current Price
+                                        </div>
+                                        <div class="detail-value">
+                                            NPR <?php echo number_format($submission['old_price'], 2); ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <div class="detail-label">
+                                            <i class="bi bi-arrow-up-circle"></i> New Price
+                                        </div>
+                                        <div class="detail-value price-highlight">
+                                            NPR <?php echo number_format($submission['new_price'], 2); ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <div class="detail-label">
+                                            <i class="bi bi-graph-up-arrow"></i> Price Change
+                                        </div>
+                                        <div class="detail-value">
+                                            <?php
+                                            $change = (($submission['new_price'] - $submission['old_price']) / $submission['old_price']) * 100;
+                                            $changeClass = $change > 0 ? 'price-increase' : 'price-decrease';
+                                            $changeIcon = $change > 0 ? 'bi-arrow-up' : 'bi-arrow-down';
+                                            ?>
+                                            <span class="<?php echo $changeClass; ?>">
+                                                <i class="bi <?php echo $changeIcon; ?>"></i>
+                                                <?php echo ($change > 0 ? '+' : '') . number_format($change, 1); ?>%
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <div class="detail-label">
+                                            <i class="bi bi-geo-alt-fill"></i> Market Location
+                                        </div>
+                                        <div class="detail-value">
+                                            <?php echo htmlspecialchars($submission['market_location']); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                
+                        <!-- Action Buttons -->
+                        <div class="submission-actions">
+                            <form method="POST" class="action-form" onsubmit="return confirm('Approve this submission?')">
+                                <input type="hidden" name="csrf_token" value="<?php echo Auth::generateCSRFToken(); ?>">
+                                <input type="hidden" name="queue_id" value="<?php echo $submission['queue_id']; ?>">
+                                <input type="hidden" name="action" value="approve">
+                                <button type="submit" class="btn-action btn-approve">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span>Approve</span>
+                                </button>
+                            </form>
+                            
+                            <button type="button" class="btn-action btn-reject" onclick="toggleRejectForm(<?php echo $submission['queue_id']; ?>)">
+                                <i class="bi bi-x-circle-fill"></i>
+                                <span>Reject</span>
+                            </button>
+                        </div>
+                
+                        <!-- Rejection Form (Hidden by default) -->
+                        <div id="reject-form-<?php echo $submission['queue_id']; ?>" class="reject-form" style="display: none;">
+                            <form method="POST" class="reject-form-inner">
+                                <input type="hidden" name="csrf_token" value="<?php echo Auth::generateCSRFToken(); ?>">
+                                <input type="hidden" name="queue_id" value="<?php echo $submission['queue_id']; ?>">
+                                <input type="hidden" name="action" value="reject">
+                                
+                                <div class="reject-header">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    <strong>Rejection Reason Required</strong>
+                                </div>
+                                
+                                <textarea 
+                                    name="rejection_reason" 
+                                    required 
+                                    placeholder="Provide a clear explanation for rejecting this submission. The contributor will see this message."
+                                    rows="4"></textarea>
+                                
+                                <div class="reject-actions">
+                                    <button type="submit" class="btn-reject-confirm">
+                                        <i class="bi bi-send-fill"></i> Confirm Rejection
+                                    </button>
+                                    <button type="button" class="btn-cancel" onclick="toggleRejectForm(<?php echo $submission['queue_id']; ?>)">
+                                        <i class="bi bi-x"></i> Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
 </main>
 
+<!-- Theme Manager Script -->
+
+<!-- Page Scripts -->
 <script>
+// Toggle rejection form
 function toggleRejectForm(queueId) {
     const form = document.getElementById('reject-form-' + queueId);
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    const isHidden = form.style.display === 'none';
+    
+    // Hide all other rejection forms first
+    document.querySelectorAll('.reject-form').forEach(f => f.style.display = 'none');
+    
+    // Toggle this form
+    form.style.display = isHidden ? 'block' : 'none';
+    
+    // Focus on textarea if showing
+    if (isHidden) {
+        const textarea = form.querySelector('textarea');
+        if (textarea) textarea.focus();
+    }
+}
+
+// Auto-dismiss alerts
+document.addEventListener('DOMContentLoaded', function() {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+        setTimeout(() => {
+            alert.style.animation = 'slideOutUp 0.5s ease forwards';
+            setTimeout(() => alert.remove(), 500);
+        }, 5000);
+    });
+
+    // Add submission card animations
+    const cards = document.querySelectorAll('.submission-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.05}s`;
+    });
+});
+
+// Search form auto-submit on input (debounced)
+let searchTimeout;
+const searchInput = document.querySelector('.search-input');
+if (searchInput) {
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            if (this.value.length >= 3 || this.value.length === 0) {
+                document.getElementById('searchForm').submit();
+            }
+        }, 500);
+    });
 }
 </script>
 
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer_professional.php'; ?>

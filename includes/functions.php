@@ -65,9 +65,16 @@ function uploadImage($file, $oldImagePath = null) {
 /**
  * Set flash message
  */
-function setFlashMessage($type, $message) {
+function setFlashMessage($message, $type = 'success') {
     $_SESSION['flash_type'] = $type;
     $_SESSION['flash_message'] = $message;
+}
+
+/**
+ * Check if flash message exists
+ */
+function hasFlashMessage() {
+    return isset($_SESSION['flash_message']);
 }
 
 /**
