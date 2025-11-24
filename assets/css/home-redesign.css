@@ -107,10 +107,16 @@ body {
     align-items: center;
     position: relative;
     z-index: 1;
-    line-height: 1.1;
+}
+
+.hero-title {
+    font-size: 2.75rem;
+    line-height: 1.4;
     color: var(--gray-900);
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
+    overflow: visible;
+    padding-bottom: 0.25rem;
 }
 
 .hero-title .highlight {
@@ -354,7 +360,8 @@ body {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
+        line-height: 1.4;
     }
 
     .hero-stats {
@@ -412,7 +419,8 @@ body {
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.875rem;
+        line-height: 1.4;
     }
 
     .hero-subtitle {

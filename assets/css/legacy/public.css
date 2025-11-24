@@ -36,9 +36,11 @@
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 2.75rem;
     margin-bottom: var(--spacing-md);
-    line-height: 1.1;
+    line-height: 1.4;
+    overflow: visible;
+    padding-bottom: 0.25rem;
 }
 
 .brand-highlight {
