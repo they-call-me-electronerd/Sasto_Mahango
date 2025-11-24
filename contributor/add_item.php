@@ -18,6 +18,8 @@ require_once __DIR__ . '/../includes/functions.php';
 Auth::requireRole(ROLE_CONTRIBUTOR, SITE_URL . '/contributor/login.php');
 
 $pageTitle = 'Add New Item';
+$metaDescription = 'Add new products and commodities to Mulyasuchi marketplace database.';
+$additionalCSS = ['pages/contributor-dashboard.css', 'pages/auth-admin.css'];
 $error = '';
 $success = '';
 
@@ -81,7 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include __DIR__ . '/../includes/header.php';
+include __DIR__ . '/../includes/header_professional.php';
+
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
 <style>
@@ -134,29 +138,37 @@ include __DIR__ . '/../includes/header.php';
     margin-bottom: var(--spacing-xs);
     font-weight: 600;
     color: var(--text-primary);
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
 }
 
 .form-group label .required {
-    color: var(--danger);
+    color: #ef4444;
+    font-weight: 700;
+    margin-left: 2px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: 0.875rem 1rem;
     border: 2px solid var(--border-color);
-    border-radius: var(--radius-md);
+    border-radius: 12px;
     font-size: 1rem;
     font-family: inherit;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+    transform: translateY(-2px);
 }
 
 .form-group textarea {
@@ -166,16 +178,18 @@ include __DIR__ . '/../includes/header.php';
 
 .file-upload-box {
     border: 2px dashed var(--border-color);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-lg);
+    border-radius: 12px;
+    padding: var(--spacing-2xl);
     text-align: center;
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
+    background: var(--bg-secondary);
 }
 
 .file-upload-box:hover {
-    border-color: var(--primary-color);
-    background: var(--bg-lighter);
+    border-color: var(--brand-primary);
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, var(--bg-secondary) 100%);
+    transform: scale(1.02);
 }
 
 .form-actions {
@@ -186,52 +200,78 @@ include __DIR__ . '/../includes/header.php';
 
 .btn-submit {
     flex: 1;
-    padding: var(--spacing-md);
-    background: var(--gradient-primary);
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
     color: white;
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: 12px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    letter-spacing: 0.025em;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
 }
 
 .btn-cancel {
-    padding: var(--spacing-md) var(--spacing-xl);
-    background: var(--bg-lighter);
+    padding: 1rem 2rem;
+    background: var(--bg-secondary);
     color: var(--text-primary);
-    border: none;
-    border-radius: var(--radius-md);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
     text-decoration: none;
     font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cancel:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--brand-primary);
+    transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
     .form-grid {
         grid-template-columns: 1fr;
     }
+    
+    .contributor-dashboard {
+        padding-top: calc(var(--navbar-height) + 1rem);
+    }
+    
+    .form-card {
+        padding: var(--spacing-lg) !important;
+    }
 }
 </style>
 
-<nav class="contributor-nav">
-    <div class="container">
-        <h2>Add New Item</h2>
-        <div>
-            <a href="dashboard.php">← Dashboard</a>
-            <a href="logout.php">Logout</a>
-        </div>
-    </div>
-</nav>
-
-<main class="form-container">
-    <div class="form-card">
-        <h1>Submit New Item for Validation</h1>
+<main class="contributor-dashboard">
+    <div class="dashboard-container">
+        <div class="form-card" style="background: var(--bg-primary); border-radius: var(--radius-2xl); padding: var(--spacing-2xl); box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-width: 900px; margin: 0 auto;">
+        <h1 style="font-family: var(--font-heading); font-size: var(--font-size-3xl); font-weight: var(--font-weight-extrabold); color: var(--text-primary); margin-bottom: var(--spacing-md);">Submit New Item for Validation</h1>
         <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);">
             All submissions are reviewed by admins before appearing on the site.
         </p>
         
         <?php if ($error): ?>
-            <div class="flash-message flash-error"><?php echo htmlspecialchars($error); ?></div>
+            <div class="flash-message flash-error" style="margin-bottom: var(--spacing-xl); padding: var(--spacing-lg); border-radius: var(--radius-lg); background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 2px solid #ef4444; color: #991b1b; font-weight: 600; display: flex; align-items: center; gap: var(--spacing-md);">
+                <i class="bi bi-exclamation-circle-fill" style="font-size: 1.5rem;"></i>
+                <span><?php echo htmlspecialchars($error); ?></span>
+            </div>
+        <?php endif; ?>
+        <?php if ($success): ?>
+            <div class="flash-message flash-success" style="margin-bottom: var(--spacing-xl); padding: var(--spacing-lg); border-radius: var(--radius-lg); background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 2px solid #10b981; color: #065f46; font-weight: 600; display: flex; align-items: center; gap: var(--spacing-md);">
+                <i class="bi bi-check-circle-fill" style="font-size: 1.5rem;"></i>
+                <span><?php echo htmlspecialchars($success); ?></span>
+            </div>
         <?php endif; ?>
         
         <form method="POST" action="" enctype="multipart/form-data">
@@ -241,12 +281,14 @@ include __DIR__ . '/../includes/header.php';
                 <div class="form-group">
                     <label for="item_name">Item Name (English) <span class="required">*</span></label>
                     <input type="text" id="item_name" name="item_name" required
+                           placeholder="e.g., Tomato, Potato, Apple..."
                            value="<?php echo htmlspecialchars($_POST['item_name'] ?? ''); ?>">
                 </div>
                 
                 <div class="form-group">
                     <label for="item_name_nepali">Item Name (Nepali)</label>
                     <input type="text" id="item_name_nepali" name="item_name_nepali"
+                           placeholder="e.g., गोलभेडा, आलु, स्याउ..."
                            value="<?php echo htmlspecialchars($_POST['item_name_nepali'] ?? ''); ?>">
                 </div>
                 
@@ -266,7 +308,9 @@ include __DIR__ . '/../includes/header.php';
                 <div class="form-group">
                     <label for="base_price">Current Price <span class="required">*</span></label>
                     <input type="number" id="base_price" name="base_price" step="0.01" min="0" required
+                           placeholder="e.g., 150.00"
                            value="<?php echo htmlspecialchars($_POST['base_price'] ?? ''); ?>">
+                    <small style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem; display: block;">Enter price in NPR (Nepali Rupees)</small>
                 </div>
                 
                 <div class="form-group">
@@ -306,6 +350,7 @@ include __DIR__ . '/../includes/header.php';
             </div>
         </form>
     </div>
+    </div>
 </main>
 
 <script>
@@ -315,4 +360,4 @@ function updateFileName(input) {
 }
 </script>
 
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer_professional.php'; ?>

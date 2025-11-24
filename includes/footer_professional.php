@@ -1,5 +1,7 @@
     <!-- Professional Footer -->
-    <footer class="professional-footer" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f9fafb; padding: 2rem 0 1rem; margin-top: 2rem; border-top: 4px solid #f97316;">
+    <footer class="professional-footer" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f9fafb; padding: 2rem 0 1rem; margin-top: 2rem; border-top: 3px solid #f97316; position: relative;">
+        <!-- Orange accent line -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #f97316 0%, #ea580c 50%, #f97316 100%); box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);"></div>
         <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
             <div class="row g-4">
                 <!-- Brand Section -->
@@ -73,9 +75,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Core JS -->
-    <script src="<?php echo SITE_URL; ?>/assets/js/core/theme-manager.js"></script>
-    
     <?php if (isset($additionalJS)): ?>
         <?php if (is_array($additionalJS)): ?>
             <?php foreach ($additionalJS as $js): ?>
@@ -139,42 +138,6 @@
         document.getElementById('mobileMenuToggle')?.addEventListener('click', function() {
             const menu = document.getElementById('navbarMenu');
             menu.classList.toggle('active');
-        });
-        
-        // Theme toggle initialization (using ThemeManager from header)
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.getElementById('themeToggle');
-            
-            if (themeToggle && typeof ThemeManager !== 'undefined') {
-                // Set initial icon state
-                updateThemeIcons(ThemeManager.getCurrentTheme());
-                
-                // Handle toggle click
-                themeToggle.addEventListener('click', () => {
-                    ThemeManager.toggleTheme();
-                    updateThemeIcons(ThemeManager.getCurrentTheme());
-                });
-                
-                // Listen for theme changes from other sources
-                document.addEventListener('themechange', (e) => {
-                    updateThemeIcons(e.detail.theme);
-                });
-            }
-            
-            function updateThemeIcons(theme) {
-                const lightIcon = document.querySelector('.theme-icon-light');
-                const darkIcon = document.querySelector('.theme-icon-dark');
-                
-                if (lightIcon && darkIcon) {
-                    if (theme === 'dark') {
-                        lightIcon.style.display = 'none';
-                        darkIcon.style.display = 'block';
-                    } else {
-                        lightIcon.style.display = 'block';
-                        darkIcon.style.display = 'none';
-                    }
-                }
-            }
         });
     </script>
 </body>

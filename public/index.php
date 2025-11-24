@@ -41,8 +41,18 @@ include __DIR__ . '/../includes/header_professional.php';
 
 <main>
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-container">
+    <section class="hero-section" style="position: relative; overflow: hidden;">
+        <!-- Background Image Container -->
+        <div class="hero-background" style="position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 1400px; height: 300px; z-index: 0;">
+            <!-- Background Image -->
+            <img src="<?php echo rtrim(SITE_URL, '/'); ?>/assets/images/skyline.png" 
+                 alt="Hero Background" 
+                 style="width: 100%; height: 100%; object-fit: contain; object-position: center bottom; opacity: 0.3;" loading="lazy">
+        </div>
+        <!-- Gradient Overlay -->
+        <div class="hero-gradient-overlay"></div>
+        
+        <div class="hero-container" style="position: relative; z-index: 1;">
             <!-- Left Content -->
             <div class="hero-content">
                 <div class="hero-badge">

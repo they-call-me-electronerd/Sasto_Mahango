@@ -84,6 +84,18 @@ body {
     overflow: hidden;
 }
 
+/* Gradient Overlay */
+.hero-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 245, 237, 0.7) 0%, rgba(254, 243, 240, 0.7) 30%, rgba(253, 240, 237, 0.75) 60%, rgba(245, 245, 245, 0.8) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
 /* Nepal Skyline Background - Enhanced Visibility */
 .hero-section::before {
     content: '';

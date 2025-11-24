@@ -105,4 +105,4 @@ include __DIR__ . '/../includes/header_professional.php';
     </div>
 </main>
 
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer_professional.php'; ?>

@@ -176,7 +176,7 @@
     padding: 0.875rem 1rem;
     background: var(--auth-input-bg);
     border: 1px solid var(--auth-input-border);
-    border-radius: var(--radius-lg);
+    border-radius: 12px;
     font-size: var(--font-size-base);
     color: var(--auth-input-text);
     transition: all 0.3s ease;
@@ -212,7 +212,7 @@
     background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
     color: white;
     border: none;
-    border-radius: var(--radius-lg);
+    border-radius: 12px;
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-bold);
     cursor: pointer;

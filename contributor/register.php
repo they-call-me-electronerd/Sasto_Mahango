@@ -154,12 +154,12 @@ include __DIR__ . '/../includes/header_professional.php';
             </a>
             
             <div class="legal-links">
-                <a href="<?php echo SITE_URL; ?>/public/privacy.php">Privacy Policy</a>
+                <a href="<?php echo SITE_URL; ?>/public/privacy-policy.php">Privacy Policy</a>
                 <span>•</span>
-                <a href="<?php echo SITE_URL; ?>/public/terms.php">Terms of Service</a>
+                <a href="<?php echo SITE_URL; ?>/public/terms-of-service.php">Terms of Service</a>
             </div>
         </div>
     </div>
 </main>
 
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer_professional.php'; ?>

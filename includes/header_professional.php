@@ -3,6 +3,9 @@
  * Professional Header - Shared across modern pages
  */
 $currentPage = basename($_SERVER['PHP_SELF']);
+$currentPath = $_SERVER['PHP_SELF'];
+$isContributorArea = strpos($currentPath, '/contributor/') !== false;
+$isAdminArea = strpos($currentPath, '/admin/') !== false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,6 +50,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <!-- Component Styles -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/components/navbar.css">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/components/footer.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/theme-toggle.css">
     
     <!-- Page Specific Styles -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/pages/landing.css?v=<?php echo time(); ?>">
@@ -120,12 +124,15 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <li><a href="<?php echo SITE_URL; ?>/public/products.php" class="<?php echo $currentPage == 'products.php' ? 'active' : ''; ?>" style="text-decoration: none; color: #374151; font-weight: 500; transition: color 0.3s; <?php echo $currentPage == 'products.php' ? 'color: #f97316;' : ''; ?>">Products</a></li>
                 <li><a href="<?php echo SITE_URL; ?>/public/categories.php" class="<?php echo $currentPage == 'categories.php' ? 'active' : ''; ?>" style="text-decoration: none; color: #374151; font-weight: 500; transition: color 0.3s; <?php echo $currentPage == 'categories.php' ? 'color: #f97316;' : ''; ?>">Categories</a></li>
                 <li><a href="<?php echo SITE_URL; ?>/public/about.php" class="<?php echo $currentPage == 'about.php' ? 'active' : ''; ?>" style="text-decoration: none; color: #374151; font-weight: 500; transition: color 0.3s; <?php echo $currentPage == 'about.php' ? 'color: #f97316;' : ''; ?>">About</a></li>
+                <?php if (Auth::isLoggedIn() && Auth::hasRole(ROLE_CONTRIBUTOR)): ?>
+                <li><a href="<?php echo SITE_URL; ?>/contributor/dashboard.php" class="<?php echo $isContributorArea ? 'active' : ''; ?>" style="text-decoration: none; color: #374151; font-weight: 500; transition: color 0.3s; <?php echo $isContributorArea ? 'color: #f97316; font-weight: 600;' : ''; ?>"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a></li>
+                <?php endif; ?>
             </ul>
 
             <!-- Right Actions -->
             <div class="navbar-actions" style="display: flex; align-items: center; gap: 1rem;">
                 <!-- Theme Toggle -->
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" style="background: none; border: none; font-size: 1.25rem; color: #6b7280; cursor: pointer; padding: 0.5rem; border-radius: 0.5rem; transition: all 0.3s;">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="bi bi-sun-fill theme-icon-light"></i>
                     <i class="bi bi-moon-stars-fill theme-icon-dark"></i>
                 </button>
