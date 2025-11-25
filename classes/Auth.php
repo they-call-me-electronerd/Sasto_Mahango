@@ -7,13 +7,16 @@
 
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/Logger.php';
+require_once __DIR__ . '/RateLimiter.php';
 
 class Auth {
     private $pdo;
+    private $rateLimiter;
     
     public function __construct() {
         $db = Database::getInstance();
         $this->pdo = $db->getConnection();
+        $this->rateLimiter = new RateLimiter();
     }
     
     /**
@@ -21,6 +24,24 @@ class Auth {
      */
     public function login($username, $password) {
         try {
+            // Get client IP
+            $ip = getClientIP();
+            $rateLimitKey = RateLimiter::loginKey($username, $ip);
+            
+            // Check rate limiting
+            if ($this->rateLimiter->tooManyAttempts($rateLimitKey)) {
+                $seconds = $this->rateLimiter->availableIn($rateLimitKey);
+                $minutes = ceil($seconds / 60);
+                
+                Logger::log('failed_login_attempt', 'user', null, "Too many login attempts for {$username} from {$ip}");
+                
+                return [
+                    'success' => false,
+                    'message' => "Too many login attempts. Please try again in {$minutes} minutes.",
+                    'locked' => true
+                ];
+            }
+            
             $stmt = $this->pdo->prepare("
                 SELECT user_id, username, email, password_hash, full_name, role, status
                 FROM users
@@ -35,27 +56,46 @@ class Auth {
             $user = $stmt->fetch();
             
             if ($user && password_verify($password, $user['password_hash'])) {
+                // Clear rate limit on successful login
+                $this->rateLimiter->clear($rateLimitKey);
+                
+                // Regenerate session ID to prevent session fixation
+                session_regenerate_id(true);
+                
                 // Set session variables
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['full_name'] = $user['full_name'];
                 $_SESSION['role'] = $user['role'];
                 $_SESSION['logged_in'] = true;
+                $_SESSION['login_time'] = time();
+                $_SESSION['ip_address'] = $ip;
+                $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'] ?? '';
                 
                 // Update last login
                 $this->updateLastLogin($user['user_id']);
                 
                 // Log the login
-                Logger::log(LOG_LOGIN, 'user', $user['user_id'], "User {$username} logged in");
+                Logger::log(LOG_LOGIN, 'user', $user['user_id'], "User {$username} logged in from {$ip}");
                 
-                return true;
+                return ['success' => true, 'user' => $user];
             }
             
-            return false;
+            // Record failed attempt
+            $this->rateLimiter->attempt($rateLimitKey);
+            $retriesLeft = $this->rateLimiter->retriesLeft($rateLimitKey);
+            
+            Logger::log('failed_login_attempt', 'user', null, "Failed login attempt for {$username} from {$ip}");
+            
+            return [
+                'success' => false,
+                'message' => "Invalid username or password. {$retriesLeft} attempts remaining.",
+                'retries_left' => $retriesLeft
+            ];
             
         } catch (PDOException $e) {
             error_log("Login error: " . $e->getMessage());
-            return false;
+            return ['success' => false, 'message' => 'An error occurred. Please try again.'];
         }
     }
     

@@ -16,50 +16,148 @@ function sanitizeInput($input) {
 }
 
 /**
- * Upload image securely
+ * Upload image securely with enhanced validation
  */
 function uploadImage($file, $oldImagePath = null) {
     // Check if file was uploaded
     if (!isset($file) || $file['error'] === UPLOAD_ERR_NO_FILE) {
-        return null;
+        return ['success' => false, 'error' => 'No file uploaded'];
     }
     
     // Check for upload errors
     if ($file['error'] !== UPLOAD_ERR_OK) {
-        return false;
+        $errors = [
+            UPLOAD_ERR_INI_SIZE => 'File exceeds upload_max_filesize',
+            UPLOAD_ERR_FORM_SIZE => 'File exceeds MAX_FILE_SIZE',
+            UPLOAD_ERR_PARTIAL => 'File was only partially uploaded',
+            UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary folder',
+            UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk',
+            UPLOAD_ERR_EXTENSION => 'File upload stopped by extension'
+        ];
+        return ['success' => false, 'error' => $errors[$file['error']] ?? 'Upload error'];
     }
     
     // Validate file size
     if ($file['size'] > MAX_FILE_SIZE) {
-        return false;
+        return ['success' => false, 'error' => 'File size exceeds ' . (MAX_FILE_SIZE / 1048576) . 'MB limit'];
     }
     
-    // Validate file type
-    $allowedTypes = unserialize(ALLOWED_IMAGE_TYPES);
+    // Get file extension
+    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $allowedExtensions = unserialize(ALLOWED_EXTENSIONS);
+    
+    // Validate extension
+    if (!in_array($extension, $allowedExtensions)) {
+        return ['success' => false, 'error' => 'Invalid file type. Allowed: ' . implode(', ', $allowedExtensions)];
+    }
+    
+    // Validate MIME type
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mimeType = finfo_file($finfo, $file['tmp_name']);
     finfo_close($finfo);
     
+    $allowedTypes = unserialize(ALLOWED_IMAGE_TYPES);
     if (!in_array($mimeType, $allowedTypes)) {
-        return false;
+        return ['success' => false, 'error' => 'Invalid file MIME type'];
     }
     
-    // Generate unique filename
-    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $filename = uniqid('item_', true) . '.' . $extension;
+    // Verify it's actually an image
+    $imageInfo = @getimagesize($file['tmp_name']);
+    if ($imageInfo === false) {
+        return ['success' => false, 'error' => 'File is not a valid image'];
+    }
+    
+    // Prevent double extension attacks
+    $fullName = strtolower($file['name']);
+    if (preg_match('/\\.(php|phtml|php3|php4|php5|phps|phar)/', $fullName)) {
+        return ['success' => false, 'error' => 'Suspicious file detected'];
+    }
+    
+    // Generate unique, safe filename
+    $filename = uniqid('item_', true) . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
     $destination = UPLOAD_DIR . $filename;
     
-    // Move uploaded file
-    if (move_uploaded_file($file['tmp_name'], $destination)) {
+    // Ensure upload directory exists
+    if (!is_dir(UPLOAD_DIR)) {
+        if (!mkdir(UPLOAD_DIR, 0755, true)) {
+            return ['success' => false, 'error' => 'Failed to create upload directory'];
+        }
+    }
+    
+    // Process and optimize image
+    try {
+        $image = null;
+        switch ($imageInfo[2]) {
+            case IMAGETYPE_JPEG:
+                $image = imagecreatefromjpeg($file['tmp_name']);
+                break;
+            case IMAGETYPE_PNG:
+                $image = imagecreatefrompng($file['tmp_name']);
+                break;
+            case IMAGETYPE_WEBP:
+                $image = imagecreatefromwebp($file['tmp_name']);
+                break;
+            default:
+                return ['success' => false, 'error' => 'Unsupported image format'];
+        }
+        
+        if ($image === false) {
+            return ['success' => false, 'error' => 'Failed to process image'];
+        }
+        
+        // Get original dimensions
+        $origWidth = imagesx($image);
+        $origHeight = imagesy($image);
+        
+        // Resize if too large (max 1200px width)
+        $maxWidth = 1200;
+        if ($origWidth > $maxWidth) {
+            $newWidth = $maxWidth;
+            $newHeight = ($origHeight * $maxWidth) / $origWidth;
+            
+            $resized = imagecreatetruecolor($newWidth, $newHeight);
+            
+            // Preserve transparency for PNG
+            if ($imageInfo[2] === IMAGETYPE_PNG) {
+                imagealphablending($resized, false);
+                imagesavealpha($resized, true);
+            }
+            
+            imagecopyresampled($resized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
+            imagedestroy($image);
+            $image = $resized;
+        }
+        
+        // Save optimized image (strips EXIF data)
+        $saved = false;
+        if ($extension === 'jpg' || $extension === 'jpeg') {
+            $saved = imagejpeg($image, $destination, 85); // 85% quality
+        } elseif ($extension === 'png') {
+            $saved = imagepng($image, $destination, 8); // Compression level 8
+        } elseif ($extension === 'webp') {
+            $saved = imagewebp($image, $destination, 85);
+        }
+        
+        imagedestroy($image);
+        
+        if (!$saved) {
+            return ['success' => false, 'error' => 'Failed to save image'];
+        }
+        
+        // Set file permissions
+        chmod($destination, 0644);
+        
         // Delete old image if exists
         if ($oldImagePath && file_exists(UPLOAD_DIR . $oldImagePath)) {
             @unlink(UPLOAD_DIR . $oldImagePath);
         }
         
-        return $filename;
+        return ['success' => true, 'filename' => $filename];
+        
+    } catch (Exception $e) {
+        error_log('Image upload error: ' . $e->getMessage());
+        return ['success' => false, 'error' => 'Image processing failed'];
     }
-    
-    return false;
 }
 
 /**

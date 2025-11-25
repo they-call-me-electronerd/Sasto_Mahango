@@ -140,19 +140,19 @@ class Item {
     /**
      * Get item price history
      */
-    public function getPriceHistory($itemId, $limit = 30) {
+    public function getPriceHistory($itemId, $days = 30) {
         try {
             $stmt = $this->pdo->prepare("
                 SELECT ph.*, u.full_name as updated_by_name
                 FROM price_history ph
                 JOIN users u ON ph.updated_by = u.user_id
                 WHERE ph.item_id = :item_id
+                AND ph.updated_at >= DATE_SUB(NOW(), INTERVAL :days DAY)
                 ORDER BY ph.updated_at DESC
-                LIMIT :limit
             ");
             
             $stmt->bindValue(':item_id', $itemId, PDO::PARAM_INT);
-            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':days', $days, PDO::PARAM_INT);
             
             $stmt->execute();
             return $stmt->fetchAll();
@@ -441,6 +441,142 @@ class Item {
         } catch (PDOException $e) {
             error_log("Count advanced products error: " . $e->getMessage());
             return 0;
+        }
+    }
+    
+    /**
+     * Update an existing item
+     * @param int $itemId Item ID to update
+     * @param array $data Array containing item_name, item_name_nepali, category_id, current_price, unit, description, market_location, image_path (optional)
+     * @param int $updatedBy User ID performing the update
+     * @return bool Success status
+     */
+    public function updateItem($itemId, $data, $updatedBy) {
+        try {
+            // Get current item data for price history
+            $currentItem = $this->getItemById($itemId);
+            if (!$currentItem) {
+                return false;
+            }
+            
+            $this->pdo->beginTransaction();
+            
+            // Update slug if name changed
+            $slug = $currentItem['slug'];
+            if ($data['item_name'] !== $currentItem['item_name']) {
+                $slug = $this->generateSlug($data['item_name']);
+            }
+            
+            // Prepare update SQL
+            $sql = "
+                UPDATE items SET
+                    item_name = :item_name,
+                    item_name_nepali = :item_name_nepali,
+                    category_id = :category_id,
+                    current_price = :current_price,
+                    unit = :unit,
+                    description = :description,
+                    market_location = :market_location,
+                    slug = :slug,
+                    updated_at = NOW()
+            ";
+            
+            // Add image path to update if provided
+            if (isset($data['image_path']) && !empty($data['image_path'])) {
+                $sql .= ", image_path = :image_path";
+            }
+            
+            $sql .= " WHERE item_id = :item_id";
+            
+            $stmt = $this->pdo->prepare($sql);
+            
+            // Bind parameters
+            $stmt->bindValue(':item_name', $data['item_name'], PDO::PARAM_STR);
+            $stmt->bindValue(':item_name_nepali', $data['item_name_nepali'] ?? null, PDO::PARAM_STR);
+            $stmt->bindValue(':category_id', $data['category_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':current_price', $data['current_price'], PDO::PARAM_STR);
+            $stmt->bindValue(':unit', $data['unit'], PDO::PARAM_STR);
+            $stmt->bindValue(':description', $data['description'] ?? null, PDO::PARAM_STR);
+            $stmt->bindValue(':market_location', $data['market_location'] ?? null, PDO::PARAM_STR);
+            $stmt->bindValue(':slug', $slug, PDO::PARAM_STR);
+            $stmt->bindValue(':item_id', $itemId, PDO::PARAM_INT);
+            
+            if (isset($data['image_path']) && !empty($data['image_path'])) {
+                $stmt->bindValue(':image_path', $data['image_path'], PDO::PARAM_STR);
+            }
+            
+            $stmt->execute();
+            
+            // If price changed, add to price history
+            if ($data['current_price'] != $currentItem['current_price']) {
+                $this->addPriceHistory($itemId, $currentItem['current_price'], $data['current_price'], $updatedBy);
+            }
+            
+            $this->pdo->commit();
+            return true;
+            
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            error_log("Update item error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Add price history entry
+     * @param int $itemId Item ID
+     * @param float $oldPrice Previous price
+     * @param float $newPrice New price
+     * @param int $updatedBy User ID performing the update
+     * @return bool Success status
+     */
+    private function addPriceHistory($itemId, $oldPrice, $newPrice, $updatedBy) {
+        try {
+            $stmt = $this->pdo->prepare("
+                INSERT INTO price_history 
+                (item_id, old_price, new_price, updated_by, updated_at)
+                VALUES 
+                (:item_id, :old_price, :new_price, :updated_by, NOW())
+            ");
+            
+            $stmt->execute([
+                'item_id' => $itemId,
+                'old_price' => $oldPrice,
+                'new_price' => $newPrice,
+                'updated_by' => $updatedBy
+            ]);
+            
+            return true;
+            
+        } catch (PDOException $e) {
+            error_log("Add price history error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Delete an item (soft delete by changing status)
+     * @param int $itemId Item ID to delete
+     * @return bool Success status
+     */
+    public function deleteItem($itemId) {
+        try {
+            $stmt = $this->pdo->prepare("
+                UPDATE items 
+                SET status = :status, updated_at = NOW()
+                WHERE item_id = :item_id
+            ");
+            
+            $stmt->execute([
+                'status' => 'deleted',
+                'item_id' => $itemId
+            ]);
+            
+            return true;
+            
+        } catch (PDOException $e) {
+            error_log("Delete item error: " . $e->getMessage());
+            return false;
         }
     }
 }

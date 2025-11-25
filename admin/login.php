@@ -33,16 +33,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'Please enter both username and password.';
         } else {
             $auth = new Auth();
-            if ($auth->login($username, $password)) {
-                // Check if admin role
-                if (Auth::hasRole(ROLE_ADMIN)) {
-                    redirect(SITE_URL . '/admin/dashboard.php');
+            $result = $auth->login($username, $password);
+            
+            if (is_array($result) && isset($result['success'])) {
+                if ($result['success']) {
+                    // Check if admin role
+                    if (Auth::hasRole(ROLE_ADMIN)) {
+                        redirect(SITE_URL . '/admin/dashboard.php');
+                    } else {
+                        $auth->logout();
+                        $error = 'Access denied. Admin login only.';
+                    }
                 } else {
-                    $auth->logout();
-                    $error = 'Access denied. Admin login only.';
+                    $error = $result['message'] ?? 'Invalid username or password.';
                 }
             } else {
-                $error = 'Invalid username or password.';
+                // Backward compatibility with old boolean return
+                if ($result) {
+                    if (Auth::hasRole(ROLE_ADMIN)) {
+                        redirect(SITE_URL . '/admin/dashboard.php');
+                    } else {
+                        $auth->logout();
+                        $error = 'Access denied. Admin login only.';
+                    }
+                } else {
+                    $error = 'Invalid username or password.';
+                }
             }
         }
     }

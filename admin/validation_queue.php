@@ -65,6 +65,7 @@ $pendingSubmissions = $allSubmissions;
 $totalPending = count($allSubmissions);
 $newItems = count(array_filter($allSubmissions, fn($s) => $s['action_type'] === ACTION_NEW_ITEM));
 $priceUpdates = count(array_filter($allSubmissions, fn($s) => $s['action_type'] === ACTION_PRICE_UPDATE));
+$itemEdits = count(array_filter($allSubmissions, fn($s) => $s['action_type'] === ACTION_ITEM_EDIT));
 
 // Apply search filter
 if (!empty($searchTerm)) {
@@ -133,6 +134,17 @@ include __DIR__ . '/../includes/header_professional.php';
                     <div class="stat-trend">Market changes</div>
                 </div>
             </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                    <i class="bi bi-pencil-square"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">Item Edits</div>
+                    <div class="stat-value"><?php echo $itemEdits; ?></div>
+                    <div class="stat-trend">Edit requests</div>
+                </div>
+            </div>
         </div>
 
         <!-- Search and Filter Bar -->
@@ -178,9 +190,24 @@ include __DIR__ . '/../includes/header_professional.php';
                         <!-- Card Header -->
                         <div class="submission-header">
                             <div class="submission-meta">
-                                <span class="submission-badge badge-<?php echo $submission['action_type'] === ACTION_NEW_ITEM ? 'new' : 'update'; ?>">
-                                    <i class="bi bi-<?php echo $submission['action_type'] === ACTION_NEW_ITEM ? 'file-earmark-plus' : 'tag'; ?>"></i>
-                                    <?php echo $submission['action_type'] === ACTION_NEW_ITEM ? 'New Item' : 'Price Update'; ?>
+                                <?php
+                                $badgeClass = 'update';
+                                $badgeIcon = 'tag';
+                                $badgeLabel = 'Price Update';
+                                
+                                if ($submission['action_type'] === ACTION_NEW_ITEM) {
+                                    $badgeClass = 'new';
+                                    $badgeIcon = 'file-earmark-plus';
+                                    $badgeLabel = 'New Item';
+                                } elseif ($submission['action_type'] === ACTION_ITEM_EDIT) {
+                                    $badgeClass = 'edit';
+                                    $badgeIcon = 'pencil-square';
+                                    $badgeLabel = 'Item Edit';
+                                }
+                                ?>
+                                <span class="submission-badge badge-<?php echo $badgeClass; ?>">
+                                    <i class="bi bi-<?php echo $badgeIcon; ?>"></i>
+                                    <?php echo $badgeLabel; ?>
                                 </span>
                                 <span class="submission-time">
                                     <i class="bi bi-clock"></i>
@@ -189,7 +216,7 @@ include __DIR__ . '/../includes/header_professional.php';
                             </div>
                             <div class="submission-contributor">
                                 <i class="bi bi-person-circle"></i>
-                                <span><?php echo htmlspecialchars($submission['full_name']); ?></span>
+                                <span><?php echo htmlspecialchars($submission['full_name'] ?? 'Unknown'); ?></span>
                             </div>
                         </div>
 
@@ -200,8 +227,8 @@ include __DIR__ . '/../includes/header_professional.php';
 
                         <!-- Submission Details -->
                         <div class="submission-details">
-                            <?php if ($submission['action_type'] === ACTION_NEW_ITEM): ?>
-                                <!-- New Item Details -->
+                            <?php if ($submission['action_type'] === ACTION_NEW_ITEM || $submission['action_type'] === ACTION_ITEM_EDIT): ?>
+                                <!-- New Item / Item Edit Details -->
                                 <div class="detail-grid">
                                     <div class="detail-item">
                                         <div class="detail-label">
@@ -218,7 +245,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                         </div>
                                         <div class="detail-value price-highlight">
                                             NPR <?php echo number_format($submission['new_price'], 2); ?>
-                                            <span class="unit">/ <?php echo htmlspecialchars($submission['unit']); ?></span>
+                                            <span class="unit">/ <?php echo htmlspecialchars($submission['unit'] ?? 'unit'); ?></span>
                                         </div>
                                     </div>
 
@@ -227,7 +254,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                             <i class="bi bi-geo-alt-fill"></i> Market Location
                                         </div>
                                         <div class="detail-value">
-                                            <?php echo htmlspecialchars($submission['market_location']); ?>
+                                            <?php echo htmlspecialchars($submission['market_location'] ?? 'N/A'); ?>
                                         </div>
                                     </div>
 
@@ -250,7 +277,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                             <i class="bi bi-arrow-down-circle"></i> Current Price
                                         </div>
                                         <div class="detail-value">
-                                            NPR <?php echo number_format($submission['old_price'], 2); ?>
+                                            NPR <?php echo number_format((float)$submission['old_price'], 2); ?>
                                         </div>
                                     </div>
 
@@ -259,7 +286,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                             <i class="bi bi-arrow-up-circle"></i> New Price
                                         </div>
                                         <div class="detail-value price-highlight">
-                                            NPR <?php echo number_format($submission['new_price'], 2); ?>
+                                            NPR <?php echo number_format((float)$submission['new_price'], 2); ?>
                                         </div>
                                     </div>
 
@@ -269,14 +296,22 @@ include __DIR__ . '/../includes/header_professional.php';
                                         </div>
                                         <div class="detail-value">
                                             <?php
-                                            $change = (($submission['new_price'] - $submission['old_price']) / $submission['old_price']) * 100;
-                                            $changeClass = $change > 0 ? 'price-increase' : 'price-decrease';
-                                            $changeIcon = $change > 0 ? 'bi-arrow-up' : 'bi-arrow-down';
+                                            // Safely calculate price change percentage
+                                            if (!empty($submission['old_price']) && $submission['old_price'] > 0) {
+                                                $change = (($submission['new_price'] - $submission['old_price']) / $submission['old_price']) * 100;
+                                                $changeClass = $change > 0 ? 'price-increase' : 'price-decrease';
+                                                $changeIcon = $change > 0 ? 'bi-arrow-up' : 'bi-arrow-down';
                                             ?>
-                                            <span class="<?php echo $changeClass; ?>">
-                                                <i class="bi <?php echo $changeIcon; ?>"></i>
-                                                <?php echo ($change > 0 ? '+' : '') . number_format($change, 1); ?>%
-                                            </span>
+                                                <span class="<?php echo $changeClass; ?>">
+                                                    <i class="bi <?php echo $changeIcon; ?>"></i>
+                                                    <?php echo ($change > 0 ? '+' : '') . number_format($change, 1); ?>%
+                                                </span>
+                                            <?php } else { ?>
+                                                <span class="price-increase">
+                                                    <i class="bi bi-plus-circle"></i>
+                                                    New Price
+                                                </span>
+                                            <?php } ?>
                                         </div>
                                     </div>
 
@@ -285,7 +320,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                             <i class="bi bi-geo-alt-fill"></i> Market Location
                                         </div>
                                         <div class="detail-value">
-                                            <?php echo htmlspecialchars($submission['market_location']); ?>
+                                            <?php echo htmlspecialchars($submission['market_location'] ?? 'N/A'); ?>
                                         </div>
                                     </div>
                                 </div>

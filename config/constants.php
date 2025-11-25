@@ -30,6 +30,7 @@ define('VALIDATION_REJECTED', 'rejected');
 // Action Types
 define('ACTION_NEW_ITEM', 'new_item');
 define('ACTION_PRICE_UPDATE', 'price_update');
+define('ACTION_ITEM_EDIT', 'item_edit');
 
 // Log Action Types
 define('LOG_LOGIN', 'login');

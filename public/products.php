@@ -286,6 +286,10 @@ include __DIR__ . '/../includes/header_professional.php';
                                             <a href="<?php echo SITE_URL; ?>/admin/edit_item.php?id=<?php echo $item['item_id']; ?>" class="btn-edit-icon" title="Edit Item">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
+                                        <?php elseif (Auth::isLoggedIn() && Auth::hasRole(ROLE_CONTRIBUTOR)): ?>
+                                            <a href="<?php echo SITE_URL; ?>/contributor/edit_item.php?id=<?php echo $item['item_id']; ?>" class="btn-edit-icon" title="Request Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
                                         <?php endif; ?>
                                     </div>
                                 </div>

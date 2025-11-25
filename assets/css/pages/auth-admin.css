@@ -1153,6 +1153,11 @@
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
+.badge-edit {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
 .submission-time {
     display: flex;
     align-items: center;

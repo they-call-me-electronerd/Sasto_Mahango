@@ -103,6 +103,49 @@ class Validation {
     }
     
     /**
+     * Submit item edit for validation
+     */
+    public function submitItemEdit($itemId, $data) {
+        try {
+            $stmt = $this->pdo->prepare("
+                INSERT INTO validation_queue (
+                    action_type, item_id, item_name, category_id, new_price, unit,
+                    market_location, description, image_path, source, submitted_by
+                ) VALUES (
+                    :action_type, :item_id, :item_name, :category_id, :new_price, :unit,
+                    :market_location, :description, :image_path, :source, :submitted_by
+                )
+            ");
+            
+            $result = $stmt->execute([
+                'action_type' => ACTION_ITEM_EDIT,
+                'item_id' => $itemId,
+                'item_name' => $data['item_name'] ?? null,
+                'category_id' => $data['category_id'] ?? null,
+                'new_price' => $data['price'] ?? null,
+                'unit' => $data['unit'] ?? null,
+                'market_location' => $data['market_location'] ?? null,
+                'description' => $data['description'] ?? null,
+                'image_path' => $data['image_path'] ?? null,
+                'source' => $data['source'] ?? null,
+                'submitted_by' => Auth::getUserId()
+            ]);
+            
+            if ($result) {
+                $queueId = $this->pdo->lastInsertId();
+                Logger::log(LOG_CREATE, 'validation_queue', $queueId, "Item edit submitted for item ID: {$itemId}");
+                return $queueId;
+            }
+            
+            return false;
+            
+        } catch (PDOException $e) {
+            error_log("Submit item edit error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
      * Get pending validations
      */
     public function getPendingValidations() {

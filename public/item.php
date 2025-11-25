@@ -35,8 +35,11 @@ $metaDescription = "View details and price history for " . htmlspecialchars($ite
 $additionalCSS = ['pages/item.css'];
 $additionalJS = ['https://cdn.jsdelivr.net/npm/chart.js', 'components/chart.js'];
 
-// Get price history
+// Get price history for statistics (last 30 days)
 $priceHistory = $itemObj->getPriceHistory($item['item_id'], 30);
+
+// Get extended price history for chart (last 90 days for better visualization)
+$priceHistoryExtended = $itemObj->getPriceHistory($item['item_id'], 90);
 
 // Get tags
 $tags = $itemObj->getItemTags($item['item_id']);
@@ -50,14 +53,20 @@ $priceStats = [
 ];
 
 if (!empty($priceHistory)) {
+    // Get all prices from history
     $prices = array_column($priceHistory, 'new_price');
+    
+    // Always include current price in statistics
+    $prices[] = (float)$item['current_price'];
+    
     $priceStats['min'] = min($prices);
     $priceStats['max'] = max($prices);
     $priceStats['avg'] = array_sum($prices) / count($prices);
     
-    if (count($priceHistory) > 1) {
+    // Calculate price change from oldest to newest
+    if (count($priceHistory) > 0) {
         $oldest = end($priceHistory)['new_price'];
-        $newest = reset($priceHistory)['new_price'];
+        $newest = (float)$item['current_price'];
         if ($oldest > 0) {
             $priceStats['change'] = (($newest - $oldest) / $oldest) * 100;
         }
@@ -317,8 +326,51 @@ include __DIR__ . '/../includes/header_professional.php';
 </main>
 
 <script>
-// Price chart data
-const priceData = <?php echo json_encode(array_reverse($priceHistory)); ?>;
+// Price chart data - prepare data with current price
+<?php 
+// Use extended history for chart (90 days) for better visualization
+$chartData = array_reverse($priceHistoryExtended);
+
+// If we have history, include the old_price points as well for complete visualization
+if (!empty($chartData)) {
+    $enhancedChartData = [];
+    foreach ($chartData as $entry) {
+        // Add the old price point first (if it's different from previous)
+        if (!empty($entry['old_price']) && $entry['old_price'] != $entry['new_price']) {
+            // Create a point slightly before this update to show the old price
+            $oldPriceTime = date('Y-m-d H:i:s', strtotime($entry['updated_at']) - 60);
+            $enhancedChartData[] = [
+                'new_price' => $entry['old_price'],
+                'updated_at' => $oldPriceTime,
+                'updated_by_name' => 'Previous'
+            ];
+        }
+        // Add the actual update point
+        $enhancedChartData[] = $entry;
+    }
+    $chartData = $enhancedChartData;
+}
+
+// Add current price as most recent point
+if (!empty($item['current_price'])) {
+    $currentPricePoint = [
+        'new_price' => $item['current_price'],
+        'updated_at' => $item['updated_at'] ?? date('Y-m-d H:i:s'),
+        'updated_by_name' => 'Current Price'
+    ];
+    $chartData[] = $currentPricePoint;
+}
+
+// If no history at all, create a single point with current price
+if (empty($chartData)) {
+    $chartData = [[
+        'new_price' => $item['current_price'],
+        'updated_at' => $item['created_at'] ?? date('Y-m-d H:i:s'),
+        'updated_by_name' => 'Initial Price'
+    ]];
+}
+?>
+const priceData = <?php echo json_encode($chartData); ?>;
 </script>
 
 <?php include __DIR__ . '/../includes/footer_professional.php'; ?>

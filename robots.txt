@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /public/
+Allow: /assets/
+
+Disallow: /admin/
+Disallow: /contributor/
+Disallow: /config/
+Disallow: /classes/
+Disallow: /includes/
+Disallow: /sql/
+Disallow: /scripts/
+Disallow: /logs/
+Disallow: /backups/
+Disallow: /*.php$
+Disallow: /*?*
+
+# Sitemap location
+Sitemap: https://mulyasuchi.com/sitemap.xml
