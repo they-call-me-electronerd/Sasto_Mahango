@@ -364,6 +364,7 @@ include __DIR__ . '/../includes/header_professional.php';
     </section>
 
 <?php include __DIR__ . '/../includes/footer_professional.php'; ?>
-<script src="<?php echo SITE_URL; ?>/assets/js/products.js"></script>
+<!-- Temporarily disabled AJAX - using normal form submission for now -->
+<!-- <script src="<?php echo SITE_URL; ?>/assets/js/products.js"></script> -->
 </body>
 </html>

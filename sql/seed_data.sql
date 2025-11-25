@@ -68,9 +68,8 @@ INSERT INTO tags (tag_name, tag_name_nepali) VALUES
 -- ===========================================================================
 -- SAMPLE DATA (OPTIONAL - FOR TESTING)
 -- ===========================================================================
--- Uncomment below to add sample items for testing
+-- Sample data for testing - now active!
 
-/*
 -- Sample Contributor User
 INSERT INTO users (username, email, password_hash, full_name, role, status, created_by) VALUES
 ('contributor1', 'contributor@mulyasuchi.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Sample Contributor', 'contributor', 'active', 1);
@@ -98,4 +97,4 @@ INSERT INTO item_tags (item_id, tag_id) VALUES
 (4, 1), -- Apple - Seasonal
 (4, 8), -- Apple - Premium
 (5, 5); -- Banana - Fresh
-*/
+
