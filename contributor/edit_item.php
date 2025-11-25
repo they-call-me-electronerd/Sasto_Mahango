@@ -262,6 +262,31 @@ include __DIR__ . '/../includes/header_professional.php';
                             placeholder="e.g., 120.00">
                     </div>
 
+                    <!-- Quick Price Update Shortcut -->
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(249, 115, 22, 0.05)); border: 2px solid #3b82f6; border-radius: 12px; padding: 1.25rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
+                                <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #2563eb); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
+                                    <i class="bi bi-lightning-charge-fill" style="font-size: 1.5rem; color: white;"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4 style="font-size: 1rem; font-weight: 700; color: #1e40af; margin: 0 0 0.25rem 0;">
+                                        Need to Update Price Only?
+                                    </h4>
+                                    <p style="font-size: 0.875rem; color: #4b5563; margin: 0;">
+                                        If you only want to update the price, use our quick price update feature for faster approval.
+                                    </p>
+                                </div>
+                                <a href="<?php echo SITE_URL; ?>/contributor/update_price.php?item_id=<?php echo $itemId; ?>" 
+                                   class="btn-primary" 
+                                   style="padding: 0.75rem 1.5rem; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; border-radius: 8px;">
+                                    <i class="bi bi-speedometer2"></i>
+                                    Quick Update
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Unit -->
                     <div class="form-group">
                         <label for="unit" class="form-label required">
