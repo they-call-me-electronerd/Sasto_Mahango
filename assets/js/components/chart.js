@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const chartCanvas = document.getElementById('priceChart');
     
     if (!chartCanvas || typeof priceData === 'undefined') {
-        console.log('Chart canvas or price data not found');
         return;
     }
     
@@ -107,6 +106,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
-    console.log('✨ Price chart rendered successfully!');
 });

@@ -524,10 +524,8 @@ include __DIR__ . '/../includes/header_professional.php';
 
 <script>
 function previewNewImage(input) {
-    console.log('previewNewImage called', input);
     if (input.files && input.files[0]) {
         const file = input.files[0];
-        console.log('File selected:', file.name, file.size, file.type);
         
         // Validate file type
         if (!file.type.startsWith('image/')) {
@@ -546,7 +544,6 @@ function previewNewImage(input) {
         const reader = new FileReader();
         
         reader.onload = function(e) {
-            console.log('FileReader onload triggered');
             const previewContainer = document.getElementById('new-image-preview');
             const previewImg = document.getElementById('new-preview-img');
             
@@ -555,14 +552,10 @@ function previewNewImage(input) {
         };
         
         reader.onerror = function(e) {
-            console.error('FileReader error:', e);
             alert('Error reading file. Please try again.');
         };
         
         reader.readAsDataURL(file);
-        console.log('FileReader.readAsDataURL called');
-    } else {
-        console.log('No file selected');
     }
 }
 

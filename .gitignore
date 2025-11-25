@@ -1,0 +1,97 @@
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.staging
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+error.log
+debug.log
+
+# Dependencies
+node_modules/
+vendor/
+bower_components/
+
+# User Uploaded Files
+assets/uploads/
+assets/uploads/items/
+assets/uploads/temp/
+
+# Session Files
+sessions/
+tmp/
+temp/
+
+# Cache
+cache/
+*.cache
+
+# Database
+*.sql.backup
+*.db
+*.sqlite
+*.sqlite3
+
+# Composer
+composer.phar
+composer.lock
+
+# Backup Files
+*.backup
+*.bak
+*.old
+*.orig
+*~
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Build and Compiled Files
+dist/
+build/
+*.min.js
+*.min.css
+
+# Testing
+coverage/
+.phpunit.result.cache
+phpunit.xml
+
+# Sensitive Data
+private/
+secrets/
+*.pem
+*.key
+*.cert
+
+# Rate Limiting Data
+logs/rate_limits.json
+
+# Documentation (development notes - keep production docs)
+docs/COMPLETION_REPORT.txt
+docs/ENHANCEMENT_CHECKLIST.txt
+docs/FILE_MANIFEST.txt
+docs/NAVIGATION_IMPLEMENTATION.txt
+docs/MulyaSuchi_Master_Structure.txt

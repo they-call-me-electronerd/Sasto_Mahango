@@ -363,7 +363,7 @@
         footerLinks.forEach(link => {
             link.addEventListener('mouseenter', () => {
                 hoverSound.currentTime = 0;
-                hoverSound.play().catch(e => console.log('Audio play prevented'));
+                hoverSound.play().catch(e => {});
             });
         });
         */
@@ -391,8 +391,6 @@
         initSocialIcons();
         initFooterParallax();
         // initLinkSoundEffects(); // Optional
-
-        console.log('✨ Footer animations initialized');
     }
 
     // Start initialization

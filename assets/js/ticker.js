@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 tickerContent.innerHTML = html;
             })
             .catch(error => {
-                console.error('Error fetching ticker data:', error);
                 tickerContent.innerHTML = '<p>Unable to load price updates.</p>';
             });
     }

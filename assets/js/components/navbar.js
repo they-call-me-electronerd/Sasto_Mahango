@@ -333,8 +333,6 @@
         initSmoothScroll();
         initSearchToggle();
         initIntersectionObserver();
-
-        console.log('✨ Header animations initialized');
     }
 
     // Start initialization

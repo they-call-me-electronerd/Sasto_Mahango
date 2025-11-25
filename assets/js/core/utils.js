@@ -153,7 +153,6 @@
             const item = localStorage.getItem(key);
             return item ? JSON.parse(item) : defaultValue;
         } catch (error) {
-            console.error('Error reading from localStorage:', error);
             return defaultValue;
         }
     }
@@ -169,7 +168,6 @@
             localStorage.setItem(key, JSON.stringify(value));
             return true;
         } catch (error) {
-            console.error('Error writing to localStorage:', error);
             return false;
         }
     }

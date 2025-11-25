@@ -632,8 +632,6 @@ include __DIR__ . '/../includes/header_professional.php';
                 e.stopPropagation();
             });
         });
-        
-        console.log('✨ Mulyasuchi - Enhanced UI with Category Dropdowns Loaded!');
     </script>
 </body>
 </html>

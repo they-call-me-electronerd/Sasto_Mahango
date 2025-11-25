@@ -50,7 +50,6 @@
      */
     function init() {
         if (!filterForm || !productsGrid) {
-            console.warn('Filter form or products grid not found');
             return;
         }
         
@@ -68,8 +67,6 @@
         
         // Setup mobile filter toggle
         setupMobileFilterToggle();
-        
-        console.log('✨ Products page with AJAX filtering loaded successfully!');
     }
     
     /**
@@ -288,7 +285,6 @@
                 showError('Failed to load products. Please try again.');
             }
         } catch (error) {
-            console.error('Error fetching products:', error);
             showError('An error occurred while loading products.');
         } finally {
             isLoading = false;

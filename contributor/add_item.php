@@ -377,7 +377,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 <script>
 function previewImage(input) {
-    console.log('previewImage called', input);
     const fileNameDisplay = document.getElementById('file-name');
     const uploadBox = document.getElementById('upload-box');
     const previewContainer = document.getElementById('image-preview');
@@ -386,7 +385,6 @@ function previewImage(input) {
     
     if (input.files && input.files[0]) {
         const file = input.files[0];
-        console.log('File selected:', file.name, file.size, file.type);
         
         // Validate file type
         if (!file.type.startsWith('image/')) {
@@ -417,20 +415,15 @@ function previewImage(input) {
         const reader = new FileReader();
         
         reader.onload = function(e) {
-            console.log('FileReader onload triggered');
             previewImg.src = e.target.result;
             previewContainer.style.display = 'block';
         };
         
         reader.onerror = function(e) {
-            console.error('FileReader error:', e);
             alert('Error reading file. Please try again.');
         };
         
         reader.readAsDataURL(file);
-        console.log('FileReader.readAsDataURL called');
-    } else {
-        console.log('No file selected');
     }
 }
 

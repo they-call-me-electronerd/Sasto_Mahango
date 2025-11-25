@@ -107,9 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const actionCards = document.querySelectorAll('.action-card');
     actionCards.forEach(card => {
         card.addEventListener('click', function(e) {
-            const actionName = this.querySelector('h3').textContent;
-            console.log(`Action clicked: ${actionName}`);
-            
             // Add ripple effect
             createRipple(e, this);
         });
@@ -197,10 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
-    // Console greeting
-    console.log('%c🎉 Welcome to Mulyasuchi Dashboard!', 'color: #f97316; font-size: 16px; font-weight: bold;');
-    console.log('%cContributor Portal v1.0', 'color: #6b7280; font-size: 12px;');
 });
 
 // Add ripple CSS dynamically if not exists

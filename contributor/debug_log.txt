@@ -1,4 +1,0 @@
-Attempting registration for log_test_user
-Calling createUser...
-createUser returned: '4'
-Auto-login success
