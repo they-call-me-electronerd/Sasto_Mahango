@@ -118,31 +118,6 @@ include __DIR__ . '/../includes/header_professional.php';
             <?php endif; ?>
         </div>
 
-        <!-- Quick Stats -->
-        <div class="categories-stats">
-            <div class="stat-card">
-                <i class="bi bi-grid-3x3-gap"></i>
-                <div class="stat-info">
-                    <h4><?php echo count($categories); ?></h4>
-                    <p>Categories</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="bi bi-box-seam"></i>
-                <div class="stat-info">
-                    <h4><?php echo array_sum(array_column($categories, 'item_count')); ?></h4>
-                    <p>Total Products</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="bi bi-graph-up-arrow"></i>
-                <div class="stat-info">
-                    <h4>Real-time</h4>
-                    <p>Price Updates</p>
-                </div>
-            </div>
-        </div>
-
         <!-- CTA Section -->
         <div class="cta-section">
             <h3>Can't find what you're looking for?</h3>
