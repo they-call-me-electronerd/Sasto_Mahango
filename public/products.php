@@ -74,36 +74,6 @@ $totalPages = ceil($totalItems / $itemsPerPage);
 include __DIR__ . '/../includes/header_professional.php';
 ?>
 
-    <!-- Hero Section -->
-    <div class="products-hero">
-        <div class="products-container">
-            <div class="products-header">
-                <h1 class="products-title">
-                    Browse <span class="highlight">All Products</span>
-                </h1>
-                <p class="products-subtitle">
-                    Discover and track prices across thousands of products. Filter by category, price range, and more.
-                </p>
-                
-                <!-- Stats -->
-                <div class="stats-row">
-                    <div class="stat-box">
-                        <span class="stat-number"><?php echo $totalItems; ?>+</span>
-                        <span class="stat-label">Products</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-number"><?php echo count($categories); ?>+</span>
-                        <span class="stat-label">Categories</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-number">50+</span>
-                        <span class="stat-label">Markets</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Products Section -->
     <section class="products-main">
         <div class="products-layout">

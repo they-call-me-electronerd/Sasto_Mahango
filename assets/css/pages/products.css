@@ -5,7 +5,12 @@ body {
     background: var(--bg-secondary, #fef7f4);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Manrope', sans-serif;
 }
 
@@ -42,8 +47,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(-50px, 50px) rotate(180deg); }
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-50px, 50px) rotate(180deg);
+    }
 }
 
 .products-container {
@@ -114,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Products Main Content */
 .products-main {
     background: var(--bg-primary);
-    padding: 3rem 0;
+    padding: 6rem 0 3rem;
     min-height: 60vh;
 }
 
@@ -361,7 +373,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-image {
     position: relative;
-    padding-top: 75%; /* 4:3 Aspect Ratio */
+    padding-top: 75%;
+    /* 4:3 Aspect Ratio */
     background: var(--bg-secondary);
     overflow: hidden;
 }
@@ -439,7 +452,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .products-grid.list-view .product-category {
-    display: none; /* Hide category in list view or move it */
+    display: none;
+    /* Hide category in list view or move it */
 }
 
 .product-name {
@@ -545,11 +559,11 @@ h1, h2, h3, h4, h5, h6 {
     .products-layout {
         grid-template-columns: 1fr;
     }
-    
+
     .filter-sidebar {
         position: static;
     }
-    
+
     .products-title {
         font-size: 2.5rem;
     }
@@ -559,49 +573,50 @@ h1, h2, h3, h4, h5, h6 {
     .products-hero {
         padding: 4rem 0 2rem;
     }
-    
+
     .products-title {
         font-size: 2rem;
     }
-    
+
     .stats-row {
         gap: 1.5rem;
         flex-wrap: wrap;
     }
-    
+
     .stat-number {
         font-size: 2rem;
     }
-    
+
     .products-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .products-grid.list-view {
-        grid-template-columns: 1fr; /* Force grid on mobile even if list selected, or adapt list */
+        grid-template-columns: 1fr;
+        /* Force grid on mobile even if list selected, or adapt list */
     }
-    
+
     .products-grid.list-view .product-card {
         flex-direction: column;
         align-items: flex-start;
         padding: 1rem;
     }
-    
+
     .products-grid.list-view .product-image {
         width: 100%;
         height: 200px;
         margin-right: 0;
         margin-bottom: 1rem;
     }
-    
+
     .products-grid.list-view .product-details {
         flex-direction: column;
         width: 100%;
         gap: 0.5rem;
         align-items: flex-start;
     }
-    
+
     .products-grid.list-view .product-name,
     .products-grid.list-view .product-meta,
     .products-grid.list-view .product-price,
@@ -609,7 +624,7 @@ h1, h2, h3, h4, h5, h6 {
         width: 100%;
         text-align: left;
     }
-    
+
     .products-grid.list-view .product-actions {
         justify-content: flex-start;
         margin-top: 1rem;
