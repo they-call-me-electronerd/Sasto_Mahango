@@ -15,6 +15,7 @@ require_once __DIR__ . '/../../classes/Database.php';
 require_once __DIR__ . '/../../classes/Auth.php';
 require_once __DIR__ . '/../../classes/Item.php';
 require_once __DIR__ . '/../../classes/Category.php';
+require_once __DIR__ . '/../../includes/functions.php';
 
 try {
     $itemObj = new Item();
@@ -76,8 +77,8 @@ try {
         $categoryClass = 'category-' . trim($categorySlug, '-');
         
         // Check if image exists
-        $hasImage = $item['image_path'] && file_exists(__DIR__ . '/../../assets/uploads/items/' . $item['image_path']);
-        $imagePath = $hasImage ? SITE_URL . '/assets/uploads/items/' . htmlspecialchars($item['image_path']) : null;
+        $hasImage = itemHasImage($item['image_path'] ?? null);
+        $imagePath = $hasImage ? getItemImageUrl($item['image_path']) : null;
         
         $formattedItems[] = [
             'item_id' => $item['item_id'],

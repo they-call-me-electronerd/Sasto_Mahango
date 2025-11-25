@@ -357,8 +357,12 @@ include __DIR__ . '/../includes/header_professional.php';
                             <div class="card-body p-3 d-flex align-items-center gap-3">
                                 <!-- Image/Icon -->
                                 <div style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 12px; overflow: hidden; background: #f3f4f6; position: relative;">
-                                    <?php if ($item['image_path']): ?>
-                                        <img src="<?php echo UPLOAD_URL . $item['image_path']; ?>" 
+                                    <?php 
+                                        $recentHasImage = itemHasImage($item['image_path'] ?? null);
+                                        $recentImageUrl = $recentHasImage ? getItemImageUrl($item['image_path']) : null;
+                                    ?>
+                                    <?php if ($recentHasImage && $recentImageUrl): ?>
+                                        <img src="<?php echo $recentImageUrl; ?>" 
                                              alt="<?php echo htmlspecialchars($item['item_name']); ?>" 
                                              style="width: 100%; height: 100%; object-fit: cover;">
                                     <?php else: ?>

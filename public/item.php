@@ -30,6 +30,9 @@ if (!$item) {
     exit;
 }
 
+$itemHasImage = itemHasImage($item['image_path'] ?? null);
+$itemImageUrl = $itemHasImage ? getItemImageUrl($item['image_path']) : null;
+
 $pageTitle = $item['item_name'] . ' - Price Details';
 $metaDescription = "View details and price history for " . htmlspecialchars($item['item_name']) . " in Nepal. Current price: " . formatPrice($item['current_price']);
 $additionalCSS = ['pages/item.css'];
@@ -103,8 +106,8 @@ include __DIR__ . '/../includes/header_professional.php';
                 <!-- Image Gallery -->
                 <div class="product-gallery">
                     <div class="gallery-main">
-                        <?php if ($item['image_path'] && file_exists(__DIR__ . '/../assets/uploads/items/' . $item['image_path'])): ?>
-                            <img src="<?php echo SITE_URL; ?>/assets/uploads/items/<?php echo htmlspecialchars($item['image_path']); ?>" 
+                        <?php if ($itemHasImage && $itemImageUrl): ?>
+                            <img src="<?php echo $itemImageUrl; ?>" 
                                  alt="<?php echo htmlspecialchars($item['item_name']); ?>"
                                  class="main-image">
                         <?php else: ?>

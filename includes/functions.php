@@ -169,6 +169,48 @@ function uploadImage($file, $oldImagePath = null) {
 }
 
 /**
+ * Normalize stored image paths to filenames for consistent handling
+ */
+function normalizeItemImagePath($imagePath) {
+    if (empty($imagePath)) {
+        return null;
+    }
+    $sanitized = trim(str_replace('\\', '/', $imagePath));
+    $basename = basename($sanitized);
+    return $basename ?: null;
+}
+
+/**
+ * Build the absolute path for an item image if available
+ */
+function getItemImageFilePath($imagePath) {
+    $filename = normalizeItemImagePath($imagePath);
+    if (!$filename) {
+        return null;
+    }
+    return rtrim(UPLOAD_DIR, "/\\") . DIRECTORY_SEPARATOR . $filename;
+}
+
+/**
+ * Build the public URL for an item image
+ */
+function getItemImageUrl($imagePath) {
+    $filename = normalizeItemImagePath($imagePath);
+    if (!$filename) {
+        return null;
+    }
+    return rtrim(UPLOAD_URL, '/') . '/' . rawurlencode($filename);
+}
+
+/**
+ * Determine if an item image exists on disk
+ */
+function itemHasImage($imagePath) {
+    $filePath = getItemImageFilePath($imagePath);
+    return $filePath ? file_exists($filePath) : false;
+}
+
+/**
  * Set flash message
  */
 function setFlashMessage($message, $type = 'success') {

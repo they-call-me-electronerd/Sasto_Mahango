@@ -230,12 +230,14 @@ include __DIR__ . '/../includes/header_professional.php';
                             // Get category slug for icon styling
                             $categorySlug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $item['category_name'] ?? 'general'));
                             $categoryClass = 'category-' . trim($categorySlug, '-');
+                            $cardHasImage = itemHasImage($item['image_path'] ?? null);
+                            $cardImageUrl = $cardHasImage ? getItemImageUrl($item['image_path']) : null;
                         ?>
                             <div class="product-card <?php echo $categoryClass; ?>" style="animation-delay: <?php echo $delay; ?>s;">
                                 <div class="product-image">
                                     <span class="product-badge <?php echo $statusClass; ?>"><?php echo $statusLabel; ?></span>
-                                    <?php if ($item['image_path'] && file_exists(__DIR__ . '/../assets/uploads/items/' . $item['image_path'])): ?>
-                                        <img src="<?php echo SITE_URL; ?>/assets/uploads/items/<?php echo htmlspecialchars($item['image_path']); ?>" 
+                                    <?php if ($cardHasImage && $cardImageUrl): ?>
+                                        <img src="<?php echo $cardImageUrl; ?>" 
                                              alt="<?php echo htmlspecialchars($item['item_name']); ?>"
                                              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                                     <?php else: ?>

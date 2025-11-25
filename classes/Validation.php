@@ -195,23 +195,205 @@ class Validation {
     }
     
     /**
-     * Approve validation (uses stored procedure)
+     * Approve validation (PHP implementation replacing stored procedure)
      */
     public function approveValidation($queueId) {
         try {
-            $stmt = $this->pdo->prepare("CALL sp_approve_validation(:queue_id, :admin_id)");
-            $result = $stmt->execute([
+            $this->pdo->beginTransaction();
+
+            // Get validation details
+            $stmt = $this->pdo->prepare("
+                SELECT * FROM validation_queue 
+                WHERE queue_id = :queue_id AND status = :status
+                FOR UPDATE
+            ");
+            $stmt->execute([
                 'queue_id' => $queueId,
-                'admin_id' => Auth::getUserId()
+                'status' => VALIDATION_PENDING
             ]);
-            
-            if ($result) {
-                Logger::log(LOG_VALIDATE, 'validation_queue', $queueId, "Validation approved");
+            $validation = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$validation) {
+                $this->pdo->rollBack();
+                return false;
             }
+
+            $adminId = Auth::getUserId();
+            $itemId = $validation['item_id'];
+            $actionType = $validation['action_type'];
+
+            if ($actionType === ACTION_NEW_ITEM) {
+                // Generate slug
+                $slug = strtolower(str_replace([' ', ','], ['-', ''], $validation['item_name']));
+                
+                // Check for duplicate slug
+                $checkSlug = $this->pdo->prepare("SELECT COUNT(*) FROM items WHERE slug = :slug");
+                $checkSlug->execute(['slug' => $slug]);
+                if ($checkSlug->fetchColumn() > 0) {
+                    $slug .= '-' . uniqid();
+                }
+
+                // Create new item
+                // Note: Using distinct parameter names to avoid PDO issues with some drivers
+                $insertItem = $this->pdo->prepare("
+                    INSERT INTO items (
+                        item_name, item_name_nepali, slug, category_id, base_price, current_price, unit,
+                        market_location, description, image_path, status,
+                        created_by, validated_by, validated_at
+                    ) VALUES (
+                        :item_name, :item_name_nepali, :slug, :category_id, :base_price, :current_price, :unit,
+                        :market_location, :description, :image_path, :status,
+                        :created_by, :validated_by, NOW()
+                    )
+                ");
+                
+                $insertItem->execute([
+                    'item_name' => $validation['item_name'],
+                    'item_name_nepali' => null, // validation_queue doesn't have nepali name yet
+                    'slug' => $slug,
+                    'category_id' => $validation['category_id'],
+                    'base_price' => $validation['new_price'],
+                    'current_price' => $validation['new_price'],
+                    'unit' => $validation['unit'],
+                    'market_location' => $validation['market_location'],
+                    'description' => $validation['description'],
+                    'image_path' => $validation['image_path'],
+                    'status' => ITEM_STATUS_ACTIVE,
+                    'created_by' => $validation['submitted_by'],
+                    'validated_by' => $adminId
+                ]);
+                
+                $itemId = $this->pdo->lastInsertId();
+
+            } elseif ($actionType === ACTION_PRICE_UPDATE) {
+                // Update existing item price
+                $updateItem = $this->pdo->prepare("
+                    UPDATE items
+                    SET current_price = :new_price,
+                        validated_by = :validated_by,
+                        validated_at = NOW(),
+                        updated_at = NOW()
+                    WHERE item_id = :item_id
+                ");
+                
+                $updateItem->execute([
+                    'new_price' => $validation['new_price'],
+                    'validated_by' => $adminId,
+                    'item_id' => $itemId
+                ]);
+                
+                // Record price history
+                $insertHistory = $this->pdo->prepare("
+                    INSERT INTO price_history (item_id, old_price, new_price, updated_by, updated_at)
+                    VALUES (:item_id, :old_price, :new_price, :updated_by, NOW())
+                ");
+                
+                $insertHistory->execute([
+                    'item_id' => $itemId,
+                    'old_price' => $validation['old_price'],
+                    'new_price' => $validation['new_price'],
+                    'updated_by' => $adminId
+                ]);
+
+            } elseif ($actionType === ACTION_ITEM_EDIT) {
+                // Get current item details
+                $currentItemStmt = $this->pdo->prepare("SELECT * FROM items WHERE item_id = :item_id");
+                $currentItemStmt->execute(['item_id' => $itemId]);
+                $currentItem = $currentItemStmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($currentItem) {
+                    // Prepare update data, using COALESCE logic (use new value if not null, else keep old)
+                    // Note: In PHP we check if value is not null in $validation
+                    
+                    $newItemName = $validation['item_name'] ?? $currentItem['item_name'];
+                    $newCategoryId = $validation['category_id'] ?? $currentItem['category_id'];
+                    $newPrice = $validation['new_price'] ?? $currentItem['current_price'];
+                    $newUnit = $validation['unit'] ?? $currentItem['unit'];
+                    $newLocation = $validation['market_location'] ?? $currentItem['market_location'];
+                    $newDescription = $validation['description'] ?? $currentItem['description'];
+                    $newImagePath = $validation['image_path'] ?? $currentItem['image_path'];
+                    
+                    // Generate new slug if name changed
+                    $newSlug = $currentItem['slug'];
+                    if (!empty($validation['item_name']) && $validation['item_name'] !== $currentItem['item_name']) {
+                        $newSlug = strtolower(str_replace([' ', ','], ['-', ''], $newItemName));
+                        // Check duplicate
+                         $checkSlug = $this->pdo->prepare("SELECT COUNT(*) FROM items WHERE slug = :slug AND item_id != :item_id");
+                        $checkSlug->execute(['slug' => $newSlug, 'item_id' => $itemId]);
+                        if ($checkSlug->fetchColumn() > 0) {
+                            $newSlug .= '-' . uniqid();
+                        }
+                    }
+
+                    $updateItem = $this->pdo->prepare("
+                        UPDATE items
+                        SET item_name = :item_name,
+                            category_id = :category_id,
+                            current_price = :current_price,
+                            unit = :unit,
+                            market_location = :market_location,
+                            description = :description,
+                            image_path = :image_path,
+                            slug = :slug,
+                            validated_by = :validated_by,
+                            validated_at = NOW(),
+                            updated_at = NOW()
+                        WHERE item_id = :item_id
+                    ");
+
+                    $updateItem->execute([
+                        'item_name' => $newItemName,
+                        'category_id' => $newCategoryId,
+                        'current_price' => $newPrice,
+                        'unit' => $newUnit,
+                        'market_location' => $newLocation,
+                        'description' => $newDescription,
+                        'image_path' => $newImagePath,
+                        'slug' => $newSlug,
+                        'validated_by' => $adminId,
+                        'item_id' => $itemId
+                    ]);
+
+                    // Record price history if changed
+                    if ($newPrice != $currentItem['current_price']) {
+                        $insertHistory = $this->pdo->prepare("
+                            INSERT INTO price_history (item_id, old_price, new_price, updated_by, updated_at)
+                            VALUES (:item_id, :old_price, :new_price, :updated_by, NOW())
+                        ");
+                        $insertHistory->execute([
+                            'item_id' => $itemId,
+                            'old_price' => $currentItem['current_price'],
+                            'new_price' => $newPrice,
+                            'updated_by' => $adminId
+                        ]);
+                    }
+                }
+            }
+
+            // Update validation queue status
+            $updateQueue = $this->pdo->prepare("
+                UPDATE validation_queue 
+                SET status = :status, 
+                    validated_by = :validated_by, 
+                    validated_at = NOW() 
+                WHERE queue_id = :queue_id
+            ");
             
-            return $result;
+            $updateQueue->execute([
+                'status' => VALIDATION_APPROVED,
+                'validated_by' => $adminId,
+                'queue_id' => $queueId
+            ]);
+
+            $this->pdo->commit();
             
-        } catch (PDOException $e) {
+            Logger::log(LOG_VALIDATE, 'validation_queue', $queueId, "Validation approved");
+            return true;
+            
+        } catch (Exception $e) {
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
             error_log("Approve validation error: " . $e->getMessage());
             return false;
         }

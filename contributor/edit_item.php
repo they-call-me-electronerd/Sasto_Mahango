@@ -80,28 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $imagePath = null;
             
             if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = __DIR__ . '/../assets/uploads/items/';
-                
-                // Create directory if it doesn't exist
-                if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0755, true);
-                }
-                
-                $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
-                $fileType = $_FILES['item_image']['type'];
-                
-                if (in_array($fileType, $allowedTypes)) {
-                    $extension = pathinfo($_FILES['item_image']['name'], PATHINFO_EXTENSION);
-                    $filename = 'item_' . time() . '_' . uniqid() . '.' . $extension;
-                    $uploadPath = $uploadDir . $filename;
-                    
-                    if (move_uploaded_file($_FILES['item_image']['tmp_name'], $uploadPath)) {
-                        $imagePath = 'assets/uploads/items/' . $filename;
-                    } else {
-                        $errors[] = 'Failed to upload image';
-                    }
+                $uploadResult = uploadImage($_FILES['item_image']);
+                if ($uploadResult['success']) {
+                    $imagePath = $uploadResult['filename'];
                 } else {
-                    $errors[] = 'Invalid image type. Only JPG, PNG, and WEBP are allowed';
+                    $errors[] = $uploadResult['error'];
                 }
             }
             
