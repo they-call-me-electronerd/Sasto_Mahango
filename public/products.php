@@ -163,13 +163,13 @@ include __DIR__ . '/../includes/header_professional.php';
                     <!-- Filter Buttons -->
                     <div class="filter-actions">
                         <button type="submit" class="btn-apply">
-                            <i class="bi bi-funnel-fill me-1"></i>
-                            Apply Filters
+                            <i class="bi bi-funnel-fill"></i>
+                            <span>Apply Filters</span>
                         </button>
-                        <a href="products.php" class="btn-reset">
-                            <i class="bi bi-x-circle me-1"></i>
-                            Reset
-                        </a>
+                        <button type="button" class="btn-reset" onclick="window.location.href='products.php'">
+                            <i class="bi bi-x-circle"></i>
+                            <span>Reset</span>
+                        </button>
                     </div>
                 </form>
             </aside>
@@ -296,8 +296,8 @@ include __DIR__ . '/../includes/header_professional.php';
                     </div>
 
                     <!-- Pagination -->
+                    <div class="pagination-wrapper">
                     <?php if ($totalPages > 1): ?>
-                        <div class="pagination-wrapper">
                             <ul class="pagination">
                                 <?php
                                 $queryParams = $_GET;
@@ -352,8 +352,8 @@ include __DIR__ . '/../includes/header_professional.php';
                                     </li>
                                 <?php endif; ?>
                             </ul>
-                        </div>
                     <?php endif; ?>
+                    </div>
                 <?php endif; ?>
             </main>
         </div>
