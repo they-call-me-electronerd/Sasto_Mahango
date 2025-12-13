@@ -34,7 +34,7 @@
         
         <div class="footer-bottom" style="margin-top: 1rem; padding-top: 1rem;">
             <p>&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. All rights reserved.</p>
-            <p>Built with ❤️ for Nepal</p>
+            <p>Built by Team Urja on ISTN Hackathon</p>
         </div>
     </footer>
     

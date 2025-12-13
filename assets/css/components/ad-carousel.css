@@ -1,0 +1,307 @@
+/**
+ * Advertisement Carousel Styles
+ * Responsive ad carousel for monetization
+ */
+
+/* Hero Ad Carousel Container */
+.hero-ad-carousel {
+    position: relative;
+    z-index: 1;
+}
+
+.ad-carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    height: 450px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(59, 130, 246, 0.05));
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    animation: floatAnimation 6s ease-in-out infinite;
+}
+
+/* Float Animation */
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.02);
+    }
+}
+
+/* Ad Slides */
+.ad-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+    transform: scale(0.95);
+}
+
+.ad-slide.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+
+.ad-slide.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+/* Ad Link */
+.ad-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.ad-link:hover {
+    transform: scale(1.02);
+}
+
+/* Ad Image */
+.ad-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.ad-link:hover .ad-image {
+    transform: scale(1.05);
+}
+
+/* Sponsored Badge */
+.ad-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(249, 115, 22, 0);
+    }
+}
+
+.ad-badge i {
+    font-size: 1rem;
+}
+
+/* Navigation Buttons */
+.ad-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+}
+
+.ad-carousel-container:hover .ad-nav-btn {
+    opacity: 1;
+}
+
+.ad-nav-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ad-nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.ad-prev {
+    left: 16px;
+}
+
+.ad-next {
+    right: 16px;
+}
+
+.ad-nav-btn i {
+    font-size: 1.5rem;
+    color: #1f2937;
+}
+
+/* Dot Indicators */
+.ad-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.ad-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.ad-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+}
+
+.ad-dot.active {
+    background: white;
+    border-color: white;
+    width: 28px;
+    border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .ad-carousel-container {
+        max-width: 480px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-ad-carousel {
+        margin-top: 3rem;
+    }
+    
+    .ad-carousel-container {
+        max-width: 100%;
+        height: 350px;
+    }
+    
+    .ad-nav-btn {
+        width: 40px;
+        height: 40px;
+        opacity: 1;
+    }
+    
+    .ad-nav-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .ad-carousel-container {
+        height: 280px;
+        border-radius: 16px;
+    }
+    
+    .ad-badge {
+        top: 12px;
+        right: 12px;
+        padding: 6px 12px;
+        font-size: 0.625rem;
+    }
+    
+    .ad-nav-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .ad-prev {
+        left: 12px;
+    }
+    
+    .ad-next {
+        right: 12px;
+    }
+    
+    .ad-indicators {
+        bottom: 12px;
+        padding: 6px 12px;
+    }
+    
+    .ad-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .ad-dot.active {
+        width: 20px;
+    }
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+.ad-slide.loading {
+    background: linear-gradient(
+        to right,
+        #f3f4f6 0%,
+        #e5e7eb 20%,
+        #f3f4f6 40%,
+        #f3f4f6 100%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* Accessibility */
+.ad-nav-btn:focus,
+.ad-dot:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .hero-ad-carousel {
+        display: none;
+    }
+}

@@ -1,6 +1,6 @@
 ﻿<?php
 /**
- * Landing Page - Mulyasuchi
+ * Landing Page - SastoMahango
  */
 
 // Bootstrap application
@@ -18,8 +18,8 @@ require_once __DIR__ . '/../includes/functions.php';
 $pageTitle = 'Home';
 $metaDescription = "SastoMahango is Nepal's premier price tracking platform. Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.";
 $metaKeywords = "price tracking nepal, vegetable prices nepal, kalimati market price, daily rates, sastomahango, commodity prices";
-$additionalCSS = ['pages/landing.css', 'animations/enhanced-animations.css', 'animations/hero-enhancements.css'];
-$additionalJS = ['animations/counter-animation.js', 'animations/scroll-animations.js', 'components/ticker.js'];
+$additionalCSS = ['pages/landing.css', 'animations/enhanced-animations.css', 'animations/hero-enhancements.css', 'components/ad-carousel.css', 'components/ad-banner.css'];
+$additionalJS = ['animations/counter-animation.js', 'animations/scroll-animations.js', 'components/ticker.js', 'components/ad-carousel.js', 'components/ad-banner.js', 'components/category-carousel.js', 'components/landing-ad-carousel.js'];
 
 // Get categories with item counts
 $categoryObj = new Category();
@@ -44,121 +44,322 @@ include __DIR__ . '/../includes/header_professional.php';
 </div>
 
 <main>
-    <!-- Hero Section -->
-    <section class="hero-section" style="position: relative; overflow: hidden;">
-        <!-- Background Image Container -->
-        <div class="hero-background" style="position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 1400px; height: 300px; z-index: 0;">
-            <!-- Background Image -->
-            <img src="<?php echo rtrim(SITE_URL, '/'); ?>/assets/images/skyline.png" 
-                 alt="Hero Background" 
-                 style="width: 100%; height: 100%; object-fit: contain; object-position: center bottom; opacity: 0.3;" loading="lazy">
-        </div>
-        <!-- Gradient Overlay -->
-        <div class="hero-gradient-overlay"></div>
-        
-        <div class="hero-container" style="position: relative; z-index: 1;">
-            <!-- Left Content -->
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="bi bi-lightning-charge-fill"></i>
-                    <span>Real-time Price Updates</span>
-                </div>
-
-                <h1 class="hero-title">
-                    What is the price of <span class="highlight">anything</span> today?
-                </h1>
-
-                <p class="hero-subtitle">
-                    Get instant, verified prices for thousands of products across Nepal. From vegetables to electronics, we track it all.
-                </p>
-
-                <!-- Search Box -->
-                <form action="products.php" method="GET" class="hero-search-box">
-                    <i class="bi bi-search search-icon-left"></i>
-                    <input 
-                        type="text" 
-                        name="search" 
-                        class="hero-search-input" 
-                        placeholder="Search for rice, tomatoes, mobile phones..."
-                        autocomplete="off"
-                        required
-                    >
-                    <button type="submit" class="hero-search-btn ripple-effect">
-                        Search
-                    </button>
-                </form>
-
-                <!-- Stats -->
-                <div class="hero-stats">
-                    <div class="stat-item hover-lift">
-                        <span class="stat-number" data-counter="<?php echo $totalProducts; ?>" data-suffix="+">0</span>
-                        <span class="stat-label">Products Tracked</span>
-                    </div>
-                    <div class="stat-item hover-lift">
-                        <span class="stat-number" data-counter="<?php echo $totalMarkets; ?>" data-suffix="+">0</span>
-                        <span class="stat-label">Markets Covered</span>
-                    </div>
-                    <div class="stat-item hover-lift">
-                        <span class="stat-number animate-pulse">Daily</span>
-                        <span class="stat-label">Price Updates</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Illustration -->
-            <div class="hero-illustration floating">
-                <div class="illustration-wrapper">
-                    <div class="illustration-circle"></div>
-                    <!-- SVG Illustration -->
-                    <svg class="illustration-img" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="250" cy="250" r="200" fill="url(#gradient1)" opacity="0.1"/>
-                        <ellipse cx="250" cy="280" rx="80" ry="100" fill="#f97316"/>
-                        <circle cx="250" cy="180" r="70" fill="#f97316"/>
-                        <circle cx="230" cy="170" r="8" fill="#1f2937"/>
-                        <circle cx="270" cy="170" r="8" fill="#1f2937"/>
-                        <circle cx="232" cy="168" r="3" fill="white"/>
-                        <circle cx="272" cy="168" r="3" fill="white"/>
-                        <path d="M 230 190 Q 250 200 270 190" stroke="#1f2937" stroke-width="4" stroke-linecap="round" fill="none"/>
-                        <ellipse cx="180" cy="250" rx="20" ry="50" fill="#ea580c" transform="rotate(-20 180 250)"/>
-                        <ellipse cx="320" cy="250" rx="20" ry="50" fill="#ea580c" transform="rotate(20 320 250)"/>
-                        <rect x="140" y="230" width="50" height="35" rx="5" fill="white" stroke="#f97316" stroke-width="2"/>
-                        <text x="165" y="252" font-size="16" font-weight="bold" fill="#f97316" text-anchor="middle">NPR</text>
-                        <rect x="310" y="230" width="45" height="50" rx="5" fill="#3b82f6"/>
-                        <path d="M 320 240 Q 332 230 345 240" stroke="#1e40af" stroke-width="3" stroke-linecap="round" fill="none"/>
-                        <circle cx="100" cy="150" r="20" fill="#ef4444"/>
-                        <ellipse cx="100" cy="135" rx="8" ry="5" fill="#10b981"/>
-                        <path d="M 400 180 L 410 220 L 390 220 Z" fill="#f97316"/>
-                        <path d="M 405 175 L 408 165 L 402 165 Z" fill="#10b981"/>
-                        <rect x="90" cy="320" width="40" height="60" rx="8" fill="#1f2937"/>
-                        <rect x="95" y="328" width="30" height="45" fill="#3b82f6"/>
-                        <circle cx="380" cy="300" r="25" fill="#fbbf24"/>
-                        <text x="380" y="310" font-size="20" font-weight="bold" fill="#92400e" text-anchor="middle">₹</text>
-                        <defs>
-                            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
-                            </linearGradient>
-                            
-                        </defs>
+    <!-- Landing Advertisement Section -->
+    <section class="landing-ad-section" style="background: #f8f9fa; padding: 6rem 0 4rem; position: relative; margin: 0; width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden;">
+        <div style="width: 100%; margin: 0; padding: 0;">
+            <!-- Advertisement Carousel -->
+            <div class="landing-ad-carousel" style="width: 100%; position: relative;">
+                <div class="landing-ad-container" style="position: relative; overflow: hidden; width: 100vw; background: transparent;">
+                    <!-- Ad Slides Track -->
+                    <div class="landing-ad-track" style="display: flex; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform;">
+                        <!-- Ad 1: Shadow Headphone -->
+                        <div class="landing-ad-slide" style="flex: 0 0 100%; width: 100%;">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="ad-link" style="display: block; width: 100%; position: relative;">
+                                <img src="<?php echo rtrim(SITE_URL, '/'); ?>/assets/uploads/ads/shadow-headphone.jpg" 
+                                     alt="Shadow Headphone - Exclusive Launch Offer" 
+                                     class="ad-image"
+                                     style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                <div class="ad-badge" style="position: absolute; top: 2rem; right: 2rem; background: rgba(0, 0, 0, 0.85); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 0.95rem; font-weight: 600; backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                                    <i class="bi bi-badge-ad"></i> Ad
+                                </div>
+                            </a>
+                        </div>
                         
-                    </svg>
+                        <!-- Ad 2: Ultima Power Bank -->
+                        <div class="landing-ad-slide" style="flex: 0 0 100%; width: 100%;">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="ad-link" style="display: block; width: 100%; position: relative;">
+                                <img src="<?php echo rtrim(SITE_URL, '/'); ?>/assets/uploads/ads/ad1.jpg" 
+                                     alt="Ultima Boost 20K Ultra Max - Coming Soon" 
+                                     class="ad-image"
+                                     style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                <div class="ad-badge" style="position: absolute; top: 2rem; right: 2rem; background: rgba(0, 0, 0, 0.85); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 0.95rem; font-weight: 600; backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                                    <i class="bi bi-badge-ad"></i> Ad
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Ad 3: Cetaphil Products -->
+                        <div class="landing-ad-slide" style="flex: 0 0 100%; width: 100%;">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="ad-link" style="display: block; width: 100%; position: relative;">
+                                <img src="<?php echo rtrim(SITE_URL, '/'); ?>/assets/uploads/ads/ad2.jpg" 
+                                     alt="Cetaphil - Up to 10% Off" 
+                                     class="ad-image"
+                                     style="width: 100%; height: auto; display: block; object-fit: contain;">
+                                <div class="ad-badge" style="position: absolute; top: 2rem; right: 2rem; background: rgba(0, 0, 0, 0.85); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 0.95rem; font-weight: 600; backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                                    <i class="bi bi-badge-ad"></i> Ad
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button class="landing-ad-prev" aria-label="Previous ad" style="position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 10; width: 60px; height: 60px; border-radius: 50%; background: rgba(255, 255, 255, 0.95); border: 2px solid rgba(0, 0, 0, 0.1); color: #333; font-size: 1.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="landing-ad-next" aria-label="Next ad" style="position: absolute; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 10; width: 60px; height: 60px; border-radius: 50%; background: rgba(255, 255, 255, 0.95); border: 2px solid rgba(0, 0, 0, 0.1); color: #333; font-size: 1.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Progress Indicators -->
+                    <div class="landing-ad-indicators" style="position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.75rem; z-index: 10;">
+                        <button class="landing-ad-indicator active" data-slide="0" aria-label="Go to ad 1" style="width: 40px; height: 4px; border-radius: 2px; background: #333; border: none; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;">
+                            <span class="progress-bar" style="position: absolute; top: 0; left: 0; height: 100%; width: 0; background: #22c55e; transition: width 2s linear;"></span>
+                        </button>
+                        <button class="landing-ad-indicator" data-slide="1" aria-label="Go to ad 2" style="width: 40px; height: 4px; border-radius: 2px; background: rgba(0, 0, 0, 0.3); border: none; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;">
+                            <span class="progress-bar" style="position: absolute; top: 0; left: 0; height: 100%; width: 0; background: #22c55e; transition: width 2s linear;"></span>
+                        </button>
+                        <button class="landing-ad-indicator" data-slide="2" aria-label="Go to ad 3" style="width: 40px; height: 4px; border-radius: 2px; background: rgba(0, 0, 0, 0.3); border: none; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;">
+                            <span class="progress-bar" style="position: absolute; top: 0; left: 0; height: 100%; width: 0; background: #22c55e; transition: width 2s linear;"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-       
-        <!-- Bottom Wave Divider -->
-        <div class="section-divider" style="transform: rotate(180deg);">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
         </div>
     </section>
 
-    <!-- What is Mulyasuchi Section -->
-    <!-- What is Mulyasuchi Section -->
-    <section class="section-colored scroll-reveal section-padding" aria-label="About Mulyasuchi" style="position: relative;">
-       
+    <script>
+    // Inline Landing Ad Carousel - Immediate Execution
+    (function() {
+        const track = document.querySelector('.landing-ad-track');
+        const prevBtn = document.querySelector('.landing-ad-prev');
+        const nextBtn = document.querySelector('.landing-ad-next');
+        const indicators = document.querySelectorAll('.landing-ad-indicator');
+        
+        if (!track || !indicators.length) return;
+        
+        let currentIndex = 0;
+        const totalSlides = 3;
+        let autoScrollInterval = null;
+        
+        function goToSlide(index) {
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            indicators.forEach((ind, i) => {
+                if (i === currentIndex) {
+                    ind.classList.add('active');
+                    ind.style.background = '#333';
+                    const progressBar = ind.querySelector('.progress-bar');
+                    if (progressBar) {
+                        progressBar.style.transition = 'none';
+                        progressBar.style.width = '0%';
+                        setTimeout(() => {
+                            progressBar.style.transition = 'width 2s linear';
+                            progressBar.style.width = '100%';
+                        }, 10);
+                    }
+                } else {
+                    ind.classList.remove('active');
+                    ind.style.background = 'rgba(0, 0, 0, 0.3)';
+                    const progressBar = ind.querySelector('.progress-bar');
+                    if (progressBar) {
+                        progressBar.style.transition = 'none';
+                        progressBar.style.width = '0%';
+                    }
+                }
+            });
+        }
+        
+        function next() {
+            const nextIndex = (currentIndex + 1) % totalSlides;
+            goToSlide(nextIndex);
+        }
+        
+        function prev() {
+            const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            goToSlide(prevIndex);
+        }
+        
+        function startAutoScroll() {
+            stopAutoScroll();
+            goToSlide(currentIndex);
+            autoScrollInterval = setInterval(next, 2000);
+        }
+        
+        function stopAutoScroll() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+            }
+        }
+        
+        // Event listeners
+        if (prevBtn) prevBtn.addEventListener('click', () => { prev(); startAutoScroll(); });
+        if (nextBtn) nextBtn.addEventListener('click', () => { next(); startAutoScroll(); });
+        
+        indicators.forEach((ind, index) => {
+            ind.addEventListener('click', () => { goToSlide(index); startAutoScroll(); });
+        });
+        
+        const container = document.querySelector('.landing-ad-container');
+        if (container) {
+            container.addEventListener('mouseenter', stopAutoScroll);
+            container.addEventListener('mouseleave', startAutoScroll);
+        }
+        
+        // Start
+        startAutoScroll();
+    })();
+    </script>
+
+    <!-- Categories Section -->
+    <section class="scroll-reveal section-padding" aria-label="Product Categories" style="background: white; position: relative;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;">
+                    <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">EXPLORE</span>
+                </div>
+                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Browse by Category</h2>
+                <p style="font-size: 1.125rem; color: #6b7280; max-width: 700px; margin: 0 auto;">Find verified prices for thousands of products across different categories - from fresh produce to electronics</p>
+            </div>
+
+            <div class="row g-4">
+                <?php 
+                $categoryColors = [
+                    'vegetables' => ['from' => '#10b981', 'to' => '#059669', 'bg' => '#f0fdf4'],
+                    'fruits' => ['from' => '#ef4444', 'to' => '#dc2626', 'bg' => '#fef2f2'],
+                    'kitchen-appliances' => ['from' => '#f59e0b', 'to' => '#d97706', 'bg' => '#fffbeb'],
+                    'study-material' => ['from' => '#3b82f6', 'to' => '#2563eb', 'bg' => '#eff6ff'],
+                    'clothing' => ['from' => '#ec4899', 'to' => '#db2777', 'bg' => '#fdf2f8'],
+                    'tools' => ['from' => '#6366f1', 'to' => '#4f46e5', 'bg' => '#eef2ff'],
+                    'electrical-appliances' => ['from' => '#8b5cf6', 'to' => '#7c3aed', 'bg' => '#faf5ff'],
+                    'tech-gadgets' => ['from' => '#06b6d4', 'to' => '#0891b2', 'bg' => '#ecfeff'],
+                    'miscellaneous' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
+                    'groceries' => ['from' => '#eab308', 'to' => '#ca8a04', 'bg' => '#fefce8'],
+                    'furniture' => ['from' => '#dc2626', 'to' => '#b91c1c', 'bg' => '#fef2f2'],
+                    'sports-fitness' => ['from' => '#14b8a6', 'to' => '#0d9488', 'bg' => '#f0fdfa'],
+                    'household-items' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
+                    'tools-hardware' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
+                    'dairy-products' => ['from' => '#60a5fa', 'to' => '#3b82f6', 'bg' => '#eff6ff'],
+                    'meat-fish' => ['from' => '#f87171', 'to' => '#ef4444', 'bg' => '#fef2f2'],
+                    'spices' => ['from' => '#fb923c', 'to' => '#f97316', 'bg' => '#fff7ed']
+                ];
+                $icons = [
+                    'vegetables'=>'🥦',
+                    'fruits'=>'🍎',
+                    'kitchen-appliances'=>'🍳',
+                    'study-material'=>'📚',
+                    'clothing'=>'👕',
+                    'tools'=>'🔧',
+                    'electrical-appliances'=>'💡',
+                    'tech-gadgets'=>'📱',
+                    'miscellaneous'=>'📦', 
+                    'groceries'=>'🛒', 
+                    'furniture'=>'🛋️', 
+                    'sports-fitness'=>'⚽', 
+                    'household-items'=>'📦', 
+                    'tools-hardware'=>'🔧',
+                    'dairy-products'=>'🥛',
+                    'meat-fish'=>'🐟',
+                    'spices'=>'🌶️'
+                ];
+                foreach ($categories as $category): 
+                    $slug = $category['slug'];
+                    $colors = $categoryColors[$slug] ?? ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'];
+                    $categoryItems = $categoryObj->getItemsByCategory($category['category_id'], 5);
+                ?>
+                <div class="col-6 col-md-4 col-lg-2 category-card-animate">
+                    <a href="products.php?category=<?php echo $category['category_id']; ?>" style="text-decoration: none; display: block; height: 100%;">
+                        <div class="category-card-inner" style="background: <?php echo $colors['bg']; ?>; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; cursor: pointer; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.05; border-radius: 50%;"></div>
+                            <div>
+                                <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;"><?php echo $icons[$slug] ?? '📦'; ?></span></div>
+                                <h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                <p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500; height: 2.5rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.25rem;"><?php echo htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            </div>
+                            <div style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count'] > 0 ? $category['item_count'] . ' items' : 'Coming Soon'; ?></span></div>
+                                <i class="bi bi-arrow-right" style="font-size: 1.25rem; color: <?php echo $colors['from']; ?>; transition: transform 0.3s;"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="products.php" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 1rem 2.5rem; border-radius: 3rem; font-weight: 700; font-size: 1.125rem; text-decoration: none; box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 15px 35px rgba(249, 115, 22, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(249, 115, 22, 0.3)';"><span>Explore All Categories</span><i class="bi bi-arrow-right" style="font-size: 1.25rem;"></i></a>
+            </div>
         </div>
+    </section>
+
+    <?php if (!empty($recentItems)): ?>
+    <!-- Recent Updates Section -->
+    <section class="scroll-reveal section-padding" aria-label="Recent Price Updates" style="background: #f9fafb; position: relative;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;">
+                    <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">FRESH ARRIVALS</span>
+                </div>
+                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Recent Updates</h2>
+                <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">Latest price updates from markets near you</p>
+            </div>
+            <div class="row g-4">
+                <?php foreach ($recentItems as $item): ?>
+                <div class="col-md-6 col-lg-4">
+                    <a href="item.php?id=<?php echo $item['item_id']; ?>" class="text-decoration-none">
+                        <div class="card border-0 shadow-sm h-100" style="transition: all 0.2s ease; border-radius: 16px;"
+                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 20px -5px rgba(0, 0, 0, 0.1)';"
+                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)';">
+                            <div class="card-body p-3 d-flex align-items-center gap-3">
+                                <!-- Image/Icon -->
+                                <div style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 12px; overflow: hidden; background: #f3f4f6; position: relative;">
+                                    <?php 
+                                        $recentHasImage = itemHasImage($item['image_path'] ?? null);
+                                        $recentImageUrl = $recentHasImage ? getItemImageUrl($item['image_path']) : null;
+                                    ?>
+                                    <?php if ($recentHasImage && $recentImageUrl): ?>
+                                        <img src="<?php echo $recentImageUrl; ?>" 
+                                             alt="<?php echo htmlspecialchars($item['item_name']); ?>" 
+                                             style="width: 100%; height: 100%; object-fit: cover;">
+                                    <?php else: ?>
+                                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #9ca3af; font-weight: 700; background: #f9fafb;">
+                                            <?php echo mb_substr($item['item_name'], 0, 1); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <!-- Content -->
+                                <div style="flex: 1; min-width: 0;">
+                                    <div class="d-flex justify-content-between align-items-start mb-1">
+                                        <h5 class="mb-0 text-truncate" style="font-size: 1rem; font-weight: 600; color: #111827; max-width: 100%;">
+                                            <?php echo htmlspecialchars($item['item_name']); ?>
+                                        </h5>
+                                        <?php if ($item['market_location']): ?>
+                                            <small style="color: #9ca3af; font-size: 0.75rem; white-space: nowrap; margin-left: 0.5rem;">
+                                                <i class="bi bi-geo-alt"></i> <?php echo htmlspecialchars($item['market_location']); ?>
+                                            </small>
+                                        <?php endif; ?>
+                                    </div>
+                                    
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <span class="badge" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 500; font-size: 0.7rem; padding: 0.25rem 0.5rem; border-radius: 6px;">
+                                            <?php echo htmlspecialchars($item['category_name']); ?>
+                                        </span>
+                                        <small style="color: #6b7280; font-size: 0.75rem;">
+                                            <i class="bi bi-clock"></i> <?php echo timeAgo($item['updated_at']); ?>
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- Price -->
+                                <div class="text-end ps-2" style="min-width: 80px;">
+                                    <div style="font-weight: 700; color: #f97316; font-size: 1.125rem;">
+                                        <?php echo formatPrice($item['current_price']); ?>
+                                    </div>
+                                    <small style="color: #9ca3af; font-size: 0.75rem;">/ <?php echo $item['unit']; ?></small>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- What is SastoMahango Section -->
+    <section class="section-colored scroll-reveal section-padding" aria-label="About SastoMahango" style="position: relative;">
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6">
@@ -423,7 +624,6 @@ include __DIR__ . '/../includes/header_professional.php';
                             <i class="bi bi-graph-up-arrow me-2"></i>
                             <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SastoMahango</span>
                         </h3>
-                        <p class="brand-tagline">मूल्यसूची - Nepal's Price Tracker</p>
                     </div>
                     <p class="footer-description">
                         Nepal's most trusted platform for real-time price information. Get verified prices for thousands of products updated daily from markets across Nepal.
@@ -512,7 +712,7 @@ include __DIR__ . '/../includes/header_professional.php';
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         <p class="mb-0">
                             &copy; <?php echo date('Y'); ?> SastoMahango. All rights reserved. 
-                            <span class="ms-2">Made with <i class="bi bi-heart-fill text-danger"></i> in Nepal</span>
+                            <span class="ms-2">Built by Team Urja on ISTN Hackathon</span>
                         </p>
                     </div>
                     <div class="col-md-6 text-center text-md-end">

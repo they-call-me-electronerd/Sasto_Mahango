@@ -129,6 +129,28 @@ $isAdminArea = strpos($currentPath, '/admin/') !== false;
                 <?php else: ?>
                     <li><a href="<?php echo SITE_URL; ?>/public/index.php" class="<?php echo $currentPage == 'index.php' ? 'active' : ''; ?>" style="text-decoration: none; color: #374151; font-weight: 500; transition: color 0.3s; <?php echo $currentPage == 'index.php' ? 'color: #f97316;' : ''; ?>">Home</a></li>
                     <li><a href="<?php echo SITE_URL; ?>/public/products.php" class="<?php echo $currentPage == 'products.php' ? 'active' : ''; ?>" style="text-decoration: none; color: #374151; font-weight: 500; transition: color 0.3s; <?php echo $currentPage == 'products.php' ? 'color: #f97316;' : ''; ?>">Products</a></li>
+                    
+                    <!-- Search Bar in Navbar -->
+                    <li style="margin: 0 0.5rem;">
+                        <form action="<?php echo SITE_URL; ?>/public/products.php" method="GET" style="margin: 0;">
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <input 
+                                    type="text" 
+                                    name="search" 
+                                    placeholder="Search products..." 
+                                    style="padding: 0.5rem 2.5rem 0.5rem 1rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.875rem; width: 200px; transition: all 0.3s;"
+                                    onmouseover="this.style.borderColor='#22c55e'; this.style.width='240px';"
+                                    onmouseout="this.style.borderColor='#d1d5db'; this.style.width='200px';"
+                                    onfocus="this.style.borderColor='#22c55e'; this.style.outline='none'; this.style.width='240px';"
+                                    onblur="this.style.width='200px';"
+                                >
+                                <button type="submit" style="position: absolute; right: 8px; background: none; border: none; color: #6b7280; cursor: pointer; padding: 0; display: flex; align-items: center; transition: color 0.3s;" onmouseover="this.style.color='#22c55e';" onmouseout="this.style.color='#6b7280';">
+                                    <i class="bi bi-search" style="font-size: 1rem;"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </li>
+                    
                     <li><a href="<?php echo SITE_URL; ?>/public/categories.php" class="<?php echo $currentPage == 'categories.php' ? 'active' : ''; ?>" style="text-decoration: none; color: #374151; font-weight: 500; transition: color 0.3s; <?php echo $currentPage == 'categories.php' ? 'color: #f97316;' : ''; ?>">Categories</a></li>
                     <li><a href="<?php echo SITE_URL; ?>/public/about.php" class="<?php echo $currentPage == 'about.php' ? 'active' : ''; ?>" style="text-decoration: none; color: #374151; font-weight: 500; transition: color 0.3s; <?php echo $currentPage == 'about.php' ? 'color: #f97316;' : ''; ?>">About</a></li>
                     <?php if (Auth::isLoggedIn() && Auth::hasRole(ROLE_CONTRIBUTOR)): ?>

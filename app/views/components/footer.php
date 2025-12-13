@@ -67,7 +67,7 @@
             <!-- Footer Bottom -->
             <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
                 <p style="color: #94a3b8; margin: 0;">&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. All rights reserved.</p>
-                <p style="color: #64748b; margin-top: 0.5rem; font-size: 0.875rem;">Built with ❤️ for Nepal</p>
+                <p style="color: #64748b; margin-top: 0.5rem; font-size: 0.875rem;">Built by Team Urja on ISTN Hackathon</p>
             </div>
         </div>
     </footer>
