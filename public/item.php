@@ -111,7 +111,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                         $imageSrc = htmlspecialchars($item['image_path']);
                                     }
                                     else{
-                                    $imageSrc = (SITE_URL . '/' . htmlspecialchars($item['image_path']));}
+                                    $imageSrc = (SITE_URL . '/contributor/assets/uploads/items/' . htmlspecialchars($item['image_path']));}
                                     ?>
                         <?php if ($imageSrc): ?>
                             <img src="<?php echo $imageSrc; ?>" 

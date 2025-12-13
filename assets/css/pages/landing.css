@@ -4,11 +4,11 @@
    =================================== */
 
 :root {
-    /* Brand Colors */
-    --primary-orange: #22c55e;
-    --primary-orange-dark: #16a34a;
-    --secondary-blue: #3b82f6;
-    --accent-green: #10b981;
+    /* Brand Colors - Green-Centric Theme */
+    --primary-green: #22c55e;
+    --primary-green-dark: #16a34a;
+    --secondary-green: #10b981;
+    --accent-green-light: #34d399;
 
     /* Neutrals */
     --white: #ffffff;
@@ -141,7 +141,7 @@ body {
 }
 
 .hero-title .highlight {
-    background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
+    background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -168,7 +168,7 @@ body {
 }
 
 .hero-search-box:focus-within {
-    border-color: var(--primary-orange);
+    border-color: var(--primary-green);
     box-shadow: 0 20px 40px -5px rgba(34, 197, 94, 0.25), 0 10px 15px -3px rgba(34, 197, 94, 0.1);
     transform: translateY(-2px);
     will-change: transform, box-shadow;
@@ -194,7 +194,7 @@ body {
 }
 
 .hero-search-btn {
-    background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
+    background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
     color: var(--white);
     border: none;
     padding: 1rem 2.5rem;
@@ -210,7 +210,7 @@ body {
 .hero-search-btn:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
-    background: linear-gradient(135deg, #4ade80, var(--primary-orange));
+    background: linear-gradient(135deg, #4ade80, var(--primary-green));
 }
 
 .hero-stats {
@@ -582,13 +582,13 @@ section {
 
 .category-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(249, 115, 22, 0.3) !important;
-    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
+    border-color: rgba(34, 197, 94, 0.3) !important;
+    box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
 }
 
 .category-card:hover .bi-arrow-right {
     transform: translateX(4px);
-    color: #f97316 !important;
+    color: #22c55e !important;
 }
 
 .category-card:hover > div:last-child {
@@ -599,37 +599,37 @@ section {
     transform: translateY(-4px);
 }
 
-/* Category Icon Gradient Presets */
-.gradient-orange {
-    background: linear-gradient(135deg, #f97316, #ea580c) !important;
+/* Category Icon Gradient Presets - Green Theme */
+.gradient-green-primary {
+    background: linear-gradient(135deg, #22c55e, #16a34a) !important;
 }
 
-.gradient-red {
-    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
-}
-
-.gradient-yellow {
-    background: linear-gradient(135deg, #eab308, #ca8a04) !important;
-}
-
-.gradient-blue {
-    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-}
-
-.gradient-pink {
-    background: linear-gradient(135deg, #ec4899, #db2777) !important;
-}
-
-.gradient-purple {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
-}
-
-.gradient-green {
+.gradient-green-emerald {
     background: linear-gradient(135deg, #10b981, #059669) !important;
 }
 
-.gradient-teal {
+.gradient-green-lime {
+    background: linear-gradient(135deg, #84cc16, #65a30d) !important;
+}
+
+.gradient-green-teal {
     background: linear-gradient(135deg, #14b8a6, #0d9488) !important;
+}
+
+.gradient-green-mint {
+    background: linear-gradient(135deg, #34d399, #10b981) !important;
+}
+
+.gradient-green-forest {
+    background: linear-gradient(135deg, #15803d, #166534) !important;
+}
+
+.gradient-green-sage {
+    background: linear-gradient(135deg, #4ade80, #22c55e) !important;
+}
+
+.gradient-green-olive {
+    background: linear-gradient(135deg, #a3e635, #84cc16) !important;
 }
 
 /* ===================================
@@ -704,3 +704,62 @@ section {
     }
 }
 
+/* ===================================
+   ROLE CARDS - Minimal Greenish Style
+   =================================== */
+
+.role-card-minimal {
+    position: relative;
+    cursor: pointer;
+}
+
+.role-card-minimal:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(16, 185, 129, 0.2) !important;
+}
+
+.role-card-featured {
+    transform: scale(1.02);
+}
+
+.role-card-featured:hover {
+    transform: scale(1.02) translateY(-8px) !important;
+    box-shadow: 0 16px 45px rgba(16, 185, 129, 0.25) !important;
+}
+
+.role-card-minimal .btn-minimal {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.role-card-minimal:hover .btn-minimal {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* Button hover states */
+.btn-minimal:hover {
+    transform: scale(1.03) !important;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Icon animation on card hover */
+.role-card-minimal:hover > div > div:first-child {
+    transform: scale(1.08);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .role-card-featured {
+        transform: scale(1);
+    }
+    
+    .role-card-featured:hover {
+        transform: scale(1.02) translateY(-8px) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .role-card-minimal {
+    }
+}
