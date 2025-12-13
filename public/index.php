@@ -23,7 +23,7 @@ require_once __DIR__ . '/../includes/functions.php';
 $pageTitle = 'Home';
 $metaDescription = "SastoMahango is Nepal's premier price tracking platform. Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.";
 $metaKeywords = "price tracking nepal, vegetable prices nepal, kalimati market price, daily rates, sastomahango, commodity prices";
-$additionalCSS = ['pages/landing.css', 'pages/home-categories.css', 'animations/enhanced-animations.css', 'animations/hero-enhancements.css', 'components/ad-carousel.css', 'components/ad-banner.css'];
+$additionalCSS = ['pages/landing.css', 'pages/landing-pro.css', 'pages/home-categories.css', 'animations/enhanced-animations.css', 'animations/hero-enhancements.css', 'components/ad-carousel.css', 'components/ad-banner.css'];
 $additionalJS = ['animations/counter-animation.js', 'animations/scroll-animations.js', 'components/ticker.js', 'components/ad-carousel.js', 'components/ad-banner.js', 'components/category-carousel.js', 'components/landing-ad-carousel.js'];
 
 // Get categories with item counts
@@ -32,7 +32,7 @@ $categories = $categoryObj->getCategoriesWithItemCounts();
 
 // Get recent items
 $itemObj = new Item();
-$recentItems = $itemObj->getActiveItems(8);
+$recentItems = $itemObj->getActiveItems(9);
 
 // Get stats
 $totalProducts = $itemObj->countItems();
@@ -491,71 +491,6 @@ include __DIR__ . '/../includes/header_professional.php';
     </section>
     <?php endif; ?>
 
-    <!-- What is SastoMahango Section -->
-    <section class="section-colored scroll-reveal section-padding" aria-label="About SastoMahango" style="position: relative;">
-        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <div style="display: inline-block; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1.5rem;">
-                        <span style="background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">ABOUT US</span>
-                    </div>
-                    <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1.5rem; line-height: 1.2;">What is <span style="background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SastoMahango</span>?</h2>
-                    <p style="font-size: 1.125rem; color: #6b7280; line-height: 1.8; margin-bottom: 2rem;">SastoMahango (सस्तोमहँगो) is Nepal's first comprehensive price tracking platform that brings transparency to the marketplace. We collect, verify, and publish real-time prices of everyday products from markets across Nepal.</p>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
-                        <div style="display: flex; gap: 1rem;">
-                            <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);"><i class="bi bi-check2-circle" style="font-size: 1.5rem; color: white;"></i></div>
-                            <div><h4 style="font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.25rem;">Verified Data</h4><p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Prices verified by our contributors</p></div>
-                        </div>
-                        <div style="display: flex; gap: 1rem;">
-                            <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);"><i class="bi bi-clock-history" style="font-size: 1.5rem; color: white;"></i></div>
-                            <div><h4 style="font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.25rem;">Daily Updates</h4><p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Fresh prices every single day</p></div>
-                        </div>
-                        <div style="display: flex; gap: 1rem;">
-                            <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);"><i class="bi bi-geo-alt" style="font-size: 1.5rem; color: white;"></i></div>
-                            <div><h4 style="font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.25rem;">Nationwide</h4><p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Coverage across Nepal</p></div>
-                        </div>
-                        <div style="display: flex; gap: 1rem;">
-                            <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);"><i class="bi bi-shield-check" style="font-size: 1.5rem; color: white;"></i></div>
-                            <div><h4 style="font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.25rem;">100% Free</h4><p style="font-size: 0.875rem; color: #6b7280; margin: 0;">Always free for everyone</p></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div style="background: white; border-radius: 24px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
-                        <div style="text-align: center; margin-bottom: 2rem;"><h3 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;">Our Impact</h3><p style="color: #6b7280; font-size: 0.875rem;">Real-time statistics</p></div>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
-                            <div style="text-align: center;"><div style="width: 100px; height: 100px; margin: 0 auto 1rem; position: relative;"><svg viewBox="0 0 100 100" style="transform: rotate(-90deg);"><circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="8"/><circle cx="50" cy="50" r="40" fill="none" stroke="#22c55e" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round"/></svg><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.25rem; font-weight: 800; color: #22c55e;">75%</div></div><p style="font-weight: 600; color: #111827; margin-bottom: 0.25rem;">1,245+</p><p style="font-size: 0.75rem; color: #6b7280; margin: 0;">Products</p></div>
-                            <div style="text-align: center;"><div style="width: 100px; height: 100px; margin: 0 auto 1rem; position: relative;"><svg viewBox="0 0 100 100" style="transform: rotate(-90deg);"><circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="8"/><circle cx="50" cy="50" r="40" fill="none" stroke="#10b981" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="100.48" stroke-linecap="round"/></svg><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.25rem; font-weight: 800; color: #10b981;">60%</div></div><p style="font-weight: 600; color: #111827; margin-bottom: 0.25rem;">50+</p><p style="font-size: 0.75rem; color: #6b7280; margin: 0;">Markets</p></div>
-                            <div style="text-align: center;"><div style="width: 100px; height: 100px; margin: 0 auto 1rem; position: relative;"><svg viewBox="0 0 100 100" style="transform: rotate(-90deg);"><circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="8"/><circle cx="50" cy="50" r="40" fill="none" stroke="#14b8a6" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="37.68" stroke-linecap="round"/></svg><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.25rem; font-weight: 800; color: #14b8a6;">85%</div></div><p style="font-weight: 600; color: #111827; margin-bottom: 0.25rem;">10K+</p><p style="font-size: 0.75rem; color: #6b7280; margin: 0;">Users</p></div>
-                        </div>
-                        <div style="background: #f9fafb; border-radius: 16px; padding: 1.5rem;"><p style="font-size: 0.875rem; font-weight: 600; color: #111827; margin-bottom: 1rem;">Daily Price Updates</p><div style="display: flex; align-items-end; gap: 0.75rem; height: 100px;"><div style="flex: 1; background: linear-gradient(180deg, #22c55e, #16a34a); border-radius: 8px 8px 0 0; height: 60%; animation: growUp 1.5s ease;"></div><div style="flex: 1; background: linear-gradient(180deg, #10b981, #059669); border-radius: 8px 8px 0 0; height: 80%; animation: growUp 1.7s ease;"></div><div style="flex: 1; background: linear-gradient(180deg, #14b8a6, #0d9488); border-radius: 8px 8px 0 0; height: 100%; animation: growUp 1.9s ease;"></div><div style="flex: 1; background: linear-gradient(180deg, #34d399, #10b981); border-radius: 8px 8px 0 0; height: 70%; animation: growUp 2.1s ease;"></div><div style="flex: 1; background: linear-gradient(180deg, #4ade80, #22c55e); border-radius: 8px 8px 0 0; height: 90%; animation: growUp 2.3s ease;"></div></div><div style="display: flex; justify-content: space-between; margin-top: 0.5rem;"><span style="font-size: 0.75rem; color: #9ca3af;">Mon</span><span style="font-size: 0.75rem; color: #9ca3af;">Tue</span><span style="font-size: 0.75rem; color: #9ca3af;">Wed</span><span style="font-size: 0.75rem; color: #9ca3af;">Thu</span><span style="font-size: 0.75rem; color: #9ca3af;">Fri</span></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="scroll-reveal section-padding" aria-label="Why Choose Us" style="background: #f9fafb; position: relative;">
-        
-        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;"><span style="background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">WHY US</span></div>
-                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Why Choose SastoMahango?</h2>
-                <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">We're committed to bringing price transparency and helping you make informed purchasing decisions</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3"><div style="background: linear-gradient(135deg, #f0fdf4, #ffffff); border-radius: 20px; padding: 2rem; height: 100%; border: 2px solid transparent; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#22c55e'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(34, 197, 94, 0.2)';" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='none';"><div style="width: 64px; height: 64px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);"><i class="bi bi-lightning-charge-fill" style="font-size: 2rem; color: white;"></i></div><h3 style="font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 1rem;">Real-Time Updates</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Get the latest prices updated daily from verified sources across Nepal's markets</p></div></div>
-                <div class="col-md-6 col-lg-3"><div style="background: linear-gradient(135deg, #f0fdfa, #ffffff); border-radius: 20px; padding: 2rem; height: 100%; border: 2px solid transparent; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#14b8a6'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(20, 184, 166, 0.2)';" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='none';"><div style="width: 64px; height: 64px; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);"><i class="bi bi-shield-check" style="font-size: 2rem; color: white;"></i></div><h3 style="font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 1rem;">Verified Data</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">All prices are verified by our network of trusted contributors and market researchers</p></div></div>
-                <div class="col-md-6 col-lg-3"><div style="background: linear-gradient(135deg, #f0fdf4, #ffffff); border-radius: 20px; padding: 2rem; height: 100%; border: 2px solid transparent; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(16, 185, 129, 0.2)';" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='none';"><div style="width: 64px; height: 64px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);"><i class="bi bi-graph-up-arrow" style="font-size: 2rem; color: white;"></i></div><h3 style="font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 1rem;">Price Trends</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Track price changes over time and make smart purchasing decisions based on trends</p></div></div>
-                <div class="col-md-6 col-lg-3"><div style="background: linear-gradient(135deg, #f7fee7, #ffffff); border-radius: 20px; padding: 2rem; height: 100%; border: 2px solid transparent; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#84cc16'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(132, 204, 22, 0.2)';" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='none';"><div style="width: 64px; height: 64px; background: linear-gradient(135deg, #84cc16, #65a30d); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; box-shadow: 0 8px 20px rgba(132, 204, 22, 0.3);"><i class="bi bi-people-fill" style="font-size: 2rem; color: white;"></i></div><h3 style="font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 1rem;">Community Driven</h3><p style="color: #6b7280; line-height: 1.7; margin: 0;">Built by the community, for the community. Anyone can contribute and help</p></div></div>
-            </div>
-        </div>
-        
-        <!-- Bottom Wave Divider -->
-    </section>
-    </section>
-
     <!-- Our Network Section -->
     <section class="scroll-reveal section-padding" aria-label="Our Network" style="background: white; position: relative;">
 
@@ -703,6 +638,125 @@ include __DIR__ . '/../includes/header_professional.php';
             </div>
         </div>
     </section>
+
+    <!-- Services Section -->
+    <section class="scroll-reveal services-section" aria-label="Services" style="padding: 3.5rem 0; position: relative;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <h2 class="services-title" style="font-size: 1.875rem; font-weight: 700; margin-bottom: 0;">Services</h2>
+            </div>
+            <div class="row g-3" style="max-width: 1000px; margin: 0 auto;">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="service-card" style="border-radius: 12px; padding: 1.5rem; text-align: center; height: 100%; transition: all 0.3s ease;">
+                        <div class="service-icon-wrapper" style="width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                            <i class="bi bi-lightning-charge-fill" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <h3 class="service-card-title" style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Real-Time Updates</h3>
+                        <p class="service-card-text" style="line-height: 1.5; margin: 0; font-size: 0.875rem;">Latest prices updated daily from verified sources across Nepal's markets</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="service-card" style="border-radius: 12px; padding: 1.5rem; text-align: center; height: 100%; transition: all 0.3s ease;">
+                        <div class="service-icon-wrapper" style="width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                            <i class="bi bi-shield-check" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <h3 class="service-card-title" style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Verified Data</h3>
+                        <p class="service-card-text" style="line-height: 1.5; margin: 0; font-size: 0.875rem;">All prices verified by our network of trusted contributors and market researchers</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="service-card" style="border-radius: 12px; padding: 1.5rem; text-align: center; height: 100%; transition: all 0.3s ease;">
+                        <div class="service-icon-wrapper" style="width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                            <i class="bi bi-graph-up-arrow" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <h3 class="service-card-title" style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Price Trends</h3>
+                        <p class="service-card-text" style="line-height: 1.5; margin: 0; font-size: 0.875rem;">Track price changes over time and make smart purchasing decisions based on trends</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="service-card" style="border-radius: 12px; padding: 1.5rem; text-align: center; height: 100%; transition: all 0.3s ease;">
+                        <div class="service-icon-wrapper" style="width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                            <i class="bi bi-people-fill" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <h3 class="service-card-title" style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Community Driven</h3>
+                        <p class="service-card-text" style="line-height: 1.5; margin: 0; font-size: 0.875rem;">Built by the community, for the community. Anyone can contribute and help</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Light Mode Styles */
+        .services-section {
+            background: #ffffff;
+        }
+        
+        .services-title {
+            color: #111827;
+        }
+        
+        .service-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .service-card:hover {
+            border-color: #10b981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+        }
+        
+        .service-icon-wrapper {
+            background: #ecfdf5;
+        }
+        
+        .service-icon-wrapper i {
+            color: #10b981;
+        }
+        
+        .service-card-title {
+            color: #111827;
+        }
+        
+        .service-card-text {
+            color: #6b7280;
+        }
+        
+        /* Dark Mode Styles */
+        [data-theme="dark"] .services-section {
+            background: #1f2937;
+        }
+        
+        [data-theme="dark"] .services-title {
+            color: #f9fafb;
+        }
+        
+        [data-theme="dark"] .service-card {
+            background: #374151;
+            border: 1px solid #4b5563;
+        }
+        
+        [data-theme="dark"] .service-card:hover {
+            border-color: #10b981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        }
+        
+        [data-theme="dark"] .service-icon-wrapper {
+            background: rgba(16, 185, 129, 0.15);
+        }
+        
+        [data-theme="dark"] .service-icon-wrapper i {
+            color: #34d399;
+        }
+        
+        [data-theme="dark"] .service-card-title {
+            color: #f9fafb;
+        }
+        
+        [data-theme="dark"] .service-card-text {
+            color: #d1d5db;
+        }
+    </style>
 
     <!-- Professional Footer -->
     <footer class="professional-footer">

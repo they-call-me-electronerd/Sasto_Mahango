@@ -1,0 +1,390 @@
+/* ===================================
+   LANDING PAGE PRO ENHANCEMENTS
+   Modern, Professional Design System
+   =================================== */
+
+/* Smooth Page Entry Animation */
+@keyframes pageEntry {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation: pageEntry 0.5s ease;
+}
+
+/* ===================================
+   ENHANCED CATEGORY SECTION
+   =================================== */
+
+.categories-section {
+    background: linear-gradient(180deg, #f8fafc 0%, #e0e7ff 50%, #f8fafc 100%) !important;
+}
+
+.categories-badge {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(124, 58, 237, 0.1)) !important;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.categories-badge span {
+    background: linear-gradient(135deg, #6366f1, #7c3aed) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* Modern Category Cards */
+.modern-category-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9)) !important;
+    border: 2px solid rgba(99, 102, 241, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #f97316);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modern-category-card:hover::before {
+    opacity: 1;
+}
+
+.modern-category-card:hover {
+    border-color: rgba(99, 102, 241, 0.3) !important;
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15), 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Update category icon backgrounds */
+.modern-category-card > div:first-of-type > div:first-of-type {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Category badge styling */
+.card-badge {
+    background: rgba(99, 102, 241, 0.1) !important;
+    border: 1px solid rgba(99, 102, 241, 0.2) !important;
+}
+
+.card-badge span {
+    color: #6366f1 !important;
+}
+
+.card-badge + div {
+    background: rgba(99, 102, 241, 0.1) !important;
+}
+
+.card-badge + div i {
+    color: #6366f1 !important;
+}
+
+/* Explore All Button */
+.explore-all-btn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3) !important;
+}
+
+.explore-all-btn:hover {
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4) !important;
+}
+
+/* ===================================
+   RECENT UPDATES SECTION
+   =================================== */
+
+.scroll-reveal[aria-label="Recent Price Updates"] {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+}
+
+.scroll-reveal[aria-label="Recent Price Updates"] > div > div:first-child > div:first-child {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)) !important;
+}
+
+.scroll-reveal[aria-label="Recent Price Updates"] > div > div:first-child > div:first-child span {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* Price badge in cards */
+.badge {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.08)) !important;
+    color: #10b981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* ===================================
+   ABOUT SECTION (What is SastoMahango)
+   =================================== */
+
+.section-colored {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fef3c7 100%) !important;
+}
+
+.section-colored h2 span {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* Feature boxes in about section */
+.section-colored .row > div > div > div:first-child {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3) !important;
+}
+
+.section-colored .row > div > div:nth-child(2) > div:first-child {
+    background: linear-gradient(135deg, #06b6d4, #0891b2) !important;
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3) !important;
+}
+
+.section-colored .row > div > div:nth-child(3) > div:first-child {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3) !important;
+}
+
+.section-colored .row > div > div:nth-child(4) > div:first-child {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Impact stats card */
+.section-colored .col-lg-6:last-child > div {
+    background: linear-gradient(135deg, #ffffff, #fef3c7) !important;
+    border: 2px solid rgba(245, 158, 11, 0.2);
+}
+
+/* ===================================
+   WHY CHOOSE US SECTION
+   =================================== */
+
+.scroll-reveal[aria-label="Why Choose Us"] {
+    background: linear-gradient(180deg, #f1f5f9 0%, #e0e7ff 50%, #f1f5f9 100%) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(1) > div {
+    background: linear-gradient(135deg, #dbeafe, #ffffff) !important;
+    border-color: transparent !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(1) > div:hover {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 20px 50px rgba(59, 130, 246, 0.2) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(1) > div > div:first-child {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(2) > div {
+    background: linear-gradient(135deg, #ddd6fe, #ffffff) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(2) > div:hover {
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 20px 50px rgba(139, 92, 246, 0.2) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(2) > div > div:first-child {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(3) > div {
+    background: linear-gradient(135deg, #d1fae5, #ffffff) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(3) > div:hover {
+    border-color: #10b981 !important;
+    box-shadow: 0 20px 50px rgba(16, 185, 129, 0.2) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(3) > div > div:first-child {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(4) > div {
+    background: linear-gradient(135deg, #fed7aa, #ffffff) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(4) > div:hover {
+    border-color: #f97316 !important;
+    box-shadow: 0 20px 50px rgba(249, 115, 22, 0.2) !important;
+}
+
+.scroll-reveal[aria-label="Why Choose Us"] .row > div:nth-child(4) > div > div:first-child {
+    background: linear-gradient(135deg, #f97316, #ea580c) !important;
+}
+
+/* ===================================
+   ROLE CARDS SECTION
+   =================================== */
+
+section[aria-label="Get Involved"] {
+    background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fef3c7 100%) !important;
+}
+
+/* For Consumers Card */
+section[aria-label="Get Involved"] .row > div:nth-child(1) > div {
+    background: linear-gradient(135deg, #dbeafe, #ffffff) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(1) > div:hover {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 25px 60px rgba(59, 130, 246, 0.25) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(1) > div > div:first-child {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(1) a {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+}
+
+/* For Contributors Card */
+section[aria-label="Get Involved"] .row > div:nth-child(2) > div {
+    background: linear-gradient(135deg, #d1fae5, #ffffff) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(2) > div:hover {
+    border-color: #10b981 !important;
+    box-shadow: 0 25px 60px rgba(16, 185, 129, 0.25) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(2) > div > div:first-child {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(2) a {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(2) .bi-check-circle-fill {
+    color: #10b981 !important;
+}
+
+/* For Businesses Card */
+section[aria-label="Get Involved"] .row > div:nth-child(3) > div {
+    background: linear-gradient(135deg, #ccfbf1, #ffffff) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(3) > div:hover {
+    border-color: #14b8a6 !important;
+    box-shadow: 0 25px 60px rgba(20, 184, 166, 0.25) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(3) > div > div:first-child {
+    background: linear-gradient(135deg, #14b8a6, #0d9488) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(3) a {
+    background: linear-gradient(135deg, #14b8a6, #0d9488) !important;
+}
+
+section[aria-label="Get Involved"] .row > div:nth-child(3) .bi-check-circle-fill {
+    color: #14b8a6 !important;
+}
+
+/* ===================================
+   MARQUEE RIBBON
+   =================================== */
+
+.marquee-ribbon {
+    background: linear-gradient(90deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%) !important;
+    border-top: 2px solid #e2e8f0 !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.trending-label {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===================================
+   LANDING AD SECTION
+   =================================== */
+
+.landing-ad-section {
+    background: linear-gradient(180deg, #f8fafc 0%, #e0e7ff 100%) !important;
+}
+
+/* ===================================
+   FLOATING PARTICLES EFFECT
+   =================================== */
+
+@keyframes float-particle {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-20px) translateX(10px);
+        opacity: 0.6;
+    }
+}
+
+.hero-section::before {
+    animation: float-particle 8s ease-in-out infinite;
+}
+
+/* ===================================
+   ENHANCED SCROLLBAR
+   =================================== */
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #8b5cf6);
+    border-radius: 6px;
+    border: 2px solid #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #4f46e5, #7c3aed);
+}
+
+/* ===================================
+   RESPONSIVE ENHANCEMENTS
+   =================================== */
+
+@media (max-width: 768px) {
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .categories-section {
+        padding: 4rem 0 !important;
+    }
+}
+
+/* ===================================
+   SMOOTH TRANSITIONS
+   =================================== */
+
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a, button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
