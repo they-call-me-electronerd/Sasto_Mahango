@@ -154,14 +154,19 @@ $pageTitle = 'Admin Login - SastoMahango';
                 <label for="password">
                     <i class="bi bi-lock-fill"></i> Password
                 </label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    class="auth-input"
-                    placeholder="Enter your password"
-                    required
-                    autocomplete="current-password">
+                <div style="position: relative;">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="auth-input"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #6b7280; cursor: pointer; font-size: 1.2rem; padding: 4px;">
+                        <i class="bi bi-eye" id="password-icon"></i>
+                    </button>
+                </div>
             </div>
 
             <button type="submit" class="btn-auth">
@@ -203,8 +208,52 @@ $pageTitle = 'Admin Login - SastoMahango';
 <!-- Theme Manager Script -->
 <script src="<?php echo SITE_URL; ?>/assets/js/core/theme-manager.js"></script>
 
-<!-- Auto-dismiss alerts -->
+<!-- Enhanced Interactions -->
 <script>
+function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(inputId + '-icon');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+    }
+}
+
+// Add floating particles
+function createParticles() {
+    const authPage = document.querySelector('.auth-page');
+    if (!authPage) return;
+    
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        authPage.appendChild(particle);
+    }
+}
+
+createParticles();
+
+// Input focus animations
+document.querySelectorAll('.auth-input').forEach(input => {
+    input.addEventListener('focus', function() {
+        this.parentElement.classList.add('focused');
+    });
+    
+    input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('focused');
+    });
+});
+
+// Auto-dismiss alerts
 document.addEventListener('DOMContentLoaded', function() {
     const alerts = document.querySelectorAll('.alert');
     alerts.forEach(alert => {

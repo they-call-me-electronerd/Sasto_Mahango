@@ -35,6 +35,11 @@ body {
     min-height: 100vh;
 }
 
+/* Support for Nepali and other Devanagari scripts */
+body, h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select {
+    font-family: 'Noto Sans Devanagari', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
 /* ============================================================================
    TYPOGRAPHY
    ============================================================================ */

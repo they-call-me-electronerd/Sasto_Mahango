@@ -94,8 +94,13 @@ include __DIR__ . '/../includes/header_professional.php';
             
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="auth-input" required
-                       placeholder="Enter your password">
+                <div style="position: relative;">
+                    <input type="password" id="password" name="password" class="auth-input" required
+                           placeholder="Enter your password">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #6b7280; cursor: pointer; font-size: 1.2rem; padding: 4px;">
+                        <i class="bi bi-eye" id="password-icon"></i>
+                    </button>
+                </div>
             </div>
             
             <button type="submit" class="btn-auth">
@@ -120,5 +125,50 @@ include __DIR__ . '/../includes/header_professional.php';
         </div>
     </div>
 </main>
+
+<script>
+function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(inputId + '-icon');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+    }
+}
+
+// Add floating particles
+function createParticles() {
+    const authPage = document.querySelector('.auth-page');
+    if (!authPage) return;
+    
+    for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        authPage.appendChild(particle);
+    }
+}
+
+createParticles();
+
+// Input focus animations
+document.querySelectorAll('.auth-input').forEach(input => {
+    input.addEventListener('focus', function() {
+        this.parentElement.classList.add('focused');
+    });
+    
+    input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('focused');
+    });
+});
+</script>
 
 <?php include __DIR__ . '/../includes/footer_professional.php'; ?>

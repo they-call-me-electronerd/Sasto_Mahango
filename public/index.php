@@ -3,6 +3,11 @@
  * Landing Page - SastoMahango
  */
 
+// Set UTF-8 encoding for proper Nepali text display
+mb_internal_encoding('UTF-8');
+mb_http_output('UTF-8');
+header('Content-Type: text/html; charset=utf-8');
+
 // Bootstrap application
 define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
@@ -299,72 +304,89 @@ include __DIR__ . '/../includes/header_professional.php';
     </style>
 
     <!-- Categories Section -->
-    <section class="scroll-reveal section-padding" aria-label="Product Categories" style="background: white; position: relative;">
+    <section class="scroll-reveal section-padding" aria-label="Product Categories" style="background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%); position: relative; padding: 6rem 0;">
+        <!-- Decorative Elements -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 200px; background: linear-gradient(180deg, rgba(34, 197, 94, 0.03) 0%, transparent 100%); pointer-events: none;"></div>
+        
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
-                <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;">
-                    <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">EXPLORE</span>
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem; backdrop-filter: blur(10px);">
+                    <span style="background: linear-gradient(135deg, #22c55e, #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem; letter-spacing: 0.05em;">EXPLORE CATEGORIES</span>
                 </div>
-                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Browse by Category</h2>
-                <p style="font-size: 1.125rem; color: #6b7280; max-width: 700px; margin: 0 auto;">Find verified prices for thousands of products across different categories - from fresh produce to electronics</p>
+                <h2 style="font-size: 2.75rem; font-weight: 800; color: #111827; margin-bottom: 1rem; font-family: 'Manrope', sans-serif;">Browse by Category</h2>
+                <p style="font-size: 1.125rem; color: #6b7280; max-width: 700px; margin: 0 auto; line-height: 1.7;">Find verified prices for thousands of products across different categories</p>
             </div>
 
             <div class="row g-4">
                 <?php 
                 $categoryColors = [
-                    'vegetables' => ['from' => '#10b981', 'to' => '#059669', 'bg' => '#f0fdf4'],
-                    'fruits' => ['from' => '#ef4444', 'to' => '#dc2626', 'bg' => '#fef2f2'],
-                    'kitchen-appliances' => ['from' => '#f59e0b', 'to' => '#d97706', 'bg' => '#fffbeb'],
-                    'study-material' => ['from' => '#3b82f6', 'to' => '#2563eb', 'bg' => '#eff6ff'],
-                    'clothing' => ['from' => '#ec4899', 'to' => '#db2777', 'bg' => '#fdf2f8'],
-                    'tools' => ['from' => '#6366f1', 'to' => '#4f46e5', 'bg' => '#eef2ff'],
-                    'electrical-appliances' => ['from' => '#8b5cf6', 'to' => '#7c3aed', 'bg' => '#faf5ff'],
-                    'tech-gadgets' => ['from' => '#06b6d4', 'to' => '#0891b2', 'bg' => '#ecfeff'],
-                    'miscellaneous' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
-                    'groceries' => ['from' => '#eab308', 'to' => '#ca8a04', 'bg' => '#fefce8'],
-                    'furniture' => ['from' => '#dc2626', 'to' => '#b91c1c', 'bg' => '#fef2f2'],
-                    'sports-fitness' => ['from' => '#14b8a6', 'to' => '#0d9488', 'bg' => '#f0fdfa'],
-                    'household-items' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
-                    'tools-hardware' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'],
-                    'dairy-products' => ['from' => '#60a5fa', 'to' => '#3b82f6', 'bg' => '#eff6ff'],
-                    'meat-fish' => ['from' => '#f87171', 'to' => '#ef4444', 'bg' => '#fef2f2'],
-                    'spices' => ['from' => '#fb923c', 'to' => '#f97316', 'bg' => '#fff7ed']
+                    'vegetables' => ['from' => '#10b981', 'to' => '#059669', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => '#dcfce7'],
+                    'fruits' => ['from' => '#ef4444', 'to' => '#dc2626', 'bg' => 'rgba(254, 226, 226, 0.5)', 'light' => '#fee2e2'],
+                    'groceries' => ['from' => '#eab308', 'to' => '#ca8a04', 'bg' => 'rgba(254, 249, 195, 0.5)', 'light' => '#fef9c3'],
+                    'dairy-products' => ['from' => '#60a5fa', 'to' => '#3b82f6', 'bg' => 'rgba(219, 234, 254, 0.5)', 'light' => '#dbeafe'],
+                    'meat-fish' => ['from' => '#f87171', 'to' => '#ef4444', 'bg' => 'rgba(254, 226, 226, 0.5)', 'light' => '#fee2e2'],
+                    'spices' => ['from' => '#fb923c', 'to' => '#f97316', 'bg' => 'rgba(255, 237, 213, 0.5)', 'light' => '#ffedd5'],
+                    'kitchen-appliances' => ['from' => '#f59e0b', 'to' => '#d97706', 'bg' => 'rgba(254, 243, 199, 0.5)', 'light' => '#fef3c7'],
+                    'household-items' => ['from' => '#fb923c', 'to' => '#f97316', 'bg' => 'rgba(255, 237, 213, 0.5)', 'light' => '#ffedd5'],
+                    'electrical-appliances' => ['from' => '#8b5cf6', 'to' => '#7c3aed', 'bg' => 'rgba(237, 233, 254, 0.5)', 'light' => '#ede9fe'],
+                    'clothing' => ['from' => '#ec4899', 'to' => '#db2777', 'bg' => 'rgba(252, 231, 243, 0.5)', 'light' => '#fce7f3'],
+                    'study-material' => ['from' => '#3b82f6', 'to' => '#2563eb', 'bg' => 'rgba(219, 234, 254, 0.5)', 'light' => '#dbeafe'],
+                    'tools-hardware' => ['from' => '#f97316', 'to' => '#ea580c', 'bg' => 'rgba(255, 237, 213, 0.5)', 'light' => '#ffedd5']
                 ];
                 $icons = [
-                    'vegetables'=>'🥦',
-                    'fruits'=>'🍎',
-                    'kitchen-appliances'=>'🍳',
-                    'study-material'=>'📚',
-                    'clothing'=>'👕',
-                    'tools'=>'🔧',
-                    'electrical-appliances'=>'💡',
-                    'tech-gadgets'=>'📱',
-                    'miscellaneous'=>'📦', 
-                    'groceries'=>'🛒', 
-                    'furniture'=>'🛋️', 
-                    'sports-fitness'=>'⚽', 
-                    'household-items'=>'📦', 
-                    'tools-hardware'=>'🔧',
-                    'dairy-products'=>'🥛',
-                    'meat-fish'=>'🐟',
-                    'spices'=>'🌶️'
+                    'vegetables'=>'🥦', 'fruits'=>'🍎', 'groceries'=>'🛒', 'dairy-products'=>'🥛',
+                    'meat-fish'=>'🐟', 'spices'=>'🌶️', 'kitchen-appliances'=>'🔍',
+                    'household-items'=>'📦', 'electrical-appliances'=>'💡', 'clothing'=>'👕',
+                    'study-material'=>'📚', 'tools-hardware'=>'🔧'
                 ];
                 foreach ($categories as $category): 
                     $slug = $category['slug'];
-                    $colors = $categoryColors[$slug] ?? ['from' => '#f97316', 'to' => '#ea580c', 'bg' => '#fff7ed'];
-                    $categoryItems = $categoryObj->getItemsByCategory($category['category_id'], 5);
+                    $colors = $categoryColors[$slug] ?? ['from' => '#22c55e', 'to' => '#16a34a', 'bg' => 'rgba(220, 252, 231, 0.5)', 'light' => '#dcfce7'];
                 ?>
                 <div class="col-6 col-md-4 col-lg-2 category-card-animate">
                     <a href="products.php?category=<?php echo $category['category_id']; ?>" style="text-decoration: none; display: block; height: 100%;">
-                        <div class="category-card-inner" style="background: <?php echo $colors['bg']; ?>; border-radius: 20px; padding: 2rem 1.5rem; text-align: left; position: relative; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; cursor: pointer; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between;">
-                            <div style="position: absolute; top: -50%; right: -50%; width: 150%; height: 150%; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.05; border-radius: 50%;"></div>
+                        <div class="modern-category-card" style="
+                            background: <?php echo $colors['light']; ?>;
+                            backdrop-filter: blur(20px);
+                            border-radius: 24px;
+                            padding: 2rem 1.5rem;
+                            text-align: left;
+                            position: relative;
+                            overflow: hidden;
+                            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                            cursor: pointer;
+                            height: 320px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            border: 1px solid rgba(255, 255, 255, 0.8);
+                        " 
+                        onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';"
+                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';">
+                            
+                            <!-- Gradient Orb -->
+                            <div style="position: absolute; top: -20%; right: -20%; width: 120px; height: 120px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); opacity: 0.1; border-radius: 50%; filter: blur(30px);"></div>
+                            
                             <div>
-                                <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);"><span style="font-size: 2.5rem;"><?php echo $icons[$slug] ?? '📦'; ?></span></div>
-                                <h3 style="position: relative; z-index: 2; font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                                <p style="position: relative; z-index: 2; font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem; font-weight: 500; height: 2.5rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.25rem;"><?php echo htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                                <!-- Icon -->
+                                <div style="position: relative; z-index: 2; width: 80px; height: 80px; margin: 0 0 1.5rem 0; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;">
+                                    <span style="font-size: 2.25rem; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));"><?php echo $icons[$slug] ?? '📦'; ?></span>
+                                </div>
+                                
+                                <!-- Title -->
+                                <h3 style="position: relative; z-index: 2; font-size: 1.075rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem; line-height: 1.3; height: 2.6rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?php echo htmlspecialchars($category['category_name'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                
+                                <!-- Description -->
+                                <p style="position: relative; z-index: 2; font-size: 0.8rem; color: #6b7280; margin-bottom: 1rem; line-height: 1.5; height: 2.4rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?php echo htmlspecialchars($category['description'], ENT_QUOTES, 'UTF-8'); ?></p>
                             </div>
+                            
+                            <!-- Footer -->
                             <div style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;">
-                                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"><div style="width: 8px; height: 8px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div><span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count'] > 0 ? $category['item_count'] . ' items' : 'Coming Soon'; ?></span></div>
+                                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 1rem; border-radius: 100px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+                                    <div style="width: 6px; height: 6px; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); border-radius: 50%;"></div>
+                                    <span style="font-weight: 700; font-size: 0.875rem; background: linear-gradient(135deg, <?php echo $colors['from']; ?>, <?php echo $colors['to']; ?>); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><?php echo $category['item_count'] > 0 ? $category['item_count'] . ' items' : 'Soon'; ?></span>
+                                </div>
                                 <i class="bi bi-arrow-right" style="font-size: 1.25rem; color: <?php echo $colors['from']; ?>; transition: transform 0.3s;"></i>
                             </div>
                         </div>
@@ -373,8 +395,8 @@ include __DIR__ . '/../includes/header_professional.php';
                 <?php endforeach; ?>
             </div>
             
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="products.php" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 1rem 2.5rem; border-radius: 3rem; font-weight: 700; font-size: 1.125rem; text-decoration: none; box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 15px 35px rgba(34, 197, 94, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(34, 197, 94, 0.3)';"><span>Explore All Categories</span><i class="bi bi-arrow-right" style="font-size: 1.25rem;"></i></a>
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="products.php" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 1.1rem 2.5rem; border-radius: 100px; font-weight: 700; font-size: 1.125rem; text-decoration: none; box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3); transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.2);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 15px 35px rgba(34, 197, 94, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(34, 197, 94, 0.3)';"><span>Explore All Categories</span><i class="bi bi-arrow-right" style="font-size: 1.25rem;"></i></a>
             </div>
         </div>
     </section>

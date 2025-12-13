@@ -28,6 +28,10 @@ try {
     $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
     
+    // Ensure UTF-8 encoding for Nepali text
+    $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+    $pdo->exec("SET CHARACTER SET utf8mb4");
+    
     // Set timezone for database connection
     $pdo->exec("SET time_zone = '+05:45'"); // Nepal timezone
 } catch (PDOException $e) {

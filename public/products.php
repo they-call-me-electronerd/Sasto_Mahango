@@ -4,6 +4,11 @@
  * Search products by category, rate, quantity, and item name
  */
 
+// Set UTF-8 encoding for proper Nepali text display
+mb_internal_encoding('UTF-8');
+mb_http_output('UTF-8');
+header('Content-Type: text/html; charset=utf-8');
+
 define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
