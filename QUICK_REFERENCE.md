@@ -1,4 +1,4 @@
-# 🚀 MulyaSuchi - Quick Reference Guide
+# 🚀 SastoMahango - Quick Reference Guide
 
 ## Production Deployment - Quick Start
 
@@ -15,8 +15,8 @@
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/your-username/MulyaSuchi.git
-cd MulyaSuchi
+git clone https://github.com/your-username/SastoMahango.git
+cd SastoMahango
 ```
 
 ### 2. Configure Environment
@@ -30,7 +30,7 @@ nano .env  # Edit with your values
 APP_ENV=production
 APP_DEBUG=false
 DB_HOST=localhost
-DB_NAME=mulyasuchi_db
+DB_NAME=sastomahango_db
 DB_USER=your_db_user
 DB_PASS=your_secure_password
 SITE_URL=https://your-domain.com
@@ -42,17 +42,17 @@ mysql -u root -p
 ```
 
 ```sql
-CREATE DATABASE mulyasuchi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'mulyasuchi_user'@'localhost' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON mulyasuchi_db.* TO 'mulyasuchi_user'@'localhost';
+CREATE DATABASE sastomahango_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'sastomahango_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON sastomahango_db.* TO 'sastomahango_user'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
 
 ```bash
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/schema.sql
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/database_optimizations.sql
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/seed_data.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/schema.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/database_optimizations.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/seed_data.sql
 ```
 
 ### 4. Set Permissions
@@ -75,11 +75,11 @@ http://your-domain.com/public/
 ## 🔑 Default Login Credentials
 
 **Admin:**
-- Email: `admin@mulyasuchi.com`
+- Email: `admin@sastomahango.com`
 - Password: `admin123`
 
 **Contributor:**
-- Email: `contributor@mulyasuchi.com`
+- Email: `contributor@sastomahango.com`
 - Password: `contributor123`
 
 **⚠️ CHANGE THESE IMMEDIATELY IN PRODUCTION!**
@@ -104,13 +104,13 @@ http://your-domain.com/public/
 ### Database
 ```bash
 # Backup database
-mysqldump -u mulyasuchi_user -p mulyasuchi_db > backup.sql
+mysqldump -u sastomahango_user -p sastomahango_db > backup.sql
 
 # Restore database
-mysql -u mulyasuchi_user -p mulyasuchi_db < backup.sql
+mysql -u sastomahango_user -p sastomahango_db < backup.sql
 
 # Reset database
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/schema.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/schema.sql
 ```
 
 ### Git
@@ -147,7 +147,7 @@ sudo apache2ctl configtest
 ### Database Connection Error
 1. Check `.env` credentials
 2. Verify MySQL is running: `sudo systemctl status mysql`
-3. Test connection: `mysql -u mulyasuchi_user -p`
+3. Test connection: `mysql -u sastomahango_user -p`
 
 ### Permission Errors
 ```bash
@@ -175,9 +175,9 @@ sudo chmod -R 755 assets/uploads/
 ## 📊 Project URLs
 
 ### Development
-- Home: `http://localhost/MulyaSuchi/public/`
-- Admin: `http://localhost/MulyaSuchi/admin/`
-- Contributor: `http://localhost/MulyaSuchi/contributor/`
+- Home: `http://localhost/SastoMahango/public/`
+- Admin: `http://localhost/SastoMahango/admin/`
+- Contributor: `http://localhost/SastoMahango/contributor/`
 
 ### Production
 - Home: `https://your-domain.com/`
@@ -212,8 +212,8 @@ sudo chmod -R 755 assets/uploads/
 4. `docs/SETUP_NOTES.md` - Setup tips
 
 **Still stuck?**
-- Email: contact@mulyasuchi.com
-- GitHub Issues: https://github.com/your-username/MulyaSuchi/issues
+- Email: contact@sastomahango.com
+- GitHub Issues: https://github.com/your-username/SastoMahango/issues
 
 ---
 

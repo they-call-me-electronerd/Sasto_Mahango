@@ -3,7 +3,7 @@
  * Terms of Service Page
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -12,7 +12,7 @@ require_once __DIR__ . '/../classes/Auth.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $pageTitle = 'Terms of Service';
-$metaDescription = 'Read the terms and conditions for using MulyaSuchi. Understand your rights and responsibilities as a user.';
+$metaDescription = 'Read the terms and conditions for using SastoMahango. Understand your rights and responsibilities as a user.';
 $additionalCSS = 'pages/legal.css';
 
 include __DIR__ . '/../includes/header_professional.php';
@@ -22,7 +22,7 @@ include __DIR__ . '/../includes/header_professional.php';
 <div class="legal-hero">
     <div class="container text-center">
         <h1><i class="bi bi-file-text me-3"></i>Terms of Service</h1>
-        <p class="lead">Understanding your rights and responsibilities on MulyaSuchi</p>
+        <p class="lead">Understanding your rights and responsibilities on SastoMahango</p>
     </div>
 </div>
 
@@ -42,7 +42,7 @@ include __DIR__ . '/../includes/header_professional.php';
         <div class="legal-section">
             <h2><i class="bi bi-check-circle"></i>1. Agreement to Terms</h2>
             <p>
-                Welcome to MulyaSuchi. These Terms of Service ("Terms") govern your access to and use of our website, services, and applications (collectively, the "Service"). By accessing or using MulyaSuchi, you agree to be bound by these Terms.
+                Welcome to SastoMahango. These Terms of Service ("Terms") govern your access to and use of our website, services, and applications (collectively, the "Service"). By accessing or using SastoMahango, you agree to be bound by these Terms.
             </p>
             <div class="highlight-box">
                 <p><strong>IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE OUR SERVICE.</strong></p>
@@ -51,7 +51,7 @@ include __DIR__ . '/../includes/header_professional.php';
 
         <div class="legal-section">
             <h2><i class="bi bi-info-circle"></i>2. Description of Service</h2>
-            <p>MulyaSuchi is a price tracking and market intelligence platform that provides:</p>
+            <p>SastoMahango is a price tracking and market intelligence platform that provides:</p>
             <ul>
                 <li>Real-time price information for various products across Nepal</li>
                 <li>Historical price data and trend analysis</li>
@@ -63,7 +63,7 @@ include __DIR__ . '/../includes/header_professional.php';
 
         <div class="legal-section">
             <h2><i class="bi bi-person-check"></i>3. Eligibility</h2>
-            <p>To use MulyaSuchi, you must:</p>
+            <p>To use SastoMahango, you must:</p>
             <ul>
                 <li>Be at least 13 years of age</li>
                 <li>Have the legal capacity to enter into binding contracts</li>
@@ -124,7 +124,7 @@ include __DIR__ . '/../includes/header_professional.php';
 
             <h3>6.2 Content Ownership</h3>
             <p>
-                By submitting price data and content, you grant MulyaSuchi a worldwide, non-exclusive, royalty-free license to use, display, reproduce, and distribute your contributions. You retain ownership of your original content.
+                By submitting price data and content, you grant SastoMahango a worldwide, non-exclusive, royalty-free license to use, display, reproduce, and distribute your contributions. You retain ownership of your original content.
             </p>
         </div>
 
@@ -157,7 +157,7 @@ include __DIR__ . '/../includes/header_professional.php';
 
         <div class="legal-section">
             <h2><i class="bi bi-shield-x"></i>9. Limitation of Liability</h2>
-            <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, MULYASUCHI SHALL NOT BE LIABLE FOR:</p>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, SASTOMAHANGO SHALL NOT BE LIABLE FOR:</p>
             <ul>
                 <li>Any indirect, incidental, special, or consequential damages</li>
                 <li>Loss of profits, revenue, data, or goodwill</li>
@@ -183,8 +183,8 @@ include __DIR__ . '/../includes/header_professional.php';
             
             <div class="contact-box">
                 <h3>Contact Information</h3>
-                <p><strong>Email:</strong> legal@mulyasuchi.com</p>
-                <p><strong>Support:</strong> support@mulyasuchi.com</p>
+                <p><strong>Email:</strong> legal@sastomahango.com</p>
+                <p><strong>Support:</strong> support@sastomahango.com</p>
                 <p><strong>Phone:</strong> +977 1-XXXXXXX</p>
                 <p><strong>Address:</strong> Kathmandu, Nepal</p>
             </div>

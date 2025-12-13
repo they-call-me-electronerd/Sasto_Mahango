@@ -6,7 +6,7 @@
 
 header('Content-Type: application/json');
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../../config/constants.php';
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/database.php';

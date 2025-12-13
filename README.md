@@ -1,4 +1,4 @@
-# MulyaSuchi (मूल्यसूची)
+# SastoMahango (सस्तोमहँगो)
 
 **Nepal's Premier Market Intelligence Platform**
 
@@ -6,7 +6,7 @@
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue)](https://www.php.net/)
 [![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-orange)](https://www.mysql.com/)
 
-MulyaSuchi is a comprehensive market intelligence platform designed to provide real-time, accurate pricing information for commodities across Nepal's markets. The platform empowers consumers, vendors, and market analysts with transparent pricing data for vegetables, fruits, grains, and other essential commodities.
+SastoMahango is a comprehensive market intelligence platform designed to provide real-time, accurate pricing information for commodities across Nepal's markets. The platform empowers consumers, vendors, and market analysts with transparent pricing data for vegetables, fruits, grains, and other essential commodities.
 
 ## 🌟 Features
 
@@ -65,7 +65,7 @@ MulyaSuchi is a comprehensive market intelligence platform designed to provide r
 ## 📁 Project Structure
 
 ```
-MulyaSuchi/
+SastoMahango/
 ├── admin/                  # Admin panel pages
 │   ├── dashboard.php
 │   ├── user_management.php
@@ -149,8 +149,8 @@ MulyaSuchi/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/MulyaSuchi.git
-cd MulyaSuchi
+git clone https://github.com/your-username/SastoMahango.git
+cd SastoMahango
 ```
 
 2. **Set up the environment file**
@@ -161,10 +161,10 @@ cp .env.example .env
 Edit `.env` and configure your database credentials:
 ```env
 DB_HOST=localhost
-DB_NAME=mulyasuchi_db
+DB_NAME=sastomahango_db
 DB_USER=your_db_user
 DB_PASS=your_secure_password
-SITE_URL=http://localhost/MulyaSuchi
+SITE_URL=http://localhost/SastoMahango
 APP_ENV=development
 APP_DEBUG=true
 ```
@@ -175,18 +175,18 @@ mysql -u root -p
 ```
 
 ```sql
-CREATE DATABASE mulyasuchi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'mulyasuchi_user'@'localhost' IDENTIFIED BY 'your_secure_password';
-GRANT ALL PRIVILEGES ON mulyasuchi_db.* TO 'mulyasuchi_user'@'localhost';
+CREATE DATABASE sastomahango_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'sastomahango_user'@'localhost' IDENTIFIED BY 'your_secure_password';
+GRANT ALL PRIVILEGES ON sastomahango_db.* TO 'sastomahango_user'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
 
 4. **Import the database schema**
 ```bash
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/schema.sql
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/database_optimizations.sql
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/seed_data.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/schema.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/database_optimizations.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/seed_data.sql
 ```
 
 5. **Set proper permissions**
@@ -201,45 +201,45 @@ chown -R www-data:www-data assets/uploads/ logs/
 
 6. **Configure Apache Virtual Host** (Optional)
 
-Create `/etc/apache2/sites-available/mulyasuchi.conf`:
+Create `/etc/apache2/sites-available/sastomahango.conf`:
 ```apache
 <VirtualHost *:80>
-    ServerName mulyasuchi.local
-    DocumentRoot /var/www/html/MulyaSuchi/public
+    ServerName sastomahango.local
+    DocumentRoot /var/www/html/SastoMahango/public
     
-    <Directory /var/www/html/MulyaSuchi/public>
+    <Directory /var/www/html/SastoMahango/public>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
     
-    ErrorLog ${APACHE_LOG_DIR}/mulyasuchi_error.log
-    CustomLog ${APACHE_LOG_DIR}/mulyasuchi_access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/sastomahango_error.log
+    CustomLog ${APACHE_LOG_DIR}/sastomahango_access.log combined
 </VirtualHost>
 ```
 
 Enable the site:
 ```bash
-sudo a2ensite mulyasuchi
+sudo a2ensite sastomahango
 sudo systemctl reload apache2
 ```
 
 7. **Access the application**
 
 Open your browser and navigate to:
-- Local: `http://localhost/MulyaSuchi/public/`
-- Virtual Host: `http://mulyasuchi.local/`
+- Local: `http://localhost/SastoMahango/public/`
+- Virtual Host: `http://sastomahango.local/`
 
 ### Default Credentials
 
 After importing seed data, use these credentials to log in:
 
 **Admin Account:**
-- Email: `admin@mulyasuchi.com`
+- Email: `admin@sastomahango.com`
 - Password: `admin123`
 
 **Contributor Account:**
-- Email: `contributor@mulyasuchi.com`
+- Email: `contributor@sastomahango.com`
 - Password: `contributor123`
 
 **⚠️ IMPORTANT**: Change these passwords immediately in production!
@@ -257,14 +257,14 @@ APP_DEBUG=false             # Enable debug mode (never in production)
 
 # Database
 DB_HOST=localhost
-DB_NAME=mulyasuchi_db
-DB_USER=mulyasuchi_user
+DB_NAME=sastomahango_db
+DB_USER=sastomahango_user
 DB_PASS=secure_password
 
 # Site
-SITE_NAME=Mulyasuchi
-SITE_URL=https://mulyasuchi.com
-SITE_EMAIL=contact@mulyasuchi.com
+SITE_NAME=SastoMahango
+SITE_URL=https://sastomahango.com
+SITE_EMAIL=contact@sastomahango.com
 
 # Security
 SESSION_LIFETIME=3600       # Session timeout in seconds
@@ -293,7 +293,7 @@ sudo systemctl start apache2
 sudo systemctl start mysql
 
 # Access the application
-http://localhost/MulyaSuchi/public/
+http://localhost/SastoMahango/public/
 ```
 
 ### Production Mode
@@ -363,7 +363,7 @@ For detailed deployment instructions, see [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/your-username/MulyaSuchi.git /var/www/html/mulyasuchi
+git clone https://github.com/your-username/SastoMahango.git /var/www/html/sastomahango
 
 # 2. Configure environment
 cp .env.example .env
@@ -373,14 +373,14 @@ nano .env  # Edit production values
 mysql -u root -p < sql/schema.sql
 
 # 4. Set permissions
-chown -R www-data:www-data /var/www/html/mulyasuchi
+chown -R www-data:www-data /var/www/html/sastomahango
 chmod 600 .env
 
 # 5. Configure Apache virtual host
 # (See Installation section above)
 
 # 6. Enable SSL (Let's Encrypt)
-sudo certbot --apache -d mulyasuchi.com -d www.mulyasuchi.com
+sudo certbot --apache -d sastomahango.com -d www.sastomahango.com
 ```
 
 ## 🤝 Contributing
@@ -389,7 +389,7 @@ We welcome contributions! Here's how you can help:
 
 ### Reporting Bugs
 
-1. Check if the bug has already been reported in [Issues](https://github.com/your-username/MulyaSuchi/issues)
+1. Check if the bug has already been reported in [Issues](https://github.com/your-username/SastoMahango/issues)
 2. If not, create a new issue with:
    - Clear title and description
    - Steps to reproduce
@@ -429,7 +429,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ```
 MIT License
 
-Copyright (c) 2024 MulyaSuchi
+Copyright (c) 2024 SastoMahango
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -456,7 +456,7 @@ SOFTWARE.
 - **Development Team** - Initial work and ongoing maintenance
 
 ### Contributors
-Thank you to all contributors who have helped shape MulyaSuchi!
+Thank you to all contributors who have helped shape SastoMahango!
 
 ### Acknowledgments
 - Market data sources across Nepal
@@ -465,9 +465,9 @@ Thank you to all contributors who have helped shape MulyaSuchi!
 
 ## 📧 Contact and Support
 
-- **Website**: [https://mulyasuchi.com](https://mulyasuchi.com)
-- **Email**: contact@mulyasuchi.com
-- **GitHub Issues**: [Report a bug or request a feature](https://github.com/your-username/MulyaSuchi/issues)
+- **Website**: [https://sastomahango.com](https://sastomahango.com)
+- **Email**: contact@sastomahango.com
+- **GitHub Issues**: [Report a bug or request a feature](https://github.com/your-username/SastoMahango/issues)
 
 ## 🗺️ Roadmap
 

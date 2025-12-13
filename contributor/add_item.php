@@ -3,7 +3,7 @@
  * Add New Item - Contributor Panel
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -18,7 +18,7 @@ require_once __DIR__ . '/../includes/functions.php';
 Auth::requireRole(ROLE_CONTRIBUTOR, SITE_URL . '/contributor/login.php');
 
 $pageTitle = 'Add New Item';
-$metaDescription = 'Add new products and commodities to Mulyasuchi marketplace database.';
+$metaDescription = 'Add new products and commodities to SastoMahango marketplace database.';
 $additionalCSS = ['pages/contributor-dashboard.css', 'pages/auth-admin.css'];
 $error = '';
 $success = '';

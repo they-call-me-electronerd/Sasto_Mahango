@@ -15,4 +15,4 @@ Disallow: /*.php$
 Disallow: /*?*
 
 # Sitemap location
-Sitemap: https://mulyasuchi.com/sitemap.xml
+Sitemap: https://sastomahango.com/sitemap.xml

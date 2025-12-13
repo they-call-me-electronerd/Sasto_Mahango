@@ -1,5 +1,5 @@
 -- =====================================================
--- Fresh 150 Products Dataset for MulyaSuchi
+-- Fresh 150 Products Dataset for SastoMahango
 -- Includes Nepali locations, realistic prices, and diverse categories
 -- =====================================================
 

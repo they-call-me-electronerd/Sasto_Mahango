@@ -5,7 +5,7 @@
  */
 
 // Prevent direct access
-if (!defined('MULYASUCHI_APP')) {
+if (!defined('SASTOMAHANGO_APP')) {
     die('Direct access not permitted');
 }
 

@@ -10,7 +10,7 @@
     // CONFIGURATION
     // ========================================================================
 
-    const THEME_KEY = 'mulyasuchi-theme';
+    const THEME_KEY = 'sastomahango-theme';
     const THEME_LIGHT = 'light';
     const THEME_DARK = 'dark';
     const THEME_AUTO = 'auto';

@@ -4,7 +4,7 @@
  * Search products by category, rate, quantity, and item name
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -16,8 +16,8 @@ require_once __DIR__ . '/../classes/Category.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $pageTitle = 'Products - Browse All Items';
-$metaDescription = 'Browse and search all products on MulyaSuchi. Filter by category, price range, and more. Track real-time market prices across Nepal.';
-$metaKeywords = 'products nepal, market prices, vegetables, fruits, commodities, price tracking, mulyasuchi products';
+$metaDescription = 'Browse and search all products on SastoMahango. Filter by category, price range, and more. Track real-time market prices across Nepal.';
+$metaKeywords = 'products nepal, market prices, vegetables, fruits, commodities, price tracking, sastomahango products';
 $additionalCSS = ['pages/products.css'];
 
 $itemObj = new Item();

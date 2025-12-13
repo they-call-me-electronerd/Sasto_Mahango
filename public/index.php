@@ -4,7 +4,7 @@
  */
 
 // Bootstrap application
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -16,8 +16,8 @@ require_once __DIR__ . '/../classes/Category.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $pageTitle = 'Home';
-$metaDescription = "MulyaSuchi is Nepal's premier price tracking platform. Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.";
-$metaKeywords = "price tracking nepal, vegetable prices nepal, kalimati market price, daily rates, mulyasuchi, commodity prices";
+$metaDescription = "SastoMahango is Nepal's premier price tracking platform. Track daily market prices of vegetables, fruits, and essential commodities across 50+ markets in Nepal.";
+$metaKeywords = "price tracking nepal, vegetable prices nepal, kalimati market price, daily rates, sastomahango, commodity prices";
 $additionalCSS = ['pages/landing.css', 'animations/enhanced-animations.css', 'animations/hero-enhancements.css'];
 $additionalJS = ['animations/counter-animation.js', 'animations/scroll-animations.js', 'components/ticker.js'];
 
@@ -165,8 +165,8 @@ include __DIR__ . '/../includes/header_professional.php';
                     <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1.5rem;">
                         <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">ABOUT US</span>
                     </div>
-                    <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1.5rem; line-height: 1.2;">What is <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mulyasuchi</span>?</h2>
-                    <p style="font-size: 1.125rem; color: #6b7280; line-height: 1.8; margin-bottom: 2rem;">Mulyasuchi (मूल्यसूची) is Nepal's first comprehensive price tracking platform that brings transparency to the marketplace. We collect, verify, and publish real-time prices of everyday products from markets across Nepal.</p>
+                    <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1.5rem; line-height: 1.2;">What is <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SastoMahango</span>?</h2>
+                    <p style="font-size: 1.125rem; color: #6b7280; line-height: 1.8; margin-bottom: 2rem;">SastoMahango (सस्तोमहँगो) is Nepal's first comprehensive price tracking platform that brings transparency to the marketplace. We collect, verify, and publish real-time prices of everyday products from markets across Nepal.</p>
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
                         <div style="display: flex; gap: 1rem;">
                             <div style="flex-shrink: 0; width: 48px; height: 48px; background: linear-gradient(135deg, #f97316, #ea580c); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);"><i class="bi bi-check2-circle" style="font-size: 1.5rem; color: white;"></i></div>
@@ -207,7 +207,7 @@ include __DIR__ . '/../includes/header_professional.php';
         <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 3;">
             <div style="text-align: center; margin-bottom: 4rem;">
                 <div style="display: inline-block; background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(59, 130, 246, 0.1)); padding: 0.5rem 1.5rem; border-radius: 2rem; margin-bottom: 1rem;"><span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 0.875rem;">WHY US</span></div>
-                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Why Choose Mulyasuchi?</h2>
+                <h2 style="font-size: 3rem; font-weight: 800; color: #111827; margin-bottom: 1rem;">Why Choose SastoMahango?</h2>
                 <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">We're committed to bringing price transparency and helping you make informed purchasing decisions</p>
             </div>
             <div class="row g-4">
@@ -421,7 +421,7 @@ include __DIR__ . '/../includes/header_professional.php';
                     <div class="footer-brand mb-4">
                         <h3 class="brand-name mb-3">
                             <i class="bi bi-graph-up-arrow me-2"></i>
-                            <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mulyasuchi</span>
+                            <span style="background: linear-gradient(135deg, #f97316, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SastoMahango</span>
                         </h3>
                         <p class="brand-tagline">मूल्यसूची - Nepal's Price Tracker</p>
                     </div>
@@ -492,7 +492,7 @@ include __DIR__ . '/../includes/header_professional.php';
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="bi bi-envelope-fill"></i>
-                            <span>info@mulyasuchi.com</span>
+                            <span>info@sastomahango.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="bi bi-telephone-fill"></i>
@@ -511,7 +511,7 @@ include __DIR__ . '/../includes/header_professional.php';
                 <div class="row align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         <p class="mb-0">
-                            &copy; <?php echo date('Y'); ?> Mulyasuchi. All rights reserved. 
+                            &copy; <?php echo date('Y'); ?> SastoMahango. All rights reserved. 
                             <span class="ms-2">Made with <i class="bi bi-heart-fill text-danger"></i> in Nepal</span>
                         </p>
                     </div>

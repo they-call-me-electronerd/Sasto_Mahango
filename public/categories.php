@@ -4,7 +4,7 @@
  * View all product categories with item counts
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -14,7 +14,7 @@ require_once __DIR__ . '/../classes/Category.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $pageTitle = 'Categories - Browse by Category';
-$metaDescription = 'Browse all product categories on MulyaSuchi. Find vegetables, fruits, electronics, and more. Track prices across different categories in Nepal.';
+$metaDescription = 'Browse all product categories on SastoMahango. Find vegetables, fruits, electronics, and more. Track prices across different categories in Nepal.';
 $metaKeywords = 'categories, product categories, vegetables, fruits, commodities, nepal market';
 $additionalCSS = 'pages/categories.css';
 

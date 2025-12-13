@@ -5,7 +5,7 @@
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                      NAVIGATION BAR                              │
-│  [Mulyasuchi Logo]  Home  Products  About    [Theme] [Logout]  │
+│  [SastoMahango Logo]  Home  Products  About    [Theme] [Logout]  │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
@@ -206,4 +206,4 @@
 
 **Design System Version**: 1.0
 **Last Updated**: November 24, 2025
-**Designer**: Mulyasuchi Team
+**Designer**: SastoMahango Team

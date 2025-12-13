@@ -4,7 +4,7 @@
  * Audit trail of system activities
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -16,7 +16,7 @@ require_once __DIR__ . '/../includes/functions.php';
 // Require admin login
 Auth::requireRole(ROLE_ADMIN, SITE_URL . '/admin/login.php');
 
-$pageTitle = 'System Logs - Mulyasuchi Admin';
+$pageTitle = 'System Logs - SastoMahango Admin';
 
 // Get logs
 $logs = Logger::getRecentLogs(100);

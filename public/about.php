@@ -1,9 +1,9 @@
 <?php
 /**
- * About Page - MulyaSuchi
+ * About Page - SastoMahango
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -21,8 +21,8 @@ $totalMarkets = $itemObj->countMarkets();
 $totalCategories = count($categoryObj->getActiveCategories());
 
 $pageTitle = 'About Us';
-$metaDescription = 'Learn about MulyaSuchi - Nepal\'s premier price tracking platform bringing transparency to the marketplace.';
-$metaKeywords = 'about mulyasuchi, price tracking nepal, market transparency, how it works';
+$metaDescription = 'Learn about SastoMahango - Nepal\'s premier price tracking platform bringing transparency to the marketplace.';
+$metaKeywords = 'about sastomahango, price tracking nepal, market transparency, how it works';
 $additionalCSS = ['pages/about.css'];
 
 include __DIR__ . '/../includes/header_professional.php';
@@ -33,10 +33,10 @@ include __DIR__ . '/../includes/header_professional.php';
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <div class="badge-tag">ABOUT MULYASUCHI</div>
+                <div class="badge-tag">ABOUT SASTOMAHANGO</div>
                 <h1 class="hero-title">Bringing <span class="highlight">Transparency</span> to Nepal's Marketplace</h1>
                 <p class="hero-subtitle">
-                    MulyaSuchi (मूल्यसूची) is Nepal's first comprehensive price tracking platform that empowers consumers with real-time market information.
+                    SastoMahango (सस्तोमहँगो) is Nepal's first comprehensive price tracking platform that empowers consumers with real-time market information.
                 </p>
                 <div class="hero-stats">
                     <div class="stat">

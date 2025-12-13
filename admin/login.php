@@ -1,10 +1,10 @@
 <?php
 /**
  * Admin Login Page
- * Modern & Professional Design matching Mulyasuchi Brand
+ * Modern & Professional Design matching SastoMahango Brand
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$pageTitle = 'Admin Login - Mulyasuchi';
+$pageTitle = 'Admin Login - SastoMahango';
 ?>
 <!DOCTYPE html>
 <html lang="en" data-theme="light">

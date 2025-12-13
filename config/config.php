@@ -2,7 +2,7 @@
 /**
  * Site Configuration
  * 
- * Global configuration settings for the Mulyasuchi platform
+ * Global configuration settings for the SastoMahango platform
  */
 
 require_once __DIR__ . '/env.php';
@@ -11,15 +11,15 @@ require_once __DIR__ . '/env.php';
 require_once __DIR__ . '/security.php';
 
 // Prevent direct access
-if (!defined('MULYASUCHI_APP')) {
+if (!defined('SASTOMAHANGO_APP')) {
     die('Direct access not permitted');
 }
 
 // Site Information
-define('SITE_NAME', Env::get('SITE_NAME', 'Mulyasuchi'));
+define('SITE_NAME', Env::get('SITE_NAME', 'SastoMahango'));
 define('SITE_TAGLINE', 'Your Trusted Market Intelligence Platform');
-define('SITE_URL', Env::get('SITE_URL', 'http://localhost/MulyaSuchi'));
-define('SITE_EMAIL', Env::get('SITE_EMAIL', 'contact@mulyasuchi.com'));
+define('SITE_URL', Env::get('SITE_URL', 'http://localhost/SastoMahango'));
+define('SITE_EMAIL', Env::get('SITE_EMAIL', 'contact@sastomahango.com'));
 
 // File Upload Configuration
 define('UPLOAD_DIR', Env::get('UPLOAD_DIR', __DIR__ . '/../assets/uploads/items/'));
@@ -33,7 +33,7 @@ define('ITEMS_PER_PAGE', 20);
 
 // Session Configuration
 define('SESSION_LIFETIME', (int)Env::get('SESSION_LIFETIME', 3600)); // 1 hour in seconds
-define('SESSION_NAME', Env::get('SESSION_NAME', 'MULYASUCHI_SESSION'));
+define('SESSION_NAME', Env::get('SESSION_NAME', 'SASTOMAHANGO_SESSION'));
 
 // Security
 define('CSRF_TOKEN_NAME', Env::get('CSRF_TOKEN_NAME', 'csrf_token'));

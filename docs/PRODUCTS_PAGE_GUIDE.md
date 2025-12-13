@@ -1,7 +1,7 @@
 # Products Page - User Guide
 
 ## Overview
-The Products page provides an advanced search and filtering interface for browsing all products in the MulyaSuchi marketplace.
+The Products page provides an advanced search and filtering interface for browsing all products in the SastoMahango marketplace.
 
 ## Features
 
@@ -182,4 +182,4 @@ Potential improvements:
 
 **Created:** November 23, 2025  
 **Version:** 1.0.0  
-**Part of:** MulyaSuchi - Market Intelligence Platform
+**Part of:** SastoMahango - Market Intelligence Platform

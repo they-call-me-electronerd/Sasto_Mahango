@@ -1,5 +1,5 @@
 # 🚀 PRODUCTION DEPLOYMENT GUIDE
-## MulyaSuchi Market Intelligence Platform
+## SastoMahango Market Intelligence Platform
 
 ---
 
@@ -28,36 +28,36 @@ mysql -u root -p
 ```
 
 ```sql
-CREATE DATABASE mulyasuchi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE sastomahango_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 # Create dedicated user (NEVER use root in production)
-CREATE USER 'mulyasuchi_user'@'localhost' IDENTIFIED BY 'YOUR_STRONG_PASSWORD';
-GRANT ALL PRIVILEGES ON mulyasuchi_db.* TO 'mulyasuchi_user'@'localhost';
+CREATE USER 'sastomahango_user'@'localhost' IDENTIFIED BY 'YOUR_STRONG_PASSWORD';
+GRANT ALL PRIVILEGES ON sastomahango_db.* TO 'sastomahango_user'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
 
 ```bash
 # Import schema
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/schema.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/schema.sql
 
 # Run optimizations
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/database_optimizations.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/database_optimizations.sql
 
 # Import seed data (optional)
-mysql -u mulyasuchi_user -p mulyasuchi_db < sql/seed_data.sql
+mysql -u sastomahango_user -p sastomahango_db < sql/seed_data.sql
 ```
 
 ### 3. **File Permissions**
 ```bash
 # Set proper ownership
-sudo chown -R www-data:www-data /var/www/mulyasuchi
+sudo chown -R www-data:www-data /var/www/sastomahango
 
 # Set directory permissions
-find /var/www/mulyasuchi -type d -exec chmod 755 {} \;
+find /var/www/sastomahango -type d -exec chmod 755 {} \;
 
 # Set file permissions
-find /var/www/mulyasuchi -type f -exec chmod 644 {} \;
+find /var/www/sastomahango -type f -exec chmod 644 {} \;
 
 # Make scripts executable
 chmod +x scripts/*.sh
@@ -73,9 +73,9 @@ sudo chown -R www-data:www-data logs
 
 **Create logs directory:**
 ```bash
-mkdir -p /var/log/mulyasuchi
-sudo chown www-data:www-data /var/log/mulyasuchi
-chmod 755 /var/log/mulyasuchi
+mkdir -p /var/log/sastomahango
+sudo chown www-data:www-data /var/log/sastomahango
+chmod 755 /var/log/sastomahango
 ```
 
 **Protect .env file:**
@@ -102,7 +102,7 @@ sudo apt-get update
 sudo apt-get install certbot python3-certbot-apache
 
 # Get SSL certificate
-sudo certbot --apache -d mulyasuchi.com -d www.mulyasuchi.com
+sudo certbot --apache -d sastomahango.com -d www.sastomahango.com
 
 # Auto-renewal (already set up by certbot)
 # Test renewal:
@@ -122,7 +122,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 nano scripts/backup_database.sh
 
 # Update credentials:
-DB_USER="mulyasuchi_user"
+DB_USER="sastomahango_user"
 DB_PASS="your_password"
 
 # Make executable
@@ -135,7 +135,7 @@ chmod +x scripts/backup_database.sh
 crontab -e
 
 # Add this line:
-0 2 * * * /var/www/mulyasuchi/scripts/backup_database.sh >> /var/log/mulyasuchi/backup.log 2>&1
+0 2 * * * /var/www/sastomahango/scripts/backup_database.sh >> /var/log/sastomahango/backup.log 2>&1
 ```
 
 ### 7. **PHP Configuration**
@@ -150,7 +150,7 @@ display_errors = Off
 display_startup_errors = Off
 error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
 log_errors = On
-error_log = /var/log/mulyasuchi/php_errors.log
+error_log = /var/log/sastomahango/php_errors.log
 
 max_execution_time = 30
 max_input_time = 60
@@ -176,7 +176,7 @@ sudo systemctl restart apache2
 ### 1. **Create Admin User**
 ```bash
 # Access MySQL
-mysql -u mulyasuchi_user -p mulyasuchi_db
+mysql -u sastomahango_user -p sastomahango_db
 ```
 
 ```sql
@@ -184,7 +184,7 @@ mysql -u mulyasuchi_user -p mulyasuchi_db
 INSERT INTO users (username, email, password_hash, full_name, role, status) 
 VALUES (
     'admin',
-    'admin@mulyasuchi.com',
+    'admin@sastomahango.com',
     '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', -- password: 'password' (CHANGE THIS!)
     'System Administrator',
     'admin',
@@ -207,7 +207,7 @@ VALUES (
 sudo apt-get install apache2-utils
 
 # Test homepage (100 requests, 10 concurrent)
-ab -n 100 -c 10 https://mulyasuchi.com/public/index.php
+ab -n 100 -c 10 https://sastomahango.com/public/index.php
 
 # Target: < 2 second response time
 ```
@@ -217,8 +217,8 @@ ab -n 100 -c 10 https://mulyasuchi.com/public/index.php
 **Error Monitoring:**
 ```bash
 # Watch error logs
-tail -f /var/log/mulyasuchi/php_errors.log
-tail -f /var/log/mulyasuchi/app.log
+tail -f /var/log/sastomahango/php_errors.log
+tail -f /var/log/sastomahango/app.log
 ```
 
 **Uptime Monitoring:** (Choose one)
@@ -234,13 +234,13 @@ tail -f /var/log/mulyasuchi/app.log
 Google Search Console: https://search.google.com/search-console
 Bing Webmaster: https://www.bing.com/webmasters
 
-Sitemap URL: https://mulyasuchi.com/sitemap.xml.php
+Sitemap URL: https://sastomahango.com/sitemap.xml.php
 ```
 
 **robots.txt verification:**
 ```bash
 # Check if accessible
-curl https://mulyasuchi.com/robots.txt
+curl https://sastomahango.com/robots.txt
 ```
 
 ### 6. **Email Configuration**
@@ -299,7 +299,7 @@ sudo systemctl restart mysql
 ### Security Scanning
 ```bash
 # Install OWASP ZAP or run online scan
-# Scan URL: https://mulyasuchi.com
+# Scan URL: https://sastomahango.com
 ```
 
 ### Password Policy
@@ -318,17 +318,17 @@ sudo systemctl status mysql
 
 # Check credentials in .env
 # Verify user has permissions
-mysql -u mulyasuchi_user -p
+mysql -u sastomahango_user -p
 ```
 
 ### Issue: 500 Internal Server Error
 ```bash
 # Check error logs
 tail -50 /var/log/apache2/error.log
-tail -50 /var/log/mulyasuchi/php_errors.log
+tail -50 /var/log/sastomahango/php_errors.log
 
 # Check file permissions
-ls -la /var/www/mulyasuchi
+ls -la /var/www/sastomahango
 ```
 
 ### Issue: Images not uploading
@@ -409,13 +409,13 @@ For issues:
 1. Check error logs first
 2. Review this guide
 3. Check documentation in `/docs/`
-4. Contact: admin@mulyasuchi.com
+4. Contact: admin@sastomahango.com
 
 ---
 
 ## 🎉 CONGRATULATIONS!
 
-Your MulyaSuchi platform is now production-ready with:
+Your SastoMahango platform is now production-ready with:
 - ✅ Enterprise-grade security
 - ✅ Optimized performance
 - ✅ Automated backups

@@ -3,7 +3,7 @@
  * Privacy Policy Page
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -12,7 +12,7 @@ require_once __DIR__ . '/../classes/Auth.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $pageTitle = 'Privacy Policy';
-$metaDescription = 'Learn how MulyaSuchi collects, uses, and protects your personal information. Read our comprehensive privacy policy.';
+$metaDescription = 'Learn how SastoMahango collects, uses, and protects your personal information. Read our comprehensive privacy policy.';
 $additionalCSS = 'pages/legal.css';
 
 include __DIR__ . '/../includes/header_professional.php';
@@ -71,7 +71,7 @@ include __DIR__ . '/../includes/header_professional.php';
             </ul>
 
             <h3>2.3 Information from Contributors</h3>
-            <p>If you contribute price data to MulyaSuchi, we collect:</p>
+            <p>If you contribute price data to SastoMahango, we collect:</p>
             <ul>
                 <li>Product names and descriptions</li>
                 <li>Price information and market locations</li>
@@ -99,7 +99,7 @@ include __DIR__ . '/../includes/header_professional.php';
             <h2><i class="bi bi-share"></i>4. Information Sharing and Disclosure</h2>
             
             <h3>4.1 Public Information</h3>
-            <p>The following information is publicly available on MulyaSuchi:</p>
+            <p>The following information is publicly available on SastoMahango:</p>
             <ul>
                 <li>Product names, prices, and descriptions</li>
                 <li>Market locations and price history</li>
@@ -165,7 +165,7 @@ include __DIR__ . '/../includes/header_professional.php';
                 <li><strong>Opt-Out:</strong> Unsubscribe from marketing communications</li>
                 <li><strong>Withdraw Consent:</strong> Withdraw consent for data processing where applicable</li>
             </ul>
-            <p>To exercise these rights, contact us at <strong>privacy@mulyasuchi.com</strong></p>
+            <p>To exercise these rights, contact us at <strong>privacy@sastomahango.com</strong></p>
         </div>
 
         <div class="legal-section">
@@ -183,7 +183,7 @@ include __DIR__ . '/../includes/header_professional.php';
         <div class="legal-section">
             <h2><i class="bi bi-people"></i>9. Children's Privacy</h2>
             <p>
-                MulyaSuchi is not intended for children under the age of 13. We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a child, please contact us immediately at <strong>privacy@mulyasuchi.com</strong>.
+                SastoMahango is not intended for children under the age of 13. We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a child, please contact us immediately at <strong>privacy@sastomahango.com</strong>.
             </p>
         </div>
 
@@ -193,7 +193,7 @@ include __DIR__ . '/../includes/header_professional.php';
             
             <div class="contact-box">
                 <h3>Contact Information</h3>
-                <p><strong>Email:</strong> privacy@mulyasuchi.com</p>
+                <p><strong>Email:</strong> privacy@sastomahango.com</p>
                 <p><strong>Phone:</strong> +977 1-XXXXXXX</p>
                 <p><strong>Address:</strong> Kathmandu, Nepal</p>
             </div>

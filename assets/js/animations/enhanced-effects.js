@@ -1,6 +1,6 @@
 /**
  * Enhanced Scroll Animations & Fluid Effects
- * Mulyasuchi - Professional Interactions
+ * SastoMahango - Professional Interactions
  */
 
 // =================================== 

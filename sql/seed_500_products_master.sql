@@ -1,5 +1,5 @@
 -- =============================================================================
--- MULYASUCHI: COMPLETE 500 PRODUCTS DATABASE SEED
+-- SASTOMAHANGO: COMPLETE 500 PRODUCTS DATABASE SEED
 -- =============================================================================
 -- Master SQL File - Execute this to load all 500 products
 -- This file sources all three parts in the correct order
@@ -7,17 +7,17 @@
 -- Created: 2025-11-25
 -- Total Products: 500
 -- Total Categories: 12
--- Author: MulyaSuchi Dev Team
+-- Author: SastoMahango Dev Team
 -- =============================================================================
 
 -- Execute Part 1: Base setup, categories 1-6 (Vegetables through Spices)
-SOURCE c:/xampp/htdocs/MulyaSuchi/sql/fresh_500_products.sql;
+SOURCE c:/xampp/htdocs/SastoMahango/sql/fresh_500_products.sql;
 
 -- Execute Part 2: Categories 7-9 (Kitchen Appliances through Electrical)
-SOURCE c:/xampp/htdocs/MulyaSuchi/sql/fresh_500_products_part2.sql;
+SOURCE c:/xampp/htdocs/SastoMahango/sql/fresh_500_products_part2.sql;
 
 -- Execute Part 3: Categories 10-12 (Clothing through Tools & Hardware) + Verification
-SOURCE c:/xampp/htdocs/MulyaSuchi/sql/fresh_500_products_part3.sql;
+SOURCE c:/xampp/htdocs/SastoMahango/sql/fresh_500_products_part3.sql;
 
 --
 -- =============================================================================

@@ -2,10 +2,10 @@
 /**
  * System Constants
  * 
- * Centralized constant definitions for the Mulyasuchi platform
+ * Centralized constant definitions for the SastoMahango platform
  */
 
-// Note: MULYASUCHI_APP is defined by each entry point (index.php, login.php, etc.)
+// Note: SASTOMAHANGO_APP is defined by each entry point (index.php, login.php, etc.)
 // to prevent direct access to this file
 
 // User Roles

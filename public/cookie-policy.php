@@ -3,7 +3,7 @@
  * Cookie Policy Page
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -12,7 +12,7 @@ require_once __DIR__ . '/../classes/Auth.php';
 require_once __DIR__ . '/../includes/functions.php';
 
 $pageTitle = 'Cookie Policy';
-$metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your browsing experience and provide better services.';
+$metaDescription = 'Learn about how SastoMahango uses cookies to improve your browsing experience and provide better services.';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -307,7 +307,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
         <div class="container">
             <a class="navbar-brand" href="<?php echo SITE_URL; ?>">
                 <i class="bi bi-graph-up-arrow"></i>
-                Mulyasuchi
+                SastoMahango
             </a>
         </div>
     </nav>
@@ -316,7 +316,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
     <div class="legal-hero">
         <div class="container text-center">
             <h1><i class="bi bi-cookie me-3"></i>Cookie Policy</h1>
-            <p class="lead">Understanding how we use cookies on MulyaSuchi</p>
+            <p class="lead">Understanding how we use cookies on SastoMahango</p>
         </div>
     </div>
 
@@ -350,7 +350,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
                 <li>Analyze website traffic and performance</li>
             </ul>
 
-            <h2>2. How MulyaSuchi Uses Cookies</h2>
+            <h2>2. How SastoMahango Uses Cookies</h2>
             <p>
                 We use cookies to enhance your experience on our platform and provide better services. Our cookies help us:
             </p>
@@ -385,7 +385,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
             </p>
 
             <h2>4. Specific Cookies We Use</h2>
-            <p>Below is a detailed list of cookies used on MulyaSuchi:</p>
+            <p>Below is a detailed list of cookies used on SastoMahango:</p>
 
             <table class="cookie-table">
                 <thead>
@@ -507,7 +507,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
 
             <h3>7.2 Cookie Consent</h3>
             <p>
-                When you first visit MulyaSuchi, we'll ask for your consent to use optional cookies. You can:
+                When you first visit SastoMahango, we'll ask for your consent to use optional cookies. You can:
             </p>
             <ul>
                 <li>Accept all cookies</li>
@@ -541,7 +541,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
                 Some browsers include a "Do Not Track" (DNT) feature that signals to websites that you don't want to be tracked. Currently, there is no industry standard for responding to DNT signals.
             </p>
             <p>
-                MulyaSuchi respects your privacy choices. If you enable DNT in your browser:
+                SastoMahango respects your privacy choices. If you enable DNT in your browser:
             </p>
             <ul>
                 <li>We will not set optional analytics or advertising cookies</li>
@@ -551,7 +551,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
 
             <h2>10. Cookies and Mobile Devices</h2>
             <p>
-                When you access MulyaSuchi on mobile devices, we may use similar technologies to cookies:
+                When you access SastoMahango on mobile devices, we may use similar technologies to cookies:
             </p>
             <ul>
                 <li><strong>Local Storage:</strong> Stores data in your browser for offline access</li>
@@ -596,7 +596,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
 
             <h2>13. Children's Privacy</h2>
             <p>
-                MulyaSuchi is not intended for children under 13. We do not knowingly collect information from children. If you are a parent or guardian and believe your child has provided us with information, please contact us.
+                SastoMahango is not intended for children under 13. We do not knowingly collect information from children. If you are a parent or guardian and believe your child has provided us with information, please contact us.
             </p>
 
             <h2>14. Contact Us About Cookies</h2>
@@ -606,8 +606,8 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
             
             <div class="info-box">
                 <h4>Contact Information</h4>
-                <p style="margin-bottom: 0.5rem;"><strong>Email:</strong> privacy@mulyasuchi.com</p>
-                <p style="margin-bottom: 0.5rem;"><strong>Support:</strong> support@mulyasuchi.com</p>
+                <p style="margin-bottom: 0.5rem;"><strong>Email:</strong> privacy@sastomahango.com</p>
+                <p style="margin-bottom: 0.5rem;"><strong>Support:</strong> support@sastomahango.com</p>
                 <p style="margin-bottom: 0.5rem;"><strong>Phone:</strong> +977 1-XXXXXXX</p>
                 <p style="margin-bottom: 0;"><strong>Address:</strong> Kathmandu, Nepal</p>
             </div>
@@ -634,7 +634,7 @@ $metaDescription = 'Learn about how MulyaSuchi uses cookies to improve your brow
     <!-- Footer -->
     <footer style="background: #1f2937; color: #f9fafb; padding: 2rem 0; margin-top: 4rem;">
         <div class="container text-center">
-            <p style="margin: 0;">&copy; <?php echo date('Y'); ?> Mulyasuchi. All rights reserved.</p>
+            <p style="margin: 0;">&copy; <?php echo date('Y'); ?> SastoMahango. All rights reserved.</p>
             <div style="margin-top: 1rem;">
                 <a href="privacy-policy.php" style="color: #9ca3af; text-decoration: none; margin: 0 1rem;">Privacy Policy</a>
                 <a href="terms-of-service.php" style="color: #9ca3af; text-decoration: none; margin: 0 1rem;">Terms of Service</a>

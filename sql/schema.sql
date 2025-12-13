@@ -11,11 +11,11 @@
 -- DATABASE INITIALIZATION
 -- ===========================================================================
 
-CREATE DATABASE IF NOT EXISTS mulyasuchi_db
+CREATE DATABASE IF NOT EXISTS sastomahango_db
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
-USE mulyasuchi_db;
+USE sastomahango_db;
 
 -- ===========================================================================
 -- TABLE: users

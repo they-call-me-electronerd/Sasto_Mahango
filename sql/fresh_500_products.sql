@@ -1,12 +1,12 @@
 -- =============================================================================
--- MULYASUCHI: 500 PRODUCTS DATABASE SEED
+-- SASTOMAHANGO: 500 PRODUCTS DATABASE SEED
 -- =============================================================================
 -- Professional, Modern, Clean Structure
 -- Realistic Nepali Market Prices and Locations
 -- Distributed Across 12 Categories
 -- =============================================================================
 
-USE mulyasuchi_db;
+USE sastomahango_db;
 
 -- Disable foreign key checks
 SET FOREIGN_KEY_CHECKS = 0;

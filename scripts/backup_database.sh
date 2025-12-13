@@ -7,10 +7,10 @@
 # ===========================================================================
 
 # Configuration
-DB_NAME="mulyasuchi_db"
-DB_USER="mulyasuchi_user"
+DB_NAME="sastomahango_db"
+DB_USER="sastomahango_user"
 DB_PASS="your_password_here"
-BACKUP_DIR="/var/backups/mulyasuchi"
+BACKUP_DIR="/var/backups/sastomahango"
 RETENTION_DAYS=30
 
 # Create backup directory if it doesn't exist
@@ -18,7 +18,7 @@ mkdir -p "$BACKUP_DIR"
 
 # Generate filename with timestamp
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-BACKUP_FILE="$BACKUP_DIR/mulyasuchi_$TIMESTAMP.sql.gz"
+BACKUP_FILE="$BACKUP_DIR/sastomahango_$TIMESTAMP.sql.gz"
 
 # Perform backup
 echo "Starting database backup..."
@@ -32,7 +32,7 @@ if [ $? -eq 0 ]; then
     chmod 600 "$BACKUP_FILE"
     
     # Delete old backups (older than retention period)
-    find "$BACKUP_DIR" -name "mulyasuchi_*.sql.gz" -mtime +$RETENTION_DAYS -delete
+    find "$BACKUP_DIR" -name "sastomahango_*.sql.gz" -mtime +$RETENTION_DAYS -delete
     echo "Old backups removed (retention: $RETENTION_DAYS days)"
 else
     echo "Backup failed!"

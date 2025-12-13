@@ -1,12 +1,12 @@
 -- ===========================================================================
--- ADD NEW CATEGORIES TO MULYASUCHI
+-- ADD NEW CATEGORIES TO SASTOMAHANGO
 -- ===========================================================================
 -- Description: Adds 5 new categories to the existing database
 -- Categories: Household Items, Electrical Appliances, Clothing, 
 --             Study Material, Tools & Hardware
 -- ===========================================================================
 
-USE mulyasuchi_db;
+USE sastomahango_db;
 
 -- Insert new categories
 INSERT INTO categories (category_name, category_name_nepali, slug, description, icon_class, display_order) VALUES

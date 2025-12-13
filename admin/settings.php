@@ -4,7 +4,7 @@
  * Profile and System Configuration
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -17,7 +17,7 @@ require_once __DIR__ . '/../includes/functions.php';
 // Require admin login
 Auth::requireRole(ROLE_ADMIN, SITE_URL . '/admin/login.php');
 
-$pageTitle = 'Settings - Mulyasuchi Admin';
+$pageTitle = 'Settings - SastoMahango Admin';
 $userObj = new User();
 $currentUser = $userObj->getUserById(Auth::getUserId());
 

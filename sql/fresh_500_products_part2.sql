@@ -1,11 +1,11 @@
 -- =============================================================================
--- MULYASUCHI: 500 PRODUCTS DATABASE SEED - PART 2
+-- SASTOMAHANGO: 500 PRODUCTS DATABASE SEED - PART 2
 -- =============================================================================
 -- Continuation of fresh_500_products.sql
 -- Categories 7-12: Kitchen Appliances through Tools & Hardware
 -- =============================================================================
 
-USE mulyasuchi_db;
+USE sastomahango_db;
 
 -- =============================================================================
 -- CATEGORY 7: KITCHEN APPLIANCES (40 products)

@@ -13,8 +13,8 @@ $isAdminArea = strpos($currentPath, '/admin/') !== false;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?php echo isset($metaDescription) ? $metaDescription : SITE_TAGLINE . ' - Real-time market prices across Nepal'; ?>">
-    <meta name="keywords" content="<?php echo isset($metaKeywords) ? $metaKeywords : 'price tracking nepal, market prices, mulyasuchi'; ?>">
-    <meta name="author" content="MulyaSuchi Team">
+    <meta name="keywords" content="<?php echo isset($metaKeywords) ? $metaKeywords : 'price tracking nepal, market prices, sastomahango'; ?>">
+    <meta name="author" content="SastoMahango Team">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -69,7 +69,7 @@ $isAdminArea = strpos($currentPath, '/admin/') !== false;
     <script>
         // Apply saved theme immediately to prevent flash
         (function() {
-            const savedTheme = localStorage.getItem('mulyasuchi-theme');
+            const savedTheme = localStorage.getItem('sastomahango-theme');
             const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             const theme = savedTheme || (systemDark ? 'dark' : 'light');
             document.documentElement.setAttribute('data-theme', theme);
@@ -115,7 +115,7 @@ $isAdminArea = strpos($currentPath, '/admin/') !== false;
             <!-- Logo -->
             <a href="<?php echo SITE_URL; ?>/public/index.php" class="navbar-logo" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; font-size: 1.5rem; font-weight: 800; color: #f97316;">
                 <i class="bi bi-graph-up-arrow"></i>
-                <span class="logo-text">Mulyasuchi</span>
+                <span class="logo-text">SastoMahango</span>
             </a>
 
             <!-- Main Menu -->

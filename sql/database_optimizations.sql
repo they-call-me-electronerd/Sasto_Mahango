@@ -2,10 +2,10 @@
 # DATABASE OPTIMIZATION SCRIPTS
 # ===========================================================================
 # Run these SQL statements to optimize database performance
-# Execute: mysql -u root -p mulyasuchi_db < database_optimizations.sql
+# Execute: mysql -u root -p sastomahango_db < database_optimizations.sql
 # ===========================================================================
 
-USE mulyasuchi_db;
+USE sastomahango_db;
 
 -- ===========================================================================
 -- ADD COMPOSITE INDEXES FOR COMMON QUERIES
@@ -119,7 +119,7 @@ SELECT
     ROUND(((data_length + index_length) / 1024 / 1024), 2) AS 'Size (MB)',
     table_rows AS 'Rows'
 FROM information_schema.TABLES
-WHERE table_schema = 'mulyasuchi_db'
+WHERE table_schema = 'sastomahango_db'
 ORDER BY (data_length + index_length) DESC;
 
 -- ===========================================================================

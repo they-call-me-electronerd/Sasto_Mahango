@@ -1,11 +1,11 @@
 -- =============================================================================
--- MULYASUCHI: 500 PRODUCTS DATABASE SEED - PART 3
+-- SASTOMAHANGO: 500 PRODUCTS DATABASE SEED - PART 3
 -- =============================================================================
 -- Final Part: Categories 10-12
 -- Clothing, Study Material, Tools & Hardware
 -- =============================================================================
 
-USE mulyasuchi_db;
+USE sastomahango_db;
 
 -- =============================================================================
 -- CATEGORY 10: CLOTHING (45 products)

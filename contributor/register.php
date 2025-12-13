@@ -3,7 +3,7 @@
  * Contributor Registration Page
  */
 
-define('MULYASUCHI_APP', true);
+define('SASTOMAHANGO_APP', true);
 require_once __DIR__ . '/../config/constants.php';
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
@@ -86,7 +86,7 @@ include __DIR__ . '/../includes/header_professional.php';
             <div class="auth-logo">
                 <i class="bi bi-person-plus-fill"></i>
             </div>
-            <h1 class="auth-title">Join Mulyasuchi</h1>
+            <h1 class="auth-title">Join SastoMahango</h1>
             <p class="auth-subtitle">Become a contributor and help build Nepal's market intelligence</p>
         </div>
         

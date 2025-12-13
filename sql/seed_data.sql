@@ -5,19 +5,19 @@
 -- Default admin user, categories, settings, and tags
 -- ===========================================================================
 
-USE mulyasuchi_db;
+USE sastomahango_db;
 
 -- ===========================================================================
 -- DEFAULT ADMIN USER
 -- ===========================================================================
 -- Username: admin
--- Email: admin@mulyasuchi.com
+-- Email: admin@sastomahango.com
 -- Password: Admin@123 (MUST BE CHANGED IN PRODUCTION)
 -- Password Hash generated with: password_hash('Admin@123', PASSWORD_BCRYPT)
 -- ===========================================================================
 
 INSERT INTO users (username, email, password_hash, full_name, role, status) VALUES
-('admin', 'admin@mulyasuchi.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Master Admin', 'admin', 'active');
+('admin', 'admin@sastomahango.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Master Admin', 'admin', 'active');
 
 -- ===========================================================================
 -- DEFAULT CATEGORIES
@@ -39,9 +39,9 @@ INSERT INTO categories (category_name, category_name_nepali, slug, description, 
 -- ===========================================================================
 
 INSERT INTO site_settings (setting_key, setting_value, setting_type, description) VALUES
-('site_name', 'Mulyasuchi', 'text', 'Site name'),
+('site_name', 'SastoMahango', 'text', 'Site name'),
 ('site_tagline', 'Your Trusted Market Intelligence Platform', 'text', 'Site tagline'),
-('contact_email', 'contact@mulyasuchi.com', 'text', 'Contact email'),
+('contact_email', 'contact@sastomahango.com', 'text', 'Contact email'),
 ('contact_phone', '+977-1-XXXXXXX', 'text', 'Contact phone'),
 ('price_change_alert_threshold', '20', 'number', 'Price change alert threshold percentage'),
 ('items_per_page', '20', 'number', 'Items per page in listings'),
@@ -72,7 +72,7 @@ INSERT INTO tags (tag_name, tag_name_nepali) VALUES
 
 -- Sample Contributor User
 INSERT INTO users (username, email, password_hash, full_name, role, status, created_by) VALUES
-('contributor1', 'contributor@mulyasuchi.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Sample Contributor', 'contributor', 'active', 1);
+('contributor1', 'contributor@sastomahango.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Sample Contributor', 'contributor', 'active', 1);
 
 -- Sample Items (All pre-approved by admin)
 INSERT INTO items (item_name, item_name_nepali, slug, category_id, base_price, current_price, unit, market_location, description, status, created_by, validated_by, validated_at) VALUES

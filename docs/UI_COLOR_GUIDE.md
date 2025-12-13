@@ -1,4 +1,4 @@
-# MulyaSuchi UI Color System Guide
+# SastoMahango UI Color System Guide
 
 ## Brand Identity - Orange Gradient
 

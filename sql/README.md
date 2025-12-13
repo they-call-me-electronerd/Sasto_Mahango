@@ -1,6 +1,6 @@
 # SQL Files Documentation
 
-This directory contains all essential SQL scripts for the MulyaSuchi database system.
+This directory contains all essential SQL scripts for the SastoMahango database system.
 
 ## Production Files (Execute in Order for Fresh Installation)
 
@@ -34,7 +34,7 @@ mysql -u root -p < schema.sql
 
 **Execute:**
 ```bash
-mysql -u root -p mulyasuchi_db < seed_data.sql
+mysql -u root -p sastomahango_db < seed_data.sql
 ```
 
 ---
@@ -52,7 +52,7 @@ mysql -u root -p mulyasuchi_db < seed_data.sql
 
 **Execute:**
 ```bash
-mysql -u root -p mulyasuchi_db < fresh_150_products.sql
+mysql -u root -p sastomahango_db < fresh_150_products.sql
 ```
 
 ---
@@ -71,7 +71,7 @@ mysql -u root -p mulyasuchi_db < fresh_150_products.sql
 
 **Execute:**
 ```bash
-mysql -u root -p mulyasuchi_db < database_optimizations.sql
+mysql -u root -p sastomahango_db < database_optimizations.sql
 ```
 
 ---
@@ -87,7 +87,7 @@ mysql -u root -p mulyasuchi_db < database_optimizations.sql
 
 **Execute:**
 ```bash
-mysql -u root -p mulyasuchi_db < migration_add_item_edit_support.sql
+mysql -u root -p sastomahango_db < migration_add_item_edit_support.sql
 ```
 
 ---
@@ -101,30 +101,30 @@ mysql -u root -p mulyasuchi_db < migration_add_item_edit_support.sql
 mysql -u root -p < schema.sql
 
 # Step 2: Add initial data (admin, categories, settings)
-mysql -u root -p mulyasuchi_db < seed_data.sql
+mysql -u root -p sastomahango_db < seed_data.sql
 
 # Step 3: Add product data
-mysql -u root -p mulyasuchi_db < fresh_150_products.sql
+mysql -u root -p sastomahango_db < fresh_150_products.sql
 
 # Step 4: Optimize database
-mysql -u root -p mulyasuchi_db < database_optimizations.sql
+mysql -u root -p sastomahango_db < database_optimizations.sql
 
 # Step 5: Add item edit support
-mysql -u root -p mulyasuchi_db < migration_add_item_edit_support.sql
+mysql -u root -p sastomahango_db < migration_add_item_edit_support.sql
 ```
 
 ### Using XAMPP on Windows
 
 ```powershell
 # Navigate to SQL directory
-cd c:\xampp\htdocs\MulyaSuchi\sql
+cd c:\xampp\htdocs\SastoMahango\sql
 
 # Execute all in order
 c:\xampp\mysql\bin\mysql.exe -u root < schema.sql
-c:\xampp\mysql\bin\mysql.exe -u root mulyasuchi_db < seed_data.sql
-c:\xampp\mysql\bin\mysql.exe -u root mulyasuchi_db < fresh_150_products.sql
-c:\xampp\mysql\bin\mysql.exe -u root mulyasuchi_db < database_optimizations.sql
-c:\xampp\mysql\bin\mysql.exe -u root mulyasuchi_db < migration_add_item_edit_support.sql
+c:\xampp\mysql\bin\mysql.exe -u root sastomahango_db < seed_data.sql
+c:\xampp\mysql\bin\mysql.exe -u root sastomahango_db < fresh_150_products.sql
+c:\xampp\mysql\bin\mysql.exe -u root sastomahango_db < database_optimizations.sql
+c:\xampp\mysql\bin\mysql.exe -u root sastomahango_db < migration_add_item_edit_support.sql
 ```
 
 ---
@@ -147,7 +147,7 @@ c:\xampp\mysql\bin\mysql.exe -u root mulyasuchi_db < migration_add_item_edit_sup
 
 **Admin User:**
 - Username: `admin`
-- Email: `admin@mulyasuchi.com`
+- Email: `admin@sastomahango.com`
 - Password: `Admin@123`
 
 ⚠️ **IMPORTANT:** Change the default admin password immediately after first login in production!
@@ -156,7 +156,7 @@ c:\xampp\mysql\bin\mysql.exe -u root mulyasuchi_db < migration_add_item_edit_sup
 
 ## Database Information
 
-- **Database Name:** mulyasuchi_db
+- **Database Name:** sastomahango_db
 - **Character Set:** utf8mb4
 - **Collation:** utf8mb4_unicode_ci
 - **Engine:** InnoDB
@@ -178,7 +178,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 ### Schema Already Exists
 To drop and recreate:
 ```sql
-DROP DATABASE IF EXISTS mulyasuchi_db;
+DROP DATABASE IF EXISTS sastomahango_db;
 -- Then run schema.sql
 ```
 
