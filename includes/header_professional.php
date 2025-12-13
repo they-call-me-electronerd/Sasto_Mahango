@@ -185,7 +185,7 @@ $isAdminArea = strpos($currentPath, '/admin/') !== false;
                     </div>
                 <?php else: ?>
                     <a href="<?php echo SITE_URL; ?>/contributor/login.php" class="nav-btn nav-btn-outline">Login</a>
-                    <a href="<?php echo SITE_URL; ?>/contributor/register.php" class="nav-btn nav-btn-primary">Get Started</a>
+                    <a href="<?php echo SITE_URL; ?>/contributor/register.php" class="nav-btn nav-btn-primary">Started</a>
                 <?php endif; ?>
 
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none; background: none; border: none; font-size: 1.5rem; color: #374151; cursor: pointer;">

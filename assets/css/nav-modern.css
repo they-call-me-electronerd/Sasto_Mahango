@@ -21,8 +21,8 @@
     --nav-admin: #8b5cf6;
     
     /* Spacing */
-    --nav-height: 70px;
-    --nav-padding: 0.5rem 2rem;
+    --nav-height: 55px;
+    --nav-padding: 0.35rem 1.5rem;
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -95,7 +95,7 @@
     padding: var(--nav-padding);
     max-width: 1400px;
     margin: 0 auto;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 /* ============================================================================
@@ -111,27 +111,27 @@
 .nav-brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
     text-decoration: none;
     transition: var(--transition-fast);
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
+    padding: 0.35rem 0.75rem;
+    border-radius: 10px;
 }
 
 .nav-brand:hover {
-    background: rgba(255, 71, 87, 0.1);
+    background: rgba(34, 197, 94, 0.1);
 }
 
 .brand-icon-wrapper {
     position: relative;
-    width: 45px;
-    height: 45px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(0, 212, 255, 0.2));
-    border: 1px solid rgba(255, 71, 87, 0.3);
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2));
+    border: 1px solid rgba(34, 197, 94, 0.3);
     backdrop-filter: blur(10px);
     transition: var(--transition-smooth);
     overflow: hidden;
@@ -139,19 +139,19 @@
 
 .brand-icon-wrapper:hover {
     transform: scale(1.1) rotate(5deg);
-    background: linear-gradient(135deg, rgba(255, 71, 87, 0.3), rgba(0, 212, 255, 0.3));
-    border-color: rgba(255, 71, 87, 0.5);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3));
+    border-color: rgba(34, 197, 94, 0.5);
 }
 
 .brand-icon {
-    font-size: 1.75rem;
+    font-size: 1.4rem;
     animation: shimmerIcon 3s ease-in-out infinite;
 }
 
 .brand-glow {
     position: absolute;
     inset: -8px;
-    background: radial-gradient(circle, rgba(255, 71, 87, 0.4) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, transparent 70%);
     border-radius: 12px;
     filter: blur(8px);
     opacity: 0;
@@ -170,7 +170,7 @@
 }
 
 .brand-name {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 800;
     margin: 0;
     padding: 0;
@@ -183,7 +183,7 @@
 }
 
 .brand-tagline {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
     color: var(--nav-primary);
     text-transform: uppercase;
@@ -217,7 +217,7 @@
 }
 
 .nav-toggle:hover {
-    background: rgba(255, 71, 87, 0.1);
+    background: rgba(34, 197, 94, 0.1);
 }
 
 .hamburger-line {
@@ -232,7 +232,7 @@
 .hamburger-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255, 71, 87, 0.1), rgba(0, 212, 255, 0.1));
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
     border-radius: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -329,8 +329,8 @@
    ============================================================================ */
 
 .nav-link-auth {
-    background: linear-gradient(135deg, rgba(255, 71, 87, 0.15), rgba(0, 212, 255, 0.15));
-    border: 1px solid var(--glass-border);
+    background: transparent;
+    border: none;
     border-radius: 10px;
     padding: 0.5rem 0.875rem;
     font-size: 0.875rem;
@@ -339,13 +339,36 @@
     flex-shrink: 0;
     text-align: center;
     justify-content: center;
+    position: relative;
+}
+
+.nav-link-auth::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--nav-primary);
+    transition: width 0.3s ease, left 0.3s ease;
 }
 
 .nav-link-auth:hover {
-    background: linear-gradient(135deg, var(--nav-primary), var(--nav-accent));
-    color: white;
-    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
-    transform: translateY(-3px) scale(1.05);
+    background: transparent;
+    color: var(--nav-primary);
+    box-shadow: none;
+    transform: none;
+}
+
+.nav-link-auth:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.nav-link-auth.active::before {
+    width: 100%;
+    left: 0;
+    height: 3px;
 }
 
 .nav-link-contributor {
@@ -373,7 +396,7 @@
 }
 
 .nav-link-logout:hover {
-    background: rgba(255, 71, 87, 0.2);
+    background: rgba(34, 197, 94, 0.15);
 }
 
 .nav-badge {
@@ -413,10 +436,10 @@
 
 .nav-search-box:hover,
 .nav-search-box:focus-within {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     border-color: var(--nav-primary);
     box-shadow: 0 4px 16px rgba(34, 197, 94, 0.2),
-                inset 0 0 20px rgba(34, 197, 94, 0.05);
+                inset 0 0 20px rgba(34, 197, 94, 0.08);
     transform: translateY(-1px);
 }
 
@@ -491,7 +514,7 @@
 }
 
 .nav-action-btn:hover {
-    background: rgba(255, 71, 87, 0.15);
+    background: rgba(34, 197, 94, 0.15);
     border-color: var(--nav-primary);
     transform: scale(1.1) rotate(10deg);
 }
