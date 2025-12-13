@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Contributor Dashboard Styles
  * Matches SastoMahango Main Website Design
  */
@@ -37,9 +37,9 @@
 
 .dashboard-header {
     padding: var(--spacing-md) var(--spacing-lg);
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.03) 0%, var(--bg-secondary) 100%);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.03) 0%, var(--bg-secondary) 100%);
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(249, 115, 22, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.15);
     animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -60,7 +60,7 @@
     justify-content: center;
     font-size: 2rem;
     color: white;
-    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
     animation: pulseGlow 3s infinite;
 }
 
@@ -130,8 +130,8 @@
 
 .stat-card-compact:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(249, 115, 22, 0.25);
-    border-color: rgba(249, 115, 22, 0.4);
+    box-shadow: 0 12px 24px rgba(34, 197, 94, 0.25);
+    border-color: rgba(34, 197, 94, 0.4);
 }
 
 .stat-card-compact .stat-icon {
@@ -210,7 +210,7 @@
 
 .btn-action-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
 }
 
 .btn-action-success {
@@ -243,7 +243,7 @@
     border: 1px solid var(--border-color);
     overflow: hidden;
     margin-bottom: var(--spacing-lg);
-    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.06);
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.06);
 }
 
 .tab-navigation {
@@ -439,15 +439,15 @@
     font-weight: var(--font-weight-bold);
     margin-left: 0.2rem;
     animation: pulse 2s ease-in-out infinite;
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
 }
 
 @keyframes pulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
     }
     50% {
-        box-shadow: 0 0 0 6px rgba(249, 115, 22, 0);
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
     }
 }
 
@@ -485,11 +485,11 @@
 }
 
 .notification-warning {
-    border-left: 2px solid #f59e0b;
+    border-left: 2px solid #84cc16;
 }
 
 .notification-warning i {
-    color: #f59e0b;
+    color: #84cc16;
 }
 
 .notification-success {
@@ -601,7 +601,7 @@
 
 .stat-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px -10px rgba(249, 115, 22, 0.2);
+    box-shadow: 0 20px 40px -10px rgba(34, 197, 94, 0.2);
 }
 
 .stat-card:hover::before {
@@ -634,7 +634,7 @@
 .stat-icon.orange {
     background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
 }
 
 .stat-icon.blue {
@@ -656,7 +656,7 @@
 }
 
 [data-theme="dark"] .stat-icon.orange {
-    background: rgba(249, 115, 22, 0.1);
+    background: rgba(34, 197, 94, 0.1);
 }
 
 [data-theme="dark"] .stat-icon.blue {
@@ -767,7 +767,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
     opacity: 0;
     transition: opacity var(--transition-base);
 }
@@ -775,7 +775,7 @@
 .action-card:hover {
     transform: translateY(-4px);
     border-color: var(--brand-primary);
-    box-shadow: 0 12px 30px -8px rgba(249, 115, 22, 0.25);
+    box-shadow: 0 12px 30px -8px rgba(34, 197, 94, 0.25);
 }
 
 .action-card:hover::before {
@@ -806,7 +806,7 @@
 
 .action-card:hover .action-icon {
     transform: rotate(-10deg) scale(1.1);
-    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
 }
 
 .action-card h3 {
@@ -882,7 +882,7 @@
 
 .activity-item:hover {
     transform: translateX(8px);
-    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.15);
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.15);
     border-color: var(--brand-primary);
 }
 
@@ -960,9 +960,9 @@
 }
 
 .meta-badge.meta-category {
-    background: rgba(249, 115, 22, 0.1);
+    background: rgba(34, 197, 94, 0.1);
     color: var(--brand-primary-dark);
-    border-color: rgba(249, 115, 22, 0.2);
+    border-color: rgba(34, 197, 94, 0.2);
 }
 
 .meta-badge.meta-date {
@@ -986,8 +986,8 @@
 }
 
 [data-theme="dark"] .meta-badge.meta-category {
-    background: rgba(249, 115, 22, 0.15);
-    color: #fb923c;
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
 }
 
 .activity-details {
@@ -1127,7 +1127,7 @@
     text-align: center;
     padding: var(--spacing-2xl) var(--spacing-lg);
     color: var(--text-secondary);
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.03) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.03) 0%, transparent 100%);
     border-radius: var(--radius-lg);
 }
 
@@ -1179,7 +1179,7 @@
 
 .notification-item.unread {
     border-left: 3px solid var(--brand-primary);
-    background: linear-gradient(90deg, rgba(249, 115, 22, 0.05) 0%, var(--bg-secondary) 100%);
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.05) 0%, var(--bg-secondary) 100%);
 }
 
 .notification-header {
@@ -1211,7 +1211,7 @@
 
 .notification-icon.warning {
     background: rgba(251, 191, 36, 0.1);
-    color: #f59e0b;
+    color: #84cc16;
 }
 
 .notification-content h4 {
@@ -1264,10 +1264,10 @@
 
 @keyframes pulseGlow {
     0%, 100% {
-        box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+        box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
     }
     50% {
-        box-shadow: 0 8px 30px rgba(249, 115, 22, 0.5);
+        box-shadow: 0 8px 30px rgba(34, 197, 94, 0.5);
     }
 }
 
@@ -1385,8 +1385,8 @@
 
 .breakdown-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(249, 115, 22, 0.25);
-    border-color: rgba(249, 115, 22, 0.4);
+    box-shadow: 0 12px 24px rgba(34, 197, 94, 0.25);
+    border-color: rgba(34, 197, 94, 0.4);
 }
 
 .breakdown-icon {
@@ -1558,7 +1558,7 @@
 .btn-view-all:hover {
     background: var(--brand-primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 8px 16px rgba(34, 197, 94, 0.3);
 }
 
 .empty-state-small {
@@ -1600,7 +1600,7 @@
 
 .achievement-card.unlocked {
     border-color: var(--brand-primary);
-    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(249, 115, 22, 0.05) 100%);
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(34, 197, 94, 0.05) 100%);
 }
 
 .achievement-card.locked {

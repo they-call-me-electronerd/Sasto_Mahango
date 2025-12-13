@@ -1,4 +1,4 @@
-/* ===================================
+﻿/* ===================================
    WAVE DIVIDER DARK MODE SUPPORT
    =================================== */
 
@@ -187,7 +187,7 @@
 
 /* Colored backgrounds for stats/badges - preserve */
 [data-theme="dark"] [style*="background: linear-gradient"],
-[data-theme="dark"] [style*="background-color: #f97316"],
+[data-theme="dark"] [style*="background-color: #22c55e"],
 [data-theme="dark"] [style*="background-color: #3b82f6"],
 [data-theme="dark"] [style*="background-color: #10b981"],
 [data-theme="dark"] [style*="background-color: #8b5cf6"],
@@ -197,7 +197,7 @@
 }
 
 /* Colored text - preserve brand colors */
-[data-theme="dark"] [style*="color: #f97316"],
+[data-theme="dark"] [style*="color: #22c55e"],
 [data-theme="dark"] [style*="color: #3b82f6"],
 [data-theme="dark"] [style*="color: #10b981"],
 [data-theme="dark"] [style*="color: #8b5cf6"],

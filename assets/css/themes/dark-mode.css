@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Theme Toggle & Dark Mode Styles
  * Smooth transitions between light and dark themes
  */
@@ -14,8 +14,8 @@
     justify-content: center;
     width: 42px;
     height: 42px;
-    background: rgba(249, 115, 22, 0.1);
-    border: 1px solid rgba(249, 115, 22, 0.2);
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -23,8 +23,8 @@
 }
 
 .theme-toggle:hover {
-    background: rgba(249, 115, 22, 0.2);
-    border-color: #f97316;
+    background: rgba(34, 197, 94, 0.2);
+    border-color: #22c55e;
     transform: scale(1.1);
 }
 
@@ -37,7 +37,7 @@
 }
 
 .theme-icon-light {
-    color: #f59e0b;
+    color: #84cc16;
     transform: rotate(0deg) scale(1);
     opacity: 1;
 }
@@ -66,7 +66,7 @@
 :root {
     /* Light Theme Colors */
     --bg-primary: #ffffff;
-    --bg-secondary: #fef7f4;
+    --bg-secondary: #f0fdf4;
     --bg-tertiary: #fff4ed;
     --bg-accent: #f9fafb;
 
@@ -74,32 +74,32 @@
     --text-secondary: #4b5563;
     --text-tertiary: #6b7280;
 
-    --border-color: rgba(249, 115, 22, 0.15);
+    --border-color: rgba(34, 197, 94, 0.15);
     --border-light: rgba(0, 0, 0, 0.08);
-    --shadow-sm: 0 1px 3px 0 rgba(249, 115, 22, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-    --shadow-md: 0 4px 12px -1px rgba(249, 115, 22, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 20px 25px -5px rgba(249, 115, 22, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
-    --shadow-orange: 0 10px 30px rgba(249, 115, 22, 0.25);
+    --shadow-sm: 0 1px 3px 0 rgba(34, 197, 94, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 4px 12px -1px rgba(34, 197, 94, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 20px 25px -5px rgba(34, 197, 94, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+    --shadow-orange: 0 10px 30px rgba(34, 197, 94, 0.25);
 
     /* Brand Colors - Orange Gradient Theme */
-    --primary-orange: #f97316;
-    --primary-orange-dark: #ea580c;
-    --primary-orange-light: #fb923c;
-    --primary-orange-lighter: #fed7aa;
-    --primary-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-    --primary-gradient-soft: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(234, 88, 12, 0.1) 100%);
+    --primary-orange: #22c55e;
+    --primary-orange-dark: #16a34a;
+    --primary-orange-light: #4ade80;
+    --primary-orange-lighter: #bbf7d0;
+    --primary-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    --primary-gradient-soft: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(22, 163, 74, 0.1) 100%);
 
     /* Accent Colors */
     --accent-blue: #3b82f6;
     --accent-green: #10b981;
     --accent-red: #ef4444;
-    --accent-yellow: #f59e0b;
+    --accent-yellow: #84cc16;
     --accent-purple: #8b5cf6;
 
     /* Success/Warning/Error */
     --success: #10b981;
     --success-light: #d1fae5;
-    --warning: #f59e0b;
+    --warning: #84cc16;
     --warning-light: #fef3c7;
     --error: #ef4444;
     --error-light: #fee2e2;
@@ -123,20 +123,20 @@
     --text-secondary: #e2e8f0;
     --text-tertiary: #cbd5e1;
 
-    --border-color: rgba(249, 115, 22, 0.2);
+    --border-color: rgba(34, 197, 94, 0.2);
     --border-light: rgba(148, 163, 184, 0.15);
     --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
     --shadow-md: 0 4px 12px -1px rgba(0, 0, 0, 0.6);
     --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.8);
-    --shadow-orange: 0 10px 30px rgba(249, 115, 22, 0.4);
+    --shadow-orange: 0 10px 30px rgba(34, 197, 94, 0.4);
 
     /* Brand Colors - Keep Orange in Dark Mode */
-    --primary-orange: #fb923c;
-    --primary-orange-dark: #f97316;
+    --primary-orange: #4ade80;
+    --primary-orange-dark: #22c55e;
     --primary-orange-light: #fdba74;
-    --primary-orange-lighter: #fed7aa;
-    --primary-gradient: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-    --primary-gradient-soft: linear-gradient(135deg, rgba(251, 146, 60, 0.15) 0%, rgba(249, 115, 22, 0.15) 100%);
+    --primary-orange-lighter: #bbf7d0;
+    --primary-gradient: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+    --primary-gradient-soft: linear-gradient(135deg, rgba(74, 222, 128, 0.15) 0%, rgba(34, 197, 94, 0.15) 100%);
 
     /* Accent Colors - Adjusted for dark mode */
     --accent-blue: #60a5fa;
@@ -339,7 +339,7 @@ textarea::placeholder {
 input:focus,
 textarea:focus,
 select:focus {
-    border-color: #f97316;
+    border-color: #22c55e;
 }
 
 /* Buttons adapt to theme - except brand buttons */
@@ -351,11 +351,11 @@ select:focus {
 
 /* Scroll-to-Top Button - stays visible in dark mode */
 .scroll-to-top {
-    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.6);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.6);
 }
 
 [data-theme="dark"] .scroll-to-top {
-    box-shadow: 0 4px 30px rgba(249, 115, 22, 0.8);
+    box-shadow: 0 4px 30px rgba(34, 197, 94, 0.8);
 }
 
 /* ============================================================================
@@ -579,12 +579,12 @@ select:focus {
 }
 
 /* Maintain orange/accent colors */
-[data-theme="dark"] *[style*="color: #f97316"],
-[data-theme="dark"] *[style*="color:#f97316"],
+[data-theme="dark"] *[style*="color: #22c55e"],
+[data-theme="dark"] *[style*="color:#22c55e"],
 [data-theme="dark"] .stat-number,
 [data-theme="dark"] .product-price,
 [data-theme="dark"] .product-category {
-    color: #fb923c !important;
+    color: #4ade80 !important;
 }
 
 /* Background overrides */
@@ -763,12 +763,12 @@ select:focus {
 }
 
 /* Maintain orange/accent colors */
-[data-theme="dark"] *[style*="color: #f97316"],
-[data-theme="dark"] *[style*="color:#f97316"],
+[data-theme="dark"] *[style*="color: #22c55e"],
+[data-theme="dark"] *[style*="color:#22c55e"],
 [data-theme="dark"] .stat-number,
 [data-theme="dark"] .product-price,
 [data-theme="dark"] .product-category {
-    color: #fb923c !important;
+    color: #4ade80 !important;
 }
 
 /* Background overrides */
@@ -849,7 +849,7 @@ select:focus {
 
 /* Focus indicators */
 .theme-toggle:focus {
-    outline: 2px solid #f97316;
+    outline: 2px solid #22c55e;
     outline-offset: 2px;
 }
 

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Professional Footer Styles
  * Multi-column layout with social icons, contact info, and modern design
  */
@@ -48,7 +48,7 @@
     right: 0;
     bottom: 0;
     background-image:
-        radial-gradient(circle at 20% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
     opacity: 0.6;
     animation: pattern-float 20s ease-in-out infinite;
@@ -75,7 +75,7 @@
 
 .footer-brand .brand-name i {
     font-size: 2rem;
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -125,7 +125,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 0;
@@ -139,8 +139,8 @@
 
 .social-icon:hover {
     transform: translateY(-3px) scale(1.05);
-    border-color: #f97316;
-    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    border-color: #22c55e;
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
 }
 
 .social-icon:hover::before {
@@ -172,7 +172,7 @@
     left: 0;
     width: 40px;
     height: 3px;
-    background: linear-gradient(90deg, #f97316, transparent);
+    background: linear-gradient(90deg, #22c55e, transparent);
     border-radius: 2px;
 }
 
@@ -209,7 +209,7 @@
 }
 
 .footer-links a:hover {
-    color: #f97316;
+    color: #22c55e;
     padding-left: 0.5rem;
 }
 
@@ -239,8 +239,8 @@
 
 .newsletter-input:focus {
     background: rgba(31, 41, 55, 0.95);
-    border-color: #f97316;
-    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
     outline: none;
 }
 
@@ -249,7 +249,7 @@
 }
 
 .newsletter-btn {
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #ffffff;
     border: none;
     padding: 0.75rem 1.25rem;
@@ -273,7 +273,7 @@
 
 .newsletter-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.5);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.5);
 }
 
 .newsletter-btn:hover::before {
@@ -300,7 +300,7 @@
 
 .contact-item i {
     width: 20px;
-    color: #f97316;
+    color: #22c55e;
     font-size: 1rem;
 }
 
@@ -327,7 +327,7 @@
 }
 
 .footer-legal-link:hover {
-    color: #f97316;
+    color: #22c55e;
 }
 
 /* ============================================================================
@@ -435,7 +435,7 @@
 .footer-links a:focus,
 .social-icon:focus,
 .newsletter-btn:focus {
-    outline: 2px solid #f97316;
+    outline: 2px solid #22c55e;
     outline-offset: 2px;
 }
 
@@ -449,7 +449,7 @@
     right: 30px;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     color: white;
     border: none;
     border-radius: 50%;
@@ -462,7 +462,7 @@
     visibility: hidden;
     transform: translateY(100px);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
     z-index: 999;
     animation: scroll-top-pulse 2s ease-in-out infinite;
 }
@@ -475,7 +475,7 @@
 
 .scroll-to-top:hover {
     transform: translateY(-5px) rotate(360deg);
-    box-shadow: 0 8px 30px rgba(249, 115, 22, 0.6);
+    box-shadow: 0 8px 30px rgba(34, 197, 94, 0.6);
 }
 
 .scroll-to-top:active {
@@ -487,10 +487,10 @@
 
     0%,
     100% {
-        box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
     }
 
     50% {
-        box-shadow: 0 4px 30px rgba(249, 115, 22, 0.7);
+        box-shadow: 0 4px 30px rgba(34, 197, 94, 0.7);
     }
 }

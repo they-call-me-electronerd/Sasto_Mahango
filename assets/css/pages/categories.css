@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Categories Page Styles
  * Grid layout for browsing all categories
  */
@@ -331,7 +331,7 @@
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
 }
 
 .btn-secondary {

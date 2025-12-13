@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Modern Liquid Glass Navigation Bar
  * Premium Glassmorphism Design with Smooth Animations
  * Features: Backdrop blur, smooth transitions, premium interactivity
@@ -12,9 +12,9 @@
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     
     /* Modern Brand Colors - Orange Theme */
-    --nav-primary: #f97316;
-    --nav-primary-light: #fb923c;
-    --nav-primary-dark: #ea580c;
+    --nav-primary: #22c55e;
+    --nav-primary-light: #4ade80;
+    --nav-primary-dark: #16a34a;
     --nav-secondary: #2f3542;
     --nav-accent: #3b82f6;
     --nav-success: #10b981;
@@ -55,7 +55,7 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-        rgba(249, 115, 22, 0.05) 0%, 
+        rgba(34, 197, 94, 0.05) 0%, 
         rgba(59, 130, 246, 0.05) 100%);
     pointer-events: none;
     animation: gradientShift 15s ease infinite;
@@ -78,7 +78,7 @@
     right: -20%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
     border-radius: 50%;
     filter: blur(40px);
     animation: floatGlass 8s ease-in-out infinite;
@@ -409,7 +409,7 @@
     display: flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.6);
-    border: 1.5px solid rgba(249, 115, 22, 0.25);
+    border: 1.5px solid rgba(34, 197, 94, 0.25);
     border-radius: 12px;
     padding: 0.4rem 0.5rem 0.4rem 1rem;
     transition: var(--transition-fast);
@@ -421,8 +421,8 @@
 .nav-search-box:focus-within {
     background: rgba(255, 255, 255, 0.85);
     border-color: var(--nav-primary);
-    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.2),
-                inset 0 0 20px rgba(249, 115, 22, 0.05);
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.2),
+                inset 0 0 20px rgba(34, 197, 94, 0.05);
     transform: translateY(-1px);
 }
 
@@ -459,7 +459,7 @@
 .nav-search-btn:hover {
     background: linear-gradient(135deg, var(--nav-primary-dark), var(--nav-primary));
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
 }
 
 .nav-search-btn:active {

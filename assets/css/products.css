@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Products Page Stylesheet
  * Professional design matching home page aesthetics
  */
@@ -8,8 +8,8 @@
    ========================================================================== */
 :root {
     /* Brand Colors */
-    --primary-orange: #f97316;
-    --primary-orange-dark: #ea580c;
+    --primary-orange: #22c55e;
+    --primary-orange-dark: #16a34a;
     --secondary-blue: #3b82f6;
     --accent-green: #10b981;
 
@@ -133,7 +133,7 @@
 .filter-select:focus {
     outline: none;
     border-color: var(--primary-orange);
-    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
 .search-input-wrapper {
@@ -248,12 +248,12 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0.875rem;
-    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(234, 88, 12, 0.1));
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.1));
     color: var(--primary-orange-dark);
     border-radius: var(--radius-sm);
     font-size: 0.875rem;
     font-weight: 500;
-    border: 1px solid rgba(249, 115, 22, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
 .remove-filter {
@@ -360,8 +360,8 @@
 
 .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(249, 115, 22, 0.08);
-    border-color: rgba(249, 115, 22, 0.2);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.2);
 }
 
 .list-view .product-card {
@@ -373,7 +373,7 @@
     width: 100%;
     padding-top: 35%;
     overflow: hidden;
-    background: linear-gradient(135deg, #fef7f4 0%, #fef3ee 100%);
+    background: linear-gradient(135deg, #f0fdf4 0%, #fef3ee 100%);
 }
 
 .list-view .product-image {
@@ -528,26 +528,26 @@
 .btn-view-details {
     width: 100%;
     margin-top: auto;
-    background: linear-gradient(135deg, var(--primary-orange) 0%, #ea580c 100%);
+    background: linear-gradient(135deg, var(--primary-orange) 0%, #16a34a 100%);
     color: var(--white);
     border: none;
     font-size: 0.625rem;
     padding: 0.4rem 0.5rem;
-    box-shadow: 0 1px 3px rgba(249, 115, 22, 0.2);
+    box-shadow: 0 1px 3px rgba(34, 197, 94, 0.2);
 }
 
 .btn-view-details:hover {
-    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 4px 8px rgba(34, 197, 94, 0.3);
 }
 
 .btn-view-details:active,
 .btn-view-details:focus {
-    background: linear-gradient(135deg, #c2410c 0%, #9a3412 100%);
+    background: linear-gradient(135deg, #15803d 0%, #166534 100%);
     color: white;
     transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(249, 115, 22, 0.2);
+    box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
     outline: none;
 }
 

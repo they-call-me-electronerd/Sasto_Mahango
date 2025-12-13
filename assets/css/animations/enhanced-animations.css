@@ -1,4 +1,4 @@
-/* ===================================
+﻿/* ===================================
    ENHANCED FLUID ANIMATIONS
    Professional Effects & Micro-interactions
    =================================== */
@@ -115,11 +115,11 @@ html {
 
     0%,
     100% {
-        box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
     }
 
     50% {
-        box-shadow: 0 0 40px rgba(249, 115, 22, 0.6);
+        box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
     }
 }
 
@@ -238,7 +238,7 @@ html {
     position: absolute;
     inset: -2px;
     border-radius: inherit;
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: -1;
@@ -428,7 +428,7 @@ html {
 
 .typewriter {
     overflow: hidden;
-    border-right: 0.15em solid #f97316;
+    border-right: 0.15em solid #22c55e;
     white-space: nowrap;
     animation: typewriter 3s steps(40) 1s 1 normal both;
 }
@@ -438,7 +438,7 @@ html {
    =================================== */
 
 .animated-dots {
-    background-image: radial-gradient(circle, rgba(249, 115, 22, 0.1) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(34, 197, 94, 0.1) 1px, transparent 1px);
     background-size: 20px 20px;
     animation: dotsMove 20s linear infinite;
 }

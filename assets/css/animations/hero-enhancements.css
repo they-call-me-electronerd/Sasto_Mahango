@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Hero Section Enhancements
  * Advanced animations and effects for the hero section
  * Optimized for smooth 60fps performance
@@ -13,15 +13,15 @@
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    background: rgba(249, 115, 22, 0.1);
+    background: rgba(34, 197, 94, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 0.6rem 1.4rem;
     border-radius: 2rem;
-    border: 1px solid rgba(249, 115, 22, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.2);
     font-size: 0.95rem;
     font-weight: 600;
-    color: #ea580c;
+    color: #16a34a;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
@@ -34,7 +34,7 @@
     inset: -2px;
     background: linear-gradient(90deg,
             transparent,
-            rgba(249, 115, 22, 0.3),
+            rgba(34, 197, 94, 0.3),
             transparent);
     background-size: 200% 100%;
     animation: shimmer 3s linear infinite;
@@ -53,7 +53,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(249, 115, 22, 0.1);
+    background: rgba(34, 197, 94, 0.1);
     border-radius: 2rem;
     filter: blur(10px);
     opacity: 0;
@@ -68,8 +68,8 @@
 
 .hero-badge:hover {
     transform: translateY(-2px);
-    border-color: rgba(249, 115, 22, 0.4);
-    background: rgba(249, 115, 22, 0.15);
+    border-color: rgba(34, 197, 94, 0.4);
+    background: rgba(34, 197, 94, 0.15);
 }
 
 /* Lightning icon animation */
@@ -90,9 +90,9 @@
 /* Enhanced focus state */
 .hero-search-box:focus-within {
     transform: translateY(-4px) scale(1.02);
-    border-color: #f97316;
-    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.25),
-        0 0 0 4px rgba(249, 115, 22, 0.1);
+    border-color: #22c55e;
+    box-shadow: 0 20px 40px rgba(34, 197, 94, 0.25),
+        0 0 0 4px rgba(34, 197, 94, 0.1);
 }
 
 /* Search icon animation */
@@ -102,7 +102,7 @@
 
 .hero-search-box:focus-within .search-icon-left {
     transform: scale(1.1) rotate(10deg);
-    color: #f97316;
+    color: #22c55e;
 }
 
 /* Search button ripple effect */
@@ -132,7 +132,7 @@
 
 .hero-search-btn:hover {
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
 }
 
 /* Input placeholder animation */
@@ -172,7 +172,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #f97316, #ea580c);
+    background: linear-gradient(90deg, #22c55e, #16a34a);
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -182,7 +182,7 @@
 
 /* Glow effect for numbers */
 .stat-item:hover .stat-number {
-    filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.3));
+    filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.3));
 }
 
 /* ============================================================================
@@ -246,7 +246,7 @@
 .hero-title .highlight {
     position: relative;
     display: inline;
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -288,13 +288,13 @@
    ============================================================================ */
 
 [data-theme="dark"] .hero-badge {
-    background: rgba(249, 115, 22, 0.15);
-    border-color: rgba(249, 115, 22, 0.3);
-    color: #fb923c;
+    background: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #4ade80;
 }
 
 [data-theme="dark"] .hero-badge:hover {
-    background: rgba(249, 115, 22, 0.25);
+    background: rgba(34, 197, 94, 0.25);
 }
 
 [data-theme="dark"] .hero-search-box {
@@ -304,7 +304,7 @@
 
 [data-theme="dark"] .hero-search-box:focus-within {
     background: rgba(255, 255, 255, 0.08);
-    border-color: #f97316;
+    border-color: #22c55e;
 }
 
 /* ============================================================================
