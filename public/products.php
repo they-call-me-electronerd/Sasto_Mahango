@@ -242,7 +242,7 @@ include __DIR__ . '/../includes/header_professional.php';
                                 <div class="product-image">
                                     <span class="product-badge <?php echo $statusClass; ?>"><?php echo $statusLabel; ?></span>
                                     <?php 
-                                    $imageSrc = $cardHasImage && $cardImageUrl ? $cardImageUrl : (SITE_URL . '/' . htmlspecialchars($item['image_path']));
+                                    $imageSrc = $cardHasImage && $cardImageUrl ? $cardImageUrl : (SITE_URL . '/contributor/assets/uploads/items/' . htmlspecialchars($item['image_path']));
                                     ?>
                                     <img src="<?php echo $imageSrc; ?>" 
                                          alt="<?php echo htmlspecialchars($item['item_name']); ?>"
