@@ -56,6 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $errors = [];
         
+        // Debug logging
+        Logger::log('item_edit_attempt', 'Editing item #' . $itemId . ' - Files received: ' . json_encode($_FILES));
+        
         if (empty($itemName)) {
             $errors[] = 'Item name is required';
         }
@@ -84,29 +87,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     mkdir($uploadDir, 0755, true);
                 }
                 
-                $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
-                $fileType = $_FILES['item_image']['type'];
-                
-                if (in_array($fileType, $allowedTypes)) {
-                    $extension = pathinfo($_FILES['item_image']['name'], PATHINFO_EXTENSION);
-                    $filename = 'item_' . time() . '_' . uniqid() . '.' . $extension;
-                    $uploadPath = $uploadDir . $filename;
+                // Validate file size (5MB limit)
+                $maxFileSize = 5 * 1024 * 1024; // 5MB
+                if ($_FILES['item_image']['size'] > $maxFileSize) {
+                    $errors[] = 'Image size exceeds 5MB limit';
+                } else {
+                    // Validate MIME type
+                    $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+                    $fileType = $_FILES['item_image']['type'];
+                    $fileMime = mime_content_type($_FILES['item_image']['tmp_name']);
                     
-                    if (move_uploaded_file($_FILES['item_image']['tmp_name'], $uploadPath)) {
-                        $imagePath = 'assets/uploads/items/' . $filename;
+                    if (in_array($fileType, $allowedTypes) && in_array($fileMime, $allowedTypes)) {
+                        $extension = pathinfo($_FILES['item_image']['name'], PATHINFO_EXTENSION);
+                        $filename = 'item_' . time() . '_' . uniqid() . '.' . $extension;
+                        $uploadPath = $uploadDir . $filename;
                         
-                        // Delete old image if it exists and is different
-                        if (!empty($item['image_path']) && $item['image_path'] !== $imagePath) {
-                            $oldImagePath = __DIR__ . '/../' . $item['image_path'];
-                            if (file_exists($oldImagePath)) {
-                                unlink($oldImagePath);
+                        if (move_uploaded_file($_FILES['item_image']['tmp_name'], $uploadPath)) {
+                            $imagePath = $filename;
+                            Logger::log('item_image_upload', 'Item #' . $itemId . ' - New image uploaded: ' . $filename);
+                            
+                            // Delete old image if it exists and is different
+                            if (!empty($item['image_path']) && $item['image_path'] !== $imagePath) {
+                                $oldImagePath = __DIR__ . '/../assets/uploads/items/' . $item['image_path'];
+                                if (file_exists($oldImagePath)) {
+                                    unlink($oldImagePath);
+                                    Logger::log('item_image_delete', 'Item #' . $itemId . ' - Old image deleted: ' . $item['image_path']);
+                                }
                             }
+                        } else {
+                            $errors[] = 'Failed to upload image';
+                            Logger::log('item_image_error', 'Item #' . $itemId . ' - Failed to move uploaded file');
                         }
                     } else {
-                        $errors[] = 'Failed to upload image';
+                        $errors[] = 'Invalid image type. Only JPG, PNG, and WEBP are allowed (detected: ' . $fileMime . ')';
+                        Logger::log('item_image_error', 'Item #' . $itemId . ' - Invalid MIME type: ' . $fileMime);
                     }
-                } else {
-                    $errors[] = 'Invalid image type. Only JPG, PNG, and WEBP are allowed';
+                }
+            } elseif (isset($_FILES['item_image']) && $_FILES['item_image']['error'] !== UPLOAD_ERR_NO_FILE) {
+                // Handle upload errors
+                switch ($_FILES['item_image']['error']) {
+                    case UPLOAD_ERR_INI_SIZE:
+                    case UPLOAD_ERR_FORM_SIZE:
+                        $errors[] = 'Image file is too large';
+                        break;
+                    case UPLOAD_ERR_PARTIAL:
+                        $errors[] = 'Image was only partially uploaded';
+                        break;
+                    default:
+                        $errors[] = 'Error uploading image';
+                        break;
                 }
             }
             
@@ -125,6 +154,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Add image path if changed
                 if ($imagePath !== $item['image_path']) {
                     $data['image_path'] = $imagePath;
+                    Logger::log('item_image_update', 'Item #' . $itemId . ' - Image changed from "' . $item['image_path'] . '" to "' . $imagePath . '"');
+                } else {
+                    Logger::log('item_image_update', 'Item #' . $itemId . ' - Image unchanged: "' . $imagePath . '"');
                 }
                 
                 // Update item
@@ -300,7 +332,7 @@ include __DIR__ . '/../includes/header_professional.php';
                             <img 
                                 src="<?php echo SITE_URL . '/' . htmlspecialchars($item['image_path']); ?>" 
                                 alt="<?php echo htmlspecialchars($item['item_name']); ?>"
-                                style="max-width: 200px; border-radius: 8px; border: 2px solid var(--border-color);">
+                                style="max-width: 200px; max-height: 200px; border-radius: 8px; border: 2px solid var(--border-color); object-fit: cover;">
                         </div>
                     </div>
                     <?php endif; ?>
@@ -484,6 +516,39 @@ include __DIR__ . '/../includes/header_professional.php';
 </style>
 
 <script>
+// Form submission validation
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.admin-form');
+    
+    form.addEventListener('submit', function(e) {
+        const fileInput = document.getElementById('item_image');
+        
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            console.log('Form submitting with file:', {
+                name: file.name,
+                size: file.size,
+                type: file.type
+            });
+            
+            // Validate file before submission
+            if (!file.type.match(/^image\/(jpeg|jpg|png|webp)$/)) {
+                e.preventDefault();
+                alert('Please select a valid image file (JPG, PNG, or WEBP)');
+                return false;
+            }
+            
+            if (file.size > 5 * 1024 * 1024) {
+                e.preventDefault();
+                alert('File size must be less than 5MB');
+                return false;
+            }
+        } else {
+            console.log('Form submitting without new image - keeping existing image');
+        }
+    });
+});
+
 function previewNewImage(input) {
     console.log('previewNewImage called', input);
     if (input.files && input.files[0]) {

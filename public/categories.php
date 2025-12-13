@@ -143,25 +143,6 @@ include __DIR__ . '/../includes/header_professional.php';
 
 <?php include __DIR__ . '/../includes/footer_professional.php'; ?>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const viewButtons = document.querySelectorAll('.view-btn');
-    const categoriesGrid = document.getElementById('categoriesGrid');
-
-    viewButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            viewButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            const view = btn.dataset.view;
-            if (view === 'list') {
-                categoriesGrid.classList.add('list-view');
-            } else {
-                categoriesGrid.classList.remove('list-view');
-            }
-        });
-    });
-});
-</script>
+<script src="<?php echo SITE_URL; ?>/assets/js/pages/categories.js"></script>
 </body>
 </html>

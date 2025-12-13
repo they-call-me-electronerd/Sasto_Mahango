@@ -342,10 +342,6 @@
             ? `<span class="meta-item"><i class="bi bi-geo-alt"></i>${item.market_location}</span>` 
             : '';
         
-        const imageContent = item.has_image 
-            ? `<img src="${item.image_path}" alt="${item.item_name}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">`
-            : `<div class="product-image-placeholder"></div>`;
-        
         const adminButton = isAdmin 
             ? `<a href="${siteUrl}/admin/edit_item.php?id=${item.item_id}" class="btn-edit-icon" title="Edit Item"><i class="bi bi-pencil-square"></i></a>` 
             : '';
@@ -354,7 +350,16 @@
             <div class="product-card ${item.category_class}" style="animation-delay: ${delay}s;">
                 <div class="product-image">
                     <span class="product-badge ${item.status_class}">${item.status_label}</span>
-                    ${imageContent}
+                    <img src="${item.image_path}" 
+                         alt="${item.item_name}"
+                         class="product-main-image"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    <div class="product-image-placeholder" style="display: none;">
+                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
                 </div>
                 <div class="product-details">
                     <span class="product-category">${item.category_name}</span>

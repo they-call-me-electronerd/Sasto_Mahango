@@ -106,8 +106,15 @@ include __DIR__ . '/../includes/header_professional.php';
                 <!-- Image Gallery -->
                 <div class="product-gallery">
                     <div class="gallery-main">
-                        <?php if ($itemHasImage && $itemImageUrl): ?>
-                            <img src="<?php echo $itemImageUrl; ?>" 
+                        <?php 
+                                    if (str_contains(htmlspecialchars($item['image_path']),"http")) {
+                                        $imageSrc = htmlspecialchars($item['image_path']);
+                                    }
+                                    else{
+                                    $imageSrc = (SITE_URL . '/' . htmlspecialchars($item['image_path']));}
+                                    ?>
+                        <?php if ($imageSrc): ?>
+                            <img src="<?php echo $imageSrc; ?>" 
                                  alt="<?php echo htmlspecialchars($item['item_name']); ?>"
                                  class="main-image">
                         <?php else: ?>

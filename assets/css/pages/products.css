@@ -567,10 +567,9 @@ h6 {
     display: flex;
     flex-direction: column;
     position: relative;
-    animation: fadeInUp 0.6s ease forwards;
+    animation: fadeInUp 0.4s ease-out forwards;
     opacity: 0;
-    max-width: 100%;
-    will-change: transform, box-shadow;
+    height: 100%;
 }
 
 .product-card:hover {
@@ -598,11 +597,11 @@ h6 {
 
 .product-image {
     position: relative;
-    padding-top: 35%;
+    width: 100%;
+    padding-top: 65%;
     background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
     overflow: hidden;
     border-bottom: 1px solid rgba(34, 197, 94, 0.1);
-    position: relative;
 }
 
 .product-image::after {
@@ -626,6 +625,12 @@ h6 {
 }
 
 .product-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     filter: brightness(1);
 }
@@ -633,6 +638,15 @@ h6 {
 .product-card:hover .product-image img {
     transform: scale(1.12) rotate(1deg);
     filter: brightness(1.05);
+}
+
+.product-main-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Category-based placeholder icons */
@@ -645,10 +659,17 @@ h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
     background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
     background-size: 200% 200%;
     animation: gradientShift 8s ease infinite;
+}
+
+.placeholder-icon {
+    width: 80px;
+    height: 80px;
+    color: #10b981;
+    opacity: 0.4;
+    filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.1));
 }
 
 @keyframes gradientShift {
@@ -664,139 +685,7 @@ h6 {
 .product-card:nth-child(5) { animation-delay: 0.4s; }
 .product-card:nth-child(n+6) { animation-delay: 0.5s; }
 
-/* Default fallback icon */
-.product-image-placeholder::before {
-    content: '🏪';
-}
-
-/* Category-specific icons */
-.category-vegetables .product-image-placeholder::before {
-    content: '🥗';
-}
-
-.category-fruits .product-image-placeholder::before {
-    content: '🍇';
-}
-
-.category-grains .product-image-placeholder::before,
-.category-cereals .product-image-placeholder::before {
-    content: '🌾';
-}
-
-.category-pulses .product-image-placeholder::before,
-.category-legumes .product-image-placeholder::before {
-    content: '🫘';
-}
-
-.category-dairy .product-image-placeholder::before,
-.category-milk .product-image-placeholder::before {
-    content: '🥛';
-}
-
-.category-spices .product-image-placeholder::before {
-    content: '🧂';
-}
-
-.category-meat .product-image-placeholder::before,
-.category-chicken .product-image-placeholder::before,
-.category-mutton .product-image-placeholder::before {
-    content: '🍗';
-}
-
-.category-fish .product-image-placeholder::before,
-.category-seafood .product-image-placeholder::before {
-    content: '🐟';
-}
-
-.category-beverages .product-image-placeholder::before,
-.category-drinks .product-image-placeholder::before {
-    content: '🧃';
-}
-
-.category-snacks .product-image-placeholder::before,
-.category-chips .product-image-placeholder::before {
-    content: '🍪';
-}
-
-.category-household .product-image-placeholder::before,
-.category-cleaning .product-image-placeholder::before {
-    content: '🧹';
-}
-
-.category-electronics .product-image-placeholder::before,
-.category-gadgets .product-image-placeholder::before {
-    content: '💻';
-}
-
-.category-sports .product-image-placeholder::before,
-.category-fitness .product-image-placeholder::before {
-    content: '🏋️';
-}
-
-.category-clothing .product-image-placeholder::before,
-.category-fashion .product-image-placeholder::before,
-.category-apparel .product-image-placeholder::before {
-    content: '👔';
-}
-
-.category-books .product-image-placeholder::before,
-.category-stationery .product-image-placeholder::before {
-    content: '📖';
-}
-
-.category-toys .product-image-placeholder::before,
-.category-games .product-image-placeholder::before {
-    content: '🎮';
-}
-
-.category-beauty .product-image-placeholder::before,
-.category-cosmetics .product-image-placeholder::before {
-    content: '💅';
-}
-
-.category-furniture .product-image-placeholder::before,
-.category-home .product-image-placeholder::before {
-    content: '🛋️';
-}
-
-.category-tools .product-image-placeholder::before,
-.category-hardware .product-image-placeholder::before {
-    content: '🔨';
-}
-
-.category-gardening .product-image-placeholder::before,
-.category-plants .product-image-placeholder::before {
-    content: '🪴';
-}
-
-.category-bakery .product-image-placeholder::before,
-.category-bread .product-image-placeholder::before {
-    content: '🍞';
-}
-
-.category-sweets .product-image-placeholder::before,
-.category-desserts .product-image-placeholder::before,
-.category-candy .product-image-placeholder::before {
-    content: '🍰';
-}
-
-.category-oil .product-image-placeholder::before,
-.category-ghee .product-image-placeholder::before {
-    content: '🛢️';
-}
-
-.category-rice .product-image-placeholder::before {
-    content: '🍚';
-}
-
-.category-eggs .product-image-placeholder::before {
-    content: '🥚';
-}
-
-.category-tea .product-image-placeholder::before,
-.category-coffee .product-image-placeholder::before {
-    content: '☕';
-}
+/* All categories now use the same SVG placeholder icon */
 
 .category-medicines .product-image-placeholder::before,
 .category-health .product-image-placeholder::before,
@@ -850,11 +739,10 @@ h6 {
 }
 
 .product-details {
-    padding: 0.75rem 0.625rem 0.625rem;
+    padding: 0.75rem 0.875rem 0.875rem;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
     background: linear-gradient(to bottom, #ffffff 0%, #fefefe 50%, #fafbfc 100%);
     position: relative;
 }
@@ -891,13 +779,13 @@ h6 {
     font-size: 0.9375rem;
     font-weight: 700;
     color: #1f2937 !important;
-    margin: 0 0 0.3rem 0;
-    line-height: 1.25;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 2.2em;
+    height: 2.6em;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -921,10 +809,11 @@ h6 {
 .product-meta {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.25rem;
     font-size: 0.625rem;
     color: #6b7280;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
+    min-height: 2.5em;
 }
 
 .products-grid.list-view .product-meta {
@@ -956,9 +845,10 @@ h6 {
     font-weight: 800;
     color: #000000 !important;
     margin-top: auto;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.625rem;
     letter-spacing: -0.02em;
     transition: color 0.3s ease;
+    line-height: 1;
 }
 
 .product-card:hover .product-price {
@@ -1093,14 +983,11 @@ h6 {
 @keyframes fadeInUp {
     0% {
         opacity: 0;
-        transform: translateY(30px) scale(0.95);
-    }
-    50% {
-        opacity: 0.5;
+        transform: translateY(20px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
     }
 }
 
