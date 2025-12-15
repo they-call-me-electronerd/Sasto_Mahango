@@ -10,7 +10,7 @@
 
 ## 🌐 Live Demo
 
-**[Visit SastoMahango Live →](https://sastomahango.gt.tc)**
+**[Visit SastoMahango Live →](https://sastomahango.gt.tc)**   *[sastomahango.com](https://sastomahango.gt.tc)**   
 
 Experience the platform in action with real-time price data and full functionality.
 
