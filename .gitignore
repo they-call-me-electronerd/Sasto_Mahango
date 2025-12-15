@@ -14,7 +14,8 @@
 Thumbs.db
 
 # Logs
-logs/
+logs/*.log
+logs/rate_limits.json
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -28,9 +29,11 @@ vendor/
 bower_components/
 
 # User Uploaded Files
-assets/uploads/
-assets/uploads/items/
-assets/uploads/temp/
+assets/uploads/*
+!assets/uploads/.gitkeep
+assets/uploads/items/*
+!assets/uploads/items/.gitkeep
+assets/uploads/temp/*
 
 # Session Files
 sessions/
@@ -46,6 +49,7 @@ cache/
 *.db
 *.sqlite
 *.sqlite3
+database.sql
 
 # Composer
 composer.phar
@@ -71,8 +75,8 @@ desktop.ini
 # Build and Compiled Files
 dist/
 build/
-*.min.js
-*.min.css
+*.min.js.map
+*.min.css.map
 
 # Testing
 coverage/
@@ -86,12 +90,23 @@ secrets/
 *.key
 *.cert
 
-# Rate Limiting Data
-logs/rate_limits.json
+# Development Documentation (kept in repo but marked)
+# Remove these before production deployment
+COLOR_CONVERSION_SUMMARY.md
+VISUAL_COLOR_GUIDE.md
+REBRANDING_CHECKLIST.md
+QUICK_REFERENCE.md
+QUICK_START_ADS.md
+DEPLOYMENT_SUMMARY.md
+convert_to_green_theme.ps1
 
-# Documentation (development notes - keep production docs)
-docs/COMPLETION_REPORT.txt
-docs/ENHANCEMENT_CHECKLIST.txt
-docs/FILE_MANIFEST.txt
-docs/NAVIGATION_IMPLEMENTATION.txt
-docs/MulyaSuchi_Master_Structure.txt
+# Test files
+admin/test_upload.php
+
+# Temporary SQL files
+sql/items_fixed.sql
+sql/fresh_500_products_part2.sql
+sql/fresh_500_products_part3.sql
+sql/seed_500_products_master.sql
+sql/fix_nepali_text.php
+
