@@ -104,9 +104,6 @@ convert_to_green_theme.ps1
 admin/test_upload.php
 
 # Temporary SQL files
-sql/items_fixed.sql
-sql/fresh_500_products_part2.sql
-sql/fresh_500_products_part3.sql
-sql/seed_500_products_master.sql
-sql/fix_nepali_text.php
+sql/backup_*.sql
+sql/temp_*.sql
 
