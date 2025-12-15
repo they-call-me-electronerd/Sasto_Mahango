@@ -787,7 +787,7 @@ copies of the Software...
 
 <div align="center">
 
-**Made with ❤️ in Nepal 🇳🇵**
+**Made by sakshyam Bastakoti**
 
 *Empowering informed decisions through transparent market intelligence*
 
