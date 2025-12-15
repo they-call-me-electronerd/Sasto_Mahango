@@ -1,12 +1,13 @@
-# SastoMahango (सस्तोमहँगो)
+# MulyaSuchi (मूल्यसूची)
 
 **Nepal's Premier Market Intelligence Platform**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue)](https://www.php.net/)
 [![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-orange)](https://www.mysql.com/)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)](https://github.com)
 
-SastoMahango is a comprehensive market intelligence platform designed to provide real-time, accurate pricing information for commodities across Nepal's markets. The platform empowers consumers, vendors, and market analysts with transparent pricing data for vegetables, fruits, grains, and other essential commodities.
+MulyaSuchi is a comprehensive market intelligence platform designed to provide real-time, accurate pricing information for commodities across Nepal's markets. The platform empowers consumers, vendors, and market analysts with transparent pricing data for vegetables, fruits, grains, and other essential commodities.
 
 ## 🌟 Features
 
