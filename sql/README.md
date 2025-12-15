@@ -1,197 +1,159 @@
-# SQL Files Documentation
+# Database Files
 
-This directory contains all essential SQL scripts for the SastoMahango database system.
+This directory contains the complete database SQL file for MulyaSuchi.
 
-## Production Files (Execute in Order for Fresh Installation)
+## File
 
-### 1. `schema.sql` (16 KB)
-**Purpose:** Main database schema definition  
-**Contains:**
-- Database creation with proper charset (utf8mb4)
-- All table structures (users, categories, items, price_history, validation_queue, etc.)
-- Primary keys, foreign keys, and indexes
-- Default values and constraints
+### Complete Database
+- **`mulyasuchi_complete.sql`** - Complete database with schema and all data
+  - Database structure (tables, indexes, constraints)
+  - Initial seed data (categories, users, settings)
+  - All product data (500+ items)
+  - Sample data for testing
+  - All migrations applied
 
-**When to use:** Fresh database installation or schema recreation
+## Setup Instructions
 
-**Execute:**
+### Fresh Installation
+
+1. Create database:
+```sql
+CREATE DATABASE mulyasuchi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+2. Create database user:
+```sql
+CREATE USER 'mulyasuchi_user'@'localhost' IDENTIFIED BY 'your_secure_password';
+GRANT ALL PRIVILEGES ON mulyasuchi.* TO 'mulyasuchi_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+3. Import complete database:
 ```bash
-mysql -u root -p < schema.sql
+mysql -u mulyasuchi_user -p mulyasuchi < mulyasuchi_complete.sql
 ```
 
----
+That's it! Your database is ready with all tables, data, and products.
 
-### 2. `seed_data.sql` (6 KB)
-**Purpose:** Initial required data for system operation  
-**Contains:**
-- Default admin user (username: admin, password: Admin@123)
-- 12 product categories with Nepali names
-- System settings
-- Product tags
-- Default roles and permissions data
+### Database Structure
 
-**When to use:** After running schema.sql on fresh installation
+#### Main Tables
+- `users` - User accounts (admin, contributor, user)
+- `items` - Product/commodity listings with prices
+- `categories` - Product categories (vegetables, fruits, grains, etc.)
+- `markets` - Market locations across Nepal
+- `price_history` - Historical price data for trend analysis
+- `logs` - System activity and security logs
+- `sessions` - User session management
 
-**Execute:**
+#### Key Features
+- **UTF-8MB4 support** for Nepali Devanagari script
+- **Optimized indexes** for fast search and filtering
+- **Foreign key constraints** for data integrity
+- **Timestamp tracking** on all records
+- **Full-text search** on product names and descriptions
+- **Secure password hashing** for user accounts
+
+## Maintenance
+
+### Backup Database
 ```bash
-mysql -u root -p sastomahango_db < seed_data.sql
+# Windows
+mysqldump -u mulyasuchi_user -p mulyasuchi > backup_%date:~-4,4%%date:~-7,2%%date:~-10,2%.sql
+
+# Linux/Mac
+mysqldump -u mulyasuchi_user -p mulyasuchi > backup_$(date +%Y%m%d).sql
 ```
 
----
-
-### 3. `fresh_150_products.sql` (18 KB)
-**Purpose:** Production-ready product dataset  
-**Contains:**
-- 150 realistic products across 7 categories
-- Nepali names and locations
-- Market-realistic pricing
-- Multiple contributor IDs
-- Mix of active/inactive status
-
-**When to use:** To populate database with sample/production data
-
-**Execute:**
+### Restore Database
 ```bash
-mysql -u root -p sastomahango_db < fresh_150_products.sql
+mysql -u mulyasuchi_user -p mulyasuchi < backup_20241215.sql
 ```
 
----
-
-## Optimization & Migration Files
-
-### 4. `database_optimizations.sql` (5 KB)
-**Purpose:** Performance optimization  
-**Contains:**
-- Composite indexes for common queries
-- Full-text search indexes
-- Query optimization settings
-- Performance tuning parameters
-
-**When to use:** After initial setup or when experiencing slow queries
-
-**Execute:**
-```bash
-mysql -u root -p sastomahango_db < database_optimizations.sql
+### Optimize Tables (Monthly Maintenance)
+```sql
+USE mulyasuchi;
+OPTIMIZE TABLE items, users, categories, price_history, logs;
+ANALYZE TABLE items, users, categories;
 ```
 
----
-
-### 5. `migration_add_item_edit_support.sql` (5 KB)
-**Purpose:** Add item editing support to validation system  
-**Contains:**
-- Updated stored procedure `sp_approve_validation`
-- Support for 'item_edit' action type
-- Price history tracking for edits
-
-**When to use:** When deploying item edit feature
-
-**Execute:**
-```bash
-mysql -u root -p sastomahango_db < migration_add_item_edit_support.sql
+### Check Database Size
+```sql
+SELECT 
+    table_schema AS 'Database',
+    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS 'Size (MB)'
+FROM information_schema.tables 
+WHERE table_schema = 'mulyasuchi'
+GROUP BY table_schema;
 ```
 
----
+## Character Set & Collation
 
-## Complete Installation Guide
+All tables use `utf8mb4_unicode_ci` collation to properly support:
+- ✅ Nepali Devanagari script (नेपाली देवनागरी)
+- ✅ Emojis and special characters (😊 ⭐ ✓)
+- ✅ Full Unicode support
+- ✅ Case-insensitive searching
+- ✅ Proper sorting for Nepali text
 
-### Fresh Installation (New Database)
+## Default Admin Account
 
-```bash
-# Step 1: Create database and schema
-mysql -u root -p < schema.sql
-
-# Step 2: Add initial data (admin, categories, settings)
-mysql -u root -p sastomahango_db < seed_data.sql
-
-# Step 3: Add product data
-mysql -u root -p sastomahango_db < fresh_150_products.sql
-
-# Step 4: Optimize database
-mysql -u root -p sastomahango_db < database_optimizations.sql
-
-# Step 5: Add item edit support
-mysql -u root -p sastomahango_db < migration_add_item_edit_support.sql
-```
-
-### Using XAMPP on Windows
-
-```powershell
-# Navigate to SQL directory
-cd c:\xampp\htdocs\SastoMahango\sql
-
-# Execute all in order
-c:\xampp\mysql\bin\mysql.exe -u root < schema.sql
-c:\xampp\mysql\bin\mysql.exe -u root sastomahango_db < seed_data.sql
-c:\xampp\mysql\bin\mysql.exe -u root sastomahango_db < fresh_150_products.sql
-c:\xampp\mysql\bin\mysql.exe -u root sastomahango_db < database_optimizations.sql
-c:\xampp\mysql\bin\mysql.exe -u root sastomahango_db < migration_add_item_edit_support.sql
-```
-
----
-
-## File Maintenance
-
-### Deleted Files (No longer needed)
-- ❌ `add_new_categories.sql` - Duplicate of categories in seed_data.sql
-- ❌ `add_sample_products.sql` - Replaced by fresh_150_products.sql
-- ❌ `check_products.sql` - Debug query file
-
-### Backup Policy
-- Keep all 5 production files under version control
-- Do NOT delete schema.sql or seed_data.sql
-- Product data files (fresh_150_products.sql) can be regenerated as needed
-
----
-
-## Default Credentials
-
-**Admin User:**
-- Username: `admin`
-- Email: `admin@sastomahango.com`
-- Password: `Admin@123`
-
-⚠️ **IMPORTANT:** Change the default admin password immediately after first login in production!
-
----
-
-## Database Information
-
-- **Database Name:** sastomahango_db
-- **Character Set:** utf8mb4
-- **Collation:** utf8mb4_unicode_ci
-- **Engine:** InnoDB
-- **MySQL Version:** 8.0+
-
----
+After importing the database, you can login with:
+- **Username**: Check the database or create via registration
+- **Password**: Set during first setup
+- **Role**: Update to 'admin' in database after registration
 
 ## Troubleshooting
 
-### Foreign Key Constraint Errors
-If you encounter foreign key errors when running fresh_150_products.sql:
+### Import Error: "Unknown database"
+Make sure you created the database first:
 ```sql
-SET FOREIGN_KEY_CHECKS = 0;
--- Run your SQL
-SET FOREIGN_KEY_CHECKS = 1;
-```
-(This is already included in fresh_150_products.sql)
-
-### Schema Already Exists
-To drop and recreate:
-```sql
-DROP DATABASE IF EXISTS sastomahango_db;
--- Then run schema.sql
+CREATE DATABASE mulyasuchi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-### Duplicate Entry Errors
-The seed_data.sql uses `INSERT IGNORE` for safety. If you need to force replace:
+### Import Error: "Access denied"
+Verify user has proper permissions:
 ```sql
-TRUNCATE TABLE categories;
-TRUNCATE TABLE tags;
--- Then run seed_data.sql
+SHOW GRANTS FOR 'mulyasuchi_user'@'localhost';
 ```
 
----
+### Nepali Text Shows as "????"
+Ensure your database and tables use utf8mb4:
+```sql
+ALTER DATABASE mulyasuchi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE items CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
-**Last Updated:** November 25, 2025  
-**Total Files:** 5 essential SQL scripts  
-**Status:** Production Ready ✅
+### Slow Queries
+Check and add missing indexes:
+```sql
+SHOW INDEX FROM items;
+EXPLAIN SELECT * FROM items WHERE category_id = 1;
+```
+
+## Database Requirements
+
+- **MySQL**: 5.7 or higher
+- **MariaDB**: 10.2 or higher
+- **Storage Engine**: InnoDB (default)
+- **Character Set**: utf8mb4
+- **Collation**: utf8mb4_unicode_ci
+- **Disk Space**: ~50MB (with 500+ products)
+
+## Security Notes
+
+⚠️ **Important**: 
+- Change default passwords after installation
+- Use strong database passwords
+- Restrict database user permissions
+- Don't expose database credentials in code
+- Regular backups are essential
+- Keep MySQL updated
+
+## Support
+
+For database-related issues:
+1. Check MySQL error logs
+2. Verify database credentials in `.env`
+3. Test connection: `mysql -u mulyasuchi_user -p`
+4. Review installation guide: `../INSTALLATION.md`
