@@ -84,20 +84,12 @@ GRANT ALL PRIVILEGES ON mulyasuchi.* TO 'mulyasuchi_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-3. Import database schema:
+3. Import complete database:
 ```bash
-mysql -u mulyasuchi_user -p mulyasuchi < sql/schema.sql
+mysql -u mulyasuchi_user -p mulyasuchi < sql/mulyasuchi_complete.sql
 ```
 
-4. Import seed data:
-```bash
-mysql -u mulyasuchi_user -p mulyasuchi < sql/seed_data.sql
-```
-
-5. Import product data:
-```bash
-mysql -u mulyasuchi_user -p mulyasuchi < sql/fresh_500_products.sql
-```
+That's it! The single SQL file contains all schema, data, and products.
 
 #### Step 4: Set Permissions
 
